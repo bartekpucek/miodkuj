@@ -47,7 +47,7 @@ Never promise detector evasion, "undetectable" writing, academic laundering, imp
 | Marketing | Replace adjectives with proof or concrete benefit |
 | Technical docs | Keep terms/code exact, cut filler |
 | Academic text | Preserve hedging, data, citations, and valid passive |
-| Legal/official text | Clarify explanatory parts, preserve legal force |
+| Legal/official text | Clarify explanatory parts; keep the obligated party and formal register; preserve legal force |
 | Voice sample supplied | Match sample over generic naturalness |
 
 ## Common Mistakes

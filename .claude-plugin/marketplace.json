@@ -1,0 +1,21 @@
+{
+  "name": "stop-slop-pl",
+  "owner": {
+    "name": "Bartek Pucek",
+    "url": "https://pucek.com"
+  },
+  "metadata": {
+    "description": "Open-source Polish anti-slop writing tools for Claude and Claude Code.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "stop-slop-pl",
+      "source": "./",
+      "description": "Polish-language anti-slop writing skill. Rewrites AI-sounding, bureaucratic, generic, or translated-from-English Polish prose into natural, register-appropriate text while preserving facts, numbers, citations, and meaning. Triggers on odslopuj, zhumanizuj po polsku, usuń AI-owy styl, uprość, and similar requests.",
+      "version": "1.0.0",
+      "category": "writing",
+      "tags": ["polish", "writing", "editing", "anti-slop", "humanizer"]
+    }
+  ]
+}

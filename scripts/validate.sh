@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Validate every skill target in the repo.
+# Usage: ./scripts/validate.sh
+set -euo pipefail
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+python3 "$ROOT/scripts/validate_skill.py" \
+  "$ROOT/skills/codex/polish-anti-slop" \
+  "$ROOT/skills/claude/polish-anti-slop"

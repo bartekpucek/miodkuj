@@ -1,0 +1,29 @@
+{
+  "name": "stop-slop-pl",
+  "version": "1.0.0",
+  "description": "Polish-language anti-slop writing skill. Rewrites AI-sounding, bureaucratic, generic, or over-polished Polish prose into natural, register-appropriate text while preserving facts, numbers, citations, and meaning.",
+  "author": {
+    "name": "Bartek Pucek",
+    "email": "[REDACTED]",
+    "url": "https://pucek.com"
+  },
+  "homepage": "https://github.com/bartekpucek/stop-slop-PL",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bartekpucek/stop-slop-PL.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "polish",
+    "polszczyzna",
+    "writing",
+    "editing",
+    "anti-slop",
+    "humanizer",
+    "prosta-polszczyzna",
+    "style"
+  ],
+  "skills": [
+    "./skills/claude/polish-anti-slop"
+  ]
+}
