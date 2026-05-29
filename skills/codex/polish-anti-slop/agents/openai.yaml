@@ -1,0 +1,6 @@
+interface:
+  display_name: "Stop Slop PL"
+  short_description: "Naturalna polszczyzna bez AI slopu"
+  default_prompt: "Use $polish-anti-slop to odslopuj ten tekst po polsku, zachowując sens, fakty i rejestr."
+policy:
+  allow_implicit_invocation: true
