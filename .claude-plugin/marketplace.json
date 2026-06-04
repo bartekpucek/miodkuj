@@ -12,7 +12,7 @@
     {
       "name": "stop-slop-pl",
       "source": "./",
-      "description": "Polish-language anti-slop writing skill. Rewrites AI-sounding, bureaucratic, generic, or translated-from-English Polish prose into natural, register-appropriate text while preserving facts, numbers, citations, and meaning. Triggers on odslopuj, zhumanizuj po polsku, usuń AI-owy styl, uprość, and similar requests.",
+      "description": "Polish-language anti-slop writing skill. Rewrites AI-sounding, bureaucratic, generic, or translated-from-English Polish prose into natural, register-appropriate text while preserving facts, numbers, citations, and meaning. Triggers on popraw styl, napisz po ludzku, uprość, usuń slop, and similar Polish requests.",
       "version": "1.0.0",
       "category": "writing",
       "tags": ["polish", "writing", "editing", "anti-slop", "humanizer"]

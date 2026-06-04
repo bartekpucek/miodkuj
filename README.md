@@ -1,127 +1,118 @@
 # Stop Slop PL
 
-Stop Slop PL is an open-source Polish writing skill for removing AI-sounding, bureaucratic, generic, or over-polished prose while preserving facts, meaning, and register.
+> **English:** Stop Slop PL is a Polish-language writing skill for Claude, Claude Code, and Codex — it rewrites AI-sounding, bureaucratic, or over-polished Polish into natural prose while keeping facts, numbers, and register intact. The rest of this README is in Polish, because that's the audience.
 
-It ships in two interchangeable forms from one repository:
+Stop Slop PL poprawia polski tekst, który brzmi jak z AI: sztywny, urzędowy, przegadany albo tłumaczony z angielskiego. Skill przepisuje go na naturalny język i nie rusza faktów, liczb, cytatów ani rejestru.
 
-- a **Claude / Claude Code** skill (installable as a plugin or uploaded to claude.ai), and
-- a **Codex / ChatGPT** skill (`$polish-anti-slop`).
+Skill działa w dwóch wersjach z jednego repozytorium:
 
-Both share the same Polish content, so the two versions never drift.
+- **Claude / Claude Code** — jako wtyczka albo plik wgrany na claude.ai,
+- **Codex / ChatGPT** — jako skill `$polish-anti-slop`.
 
-## What It Does
+Obie wersje korzystają z tych samych reguł, więc nie rozjeżdżają się w czasie.
 
-- Rewrites Polish text by default; returns the revised text first.
-- Keeps facts, numbers, names, links, citations, quotes, code, and legal references intact.
-- Removes common Polish slop: officialese, nominalizations, passive and impersonal fog, genitive chains, fake importance, formulaic contrasts, generic endings, and chatbot residue.
-- Adapts to register: plain public Polish, marketing, technical docs, academic/scientific, legal/official, social/newsletter/opinion.
-- Can provide an audit, before/after, strict cleanup, plain-Polish simplification, academic cleanup, legal/official cleanup, or voice matching when asked.
+## Co robi
 
-It does **not** promise AI-detector evasion, "undetectable" text, academic laundering, or impersonation.
+- Domyślnie przepisuje tekst i od razu zwraca poprawioną wersję.
+- Zostawia bez zmian fakty, liczby, nazwy, linki, cytaty, kod i podstawy prawne.
+- Usuwa typowy polski slop: urzędowe zwroty, rzeczowniki odczasownikowe, stronę bierną bez sprawcy, łańcuchy dopełniaczy, puste przymiotniki, sztuczne kontrasty i ogólnikowe zakończenia.
+- Dopasowuje styl do rejestru: prosty język, marketing, dokumentacja techniczna, tekst naukowy, pisma urzędowe i prawne, treści społecznościowe.
+- Na życzenie robi sam audyt, pokazuje listę zmian, upraszcza do prostego języka albo dopasowuje się do Twojego głosu.
 
-## Repo Layout
+Czego **nie** robi: nie obiecuje obejścia wykrywaczy AI, tekstu „nie do wykrycia", podszywania się pod kogoś ani zmyślania faktów.
 
-```text
-.claude-plugin/
-  plugin.json          # Claude Code plugin manifest (loads the Claude skill)
-  marketplace.json     # lets users add this repo as a plugin marketplace
-shared/
-  references/          # single source of truth for the Polish content
-skills/
-  claude/
-    polish-anti-slop/  # Claude / Claude Code skill (references synced from shared/)
-      SKILL.md
-      references/
-  codex/
-    polish-anti-slop/  # Codex / ChatGPT skill
-      SKILL.md
-      agents/openai.yaml
-      references/
-scripts/
-  build.sh             # sync shared/references into both skills; build the .skill bundle
-  validate.sh          # validate both skills
-  validate_skill.py    # portable SKILL.md validator (stdlib only)
-docs/
-  research-summary.md
-  test-scenarios.md
-```
+## Instalacja w Claude Code
 
-## Install for Claude Code
-
-Add the repository as a plugin marketplace, then install the plugin:
+Dodaj repozytorium jako marketplace wtyczek, a potem zainstaluj wtyczkę:
 
 ```text
 /plugin marketplace add bartekpucek/stop-slop-PL
 /plugin install stop-slop-pl@stop-slop-pl
 ```
 
-The skill then triggers automatically on Polish editing requests, or you can call it directly as `/stop-slop-pl:polish-anti-slop`.
+Skill włącza się sam, gdy poprosisz o poprawę polskiego tekstu. Możesz go też wywołać wprost: `/stop-slop-pl:polish-anti-slop`.
 
-## Install for Claude.ai
+## Instalacja na claude.ai
 
-You can either download the prebuilt bundle or build it yourself.
+Pobierz gotowy plik albo zbuduj go samodzielnie.
 
-**Option A — download (no terminal needed):** grab `polish-anti-slop.skill` from the [latest release](https://github.com/bartekpucek/stop-slop-PL/releases/latest), then upload it in **Settings → Capabilities → Skills**.
+**Sposób A — gotowy plik (bez terminala):** pobierz `polish-anti-slop.skill` z [ostatniego wydania](https://github.com/bartekpucek/stop-slop-PL/releases/latest) i wgraj go w ustawieniach: **Settings → Capabilities → Skills**.
 
-**Option B — build it yourself:** build the bundle and upload it in **Settings → Capabilities → Skills**:
+**Sposób B — zbuduj samodzielnie:**
 
 ```bash
 ./scripts/build.sh
-# produces dist/polish-anti-slop.skill
+# tworzy dist/polish-anti-slop.skill
 ```
 
-## Install for Codex or ChatGPT
+> Tej ścieżki w claude.ai nie ma w oficjalnej dokumentacji Claude Code — sprawdź u siebie, bo interfejs bywa aktualizowany.
 
-Copy or symlink the Codex skill folder into the skills directory your Codex setup uses:
+## Instalacja w Codex lub ChatGPT
+
+Skopiuj albo podlinkuj folder skilla do katalogu, z którego korzysta Twój Codex:
 
 ```bash
 mkdir -p ~/.codex/skills
 ln -s "$(pwd)/skills/codex/polish-anti-slop" ~/.codex/skills/polish-anti-slop
 ```
 
-Some setups also load personal skills from `~/.agents/skills`:
+Niektóre konfiguracje czytają skille też z `~/.agents/skills`:
 
 ```bash
 mkdir -p ~/.agents/skills
 ln -s "$(pwd)/skills/codex/polish-anti-slop" ~/.agents/skills/polish-anti-slop
 ```
 
-Restart or reload the agent environment so the skill metadata is discovered.
+Po instalacji przeładuj środowisko, żeby zobaczyło nowy skill.
 
-## Usage
+> Tej ścieżki też nie ma w oficjalnej dokumentacji — zweryfikuj ją w swojej wersji Codex.
+
+## Jak używać
 
 ```text
-Odslopuj ten tekst po polsku, zachowaj sens i fakty:
+Popraw styl po polsku, zachowaj sens i fakty:
 W celu dokonania zgłoszenia należy wypełnić niniejszy formularz.
 ```
 
 ```text
-Zhumanizuj po polsku ten fragment, bez zmiany faktów:
+Napisz to po ludzku, bez zmiany faktów:
 ...
 ```
 
 ```text
-Usuń AI-owy styl i urzędowe lanie wody. Pokaż też krótką listę zmian:
+Usuń slop. Pokaż też krótką listę zmian:
 ...
 ```
 
-Default behavior: return the revised Polish text first. Diagnostics appear only when requested or when they prevent a risky edit. For audit only, ask for `tylko audyt`.
+Domyślnie skill zwraca najpierw poprawiony tekst. Uwagi dodaje tylko wtedy, gdy o nie poprosisz albo gdy ostrzega przed ryzykowną zmianą. Jeśli chcesz sam audyt, napisz `tylko audyt`.
 
-## Development
+## Układ repozytorium
 
-The Polish content lives once in `shared/references/`. Edit it there, then sync it into both skill targets and rebuild the bundle:
-
-```bash
-./scripts/build.sh      # sync references + build dist/polish-anti-slop.skill
-./scripts/validate.sh   # validate both skills
+```text
+.claude-plugin/         # manifesty wtyczki i marketplace dla Claude Code
+shared/references/      # reguły po polsku — jedno źródło prawdy
+skills/
+  claude/polish-anti-slop/   # wersja dla Claude / Claude Code
+  codex/polish-anti-slop/    # wersja dla Codex / ChatGPT
+scripts/                # build.sh, validate.sh, validate_skill.py
+docs/                   # research-summary.md, test-scenarios.md
 ```
 
-Manual pressure tests live in [docs/test-scenarios.md](docs/test-scenarios.md).
+## Rozwój
 
-## Sources
+Reguły po polsku trzymamy w jednym miejscu: `shared/references/`. Zmieniaj je tam, a potem zsynchronizuj do obu wersji skilla i zbuduj paczkę:
 
-This skill is based on a source-level audit of anti-slop and humanizer skills plus Polish plain-language, readability, stylometry, and Polish LLM research. See [docs/research-summary.md](docs/research-summary.md) and [references/sources.md](skills/claude/polish-anti-slop/references/sources.md).
+```bash
+./scripts/build.sh      # synchronizuje reguły i buduje dist/polish-anti-slop.skill
+./scripts/validate.sh   # sprawdza obie wersje skilla
+```
 
-## License
+Ręczne testy są w [docs/test-scenarios.md](docs/test-scenarios.md).
 
-MIT. See [LICENSE](LICENSE).
+## Źródła
+
+Skill powstał na podstawie przeglądu otwartych narzędzi anti-slop i humanizujących oraz polskich materiałów o prostym języku, czytelności, stylometrii i polskich modelach językowych. Zobacz [docs/research-summary.md](docs/research-summary.md) i [references/sources.md](skills/claude/polish-anti-slop/references/sources.md).
+
+## Licencja
+
+MIT. Zobacz [LICENSE](LICENSE).

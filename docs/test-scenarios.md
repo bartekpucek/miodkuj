@@ -7,7 +7,7 @@ Use these scenarios to validate `$polish-anti-slop` before publishing changes.
 Prompt:
 
 ```text
-Use $polish-anti-slop to odslopuj ten tekst po polsku:
+Use $polish-anti-slop. Popraw styl i usuń slop po polsku:
 W celu dokonania zgłoszenia należy wypełnić niniejszy formularz oraz przekazać go do właściwej komórki organizacyjnej w terminie 7 dni od daty zaistnienia zdarzenia.
 ```
 
@@ -23,7 +23,7 @@ Expected behavior:
 Prompt:
 
 ```text
-Use $polish-anti-slop. Tryb: marketing. Usuń AI-owy styl:
+Use $polish-anti-slop. Tryb: marketing. Usuń slop:
 Nasze innowacyjne i kompleksowe rozwiązanie stanowi kluczowy element transformacji cyfrowej, umożliwiając firmom skuteczne wykorzystanie potencjału danych w dynamicznie zmieniającym się świecie.
 ```
 

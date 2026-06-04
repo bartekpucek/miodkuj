@@ -1,6 +1,6 @@
 ---
 name: polish-anti-slop
-description: Removes AI-sounding, bureaucratic, generic, or over-polished Polish prose while preserving facts, meaning, numbers, citations, and register. Use whenever Polish text sounds AI-generated, over-formal, translated from English, full of officialese or lanie wody, or when the user asks to odslopuj, zhumanizuj po polsku, usuń AI-owy styl, napisz naturalniej, uprość do prostej polszczyzny, popraw styl, or match a Polish voice or register. Also use for Polish marketing, technical, academic, legal/official, or newsletter text that needs to read like a person wrote it. Works on Polish text even when the user writes the request in English.
+description: Removes AI-sounding, bureaucratic, generic, or over-polished Polish prose while preserving facts, meaning, numbers, citations, and register. Use whenever Polish text sounds AI-generated, over-formal, or translated from English, or when the user asks to popraw styl, napisz po ludzku, napisz prościej, uprość, uprość do prostego języka, usuń slop, bez slopu, or says the text brzmi jak ChatGPT, brzmi sztucznie, or brzmi jak z AI. Also use for Polish marketing, technical, academic, legal/official, or newsletter text that needs to read like a person wrote it. Works on Polish text even when the user writes the request in English.
 ---
 
 # Polish Anti Slop
@@ -13,7 +13,7 @@ Never promise detector evasion, "undetectable" writing, academic laundering, imp
 
 ## Default Output
 
-- If the user asks to rewrite, odslopuj, zhumanizuj, make natural, simplify, or remove AI style: return the revised Polish text first, nothing before it.
+- If the user asks to rewrite, popraw styl, napisz po ludzku, uprość, usuń slop, make natural, or remove AI style: return the revised Polish text first, nothing before it.
 - Add short notes only when requested or when a constraint or risk matters (e.g., you preserved a passive form on purpose, or a claim lacked proof).
 - If the user asks for audit only ("tylko audyt"): do not rewrite. List concrete issues with severity.
 - If the user gives a voice sample: match it before applying generic preferences.
@@ -43,7 +43,7 @@ Read these only when the situation calls for them — they live one level down i
 
 | Situation | Default |
 | --- | --- |
-| User says "odslopuj" / "zhumanizuj" | Rewrite first |
+| User says "popraw styl" / "usuń slop" / "napisz po ludzku" | Rewrite first |
 | User says "tylko audyt" | Audit only, no rewrite |
 | Public/citizen text | Plain Polish, direct address, action first |
 | Marketing | Replace empty adjectives with proof or a concrete benefit |

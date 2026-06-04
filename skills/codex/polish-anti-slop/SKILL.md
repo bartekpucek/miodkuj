@@ -1,6 +1,6 @@
 ---
 name: polish-anti-slop
-description: Use when Polish prose sounds AI-generated, over-formal, generic, bureaucratic, translated from English, or like lanie wody; also when asked to odslopuj, zhumanizuj po polsku, usuń AI-owy styl, simplify into prosta polszczyzna, or match a Polish voice/register.
+description: Use when Polish prose sounds AI-generated, over-formal, generic, bureaucratic, or translated from English; also when asked to popraw styl, napisz po ludzku, napisz prościej, uprość, uprość do prostego języka, usuń slop, or when the text brzmi jak ChatGPT or brzmi sztucznie. Matches a Polish voice or register when a sample is given.
 ---
 
 # Polish Anti Slop
@@ -13,7 +13,7 @@ Never promise detector evasion, "undetectable" writing, academic laundering, imp
 
 ## Default Output
 
-- If the user asks to rewrite, odslopuj, zhumanizuj, make natural, simplify, or remove AI style: return the revised Polish text first.
+- If the user asks to rewrite, popraw styl, napisz po ludzku, uprość, usuń slop, make natural, or remove AI style: return the revised Polish text first.
 - Add short notes only when requested or when a constraint/risk matters.
 - If the user asks for audit only: do not rewrite.
 - If the user gives a voice sample: match it before applying generic preferences.
@@ -41,7 +41,7 @@ Never promise detector evasion, "undetectable" writing, academic laundering, imp
 
 | Situation | Default |
 | --- | --- |
-| User says "odslopuj" | Rewrite first |
+| User says "popraw styl" / "usuń slop" | Rewrite first |
 | User says "tylko audyt" | Audit only |
 | Public/citizen text | Plain Polish, direct address, action first |
 | Marketing | Replace adjectives with proof or concrete benefit |
