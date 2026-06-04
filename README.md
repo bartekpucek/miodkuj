@@ -59,7 +59,11 @@ The skill then triggers automatically on Polish editing requests, or you can cal
 
 ## Install for Claude.ai
 
-Build the skill bundle and upload it in **Settings → Capabilities → Skills**:
+You can either download the prebuilt bundle or build it yourself.
+
+**Option A — download (no terminal needed):** grab `polish-anti-slop.skill` from the [latest release](https://github.com/bartekpucek/stop-slop-PL/releases/latest), then upload it in **Settings → Capabilities → Skills**.
+
+**Option B — build it yourself:** build the bundle and upload it in **Settings → Capabilities → Skills**:
 
 ```bash
 ./scripts/build.sh

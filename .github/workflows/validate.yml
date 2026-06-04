@@ -1,0 +1,24 @@
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate both skill targets
+        run: bash scripts/validate.sh
+
+      - name: Check references are in sync with shared/ (no drift)
+        run: |
+          bash scripts/build.sh
+          if ! git diff --quiet -- skills/; then
+            echo "::error::skills/*/references are out of sync with shared/references/. Run ./scripts/build.sh and commit the result."
+            git --no-pager diff --stat -- skills/
+            exit 1
+          fi
