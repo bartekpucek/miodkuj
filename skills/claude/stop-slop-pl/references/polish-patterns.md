@@ -210,6 +210,20 @@ Fix:
 - Replace generic synthesis with actual consequence.
 - Avoid balanced pairs unless the text genuinely compares two sides.
 
+## Em Dashes
+
+Signals:
+
+- an em dash used as a default connector between clauses,
+- several em dashes in one paragraph,
+- an em dash standing in for a comma, colon, or full stop.
+
+Fix:
+
+- Replace the em dash with a comma, colon, or full stop, or split the sentence.
+- Prefer shorter finite Polish sentences over dash-joined clauses.
+- Keep a dash only where Polish genuinely needs it, such as dialogue or a clear apposition.
+
 ## Generic Endings
 
 Watchlist:

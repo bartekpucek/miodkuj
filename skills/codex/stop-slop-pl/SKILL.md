@@ -22,7 +22,7 @@ Never promise detector evasion, "undetectable" writing, academic laundering, imp
 
 1. Identify genre and audience: public/plain Polish, marketing, technical docs, academic/scientific, legal/official, or social/opinion.
 2. Protect exact spans: code, commands, URLs, markdown links, quotes, citations, tables, numbers, dates, legal references, product/API names.
-3. Scan for Polish slop: chatbot residue, officialese, nominalizations, passive/impersonal fog, genitive chains, inflated importance, formulaic structures, generic endings.
+3. Scan for Polish slop: chatbot residue, officialese, nominalizations, passive/impersonal fog, genitive chains, inflated importance, formulaic structures, em-dash overuse, generic endings.
 4. Rewrite paragraph by paragraph. Prefer actors, verbs, concrete stakes, and natural Polish order.
 5. Run a second pass: what still sounds generated, bureaucratic, translated, too balanced, or too generic?
 6. Run an integrity pass: no changed facts, no invented proof, no lost caveats, no broken protected spans.
@@ -57,3 +57,4 @@ Never promise detector evasion, "undetectable" writing, academic laundering, imp
 - Do not replace official legal terms with loose paraphrases.
 - Do not add examples, data, dates, sources, or claims that the user did not provide.
 - Do not treat one word like `kluczowy` or `ważny` as proof of AI style. Act on clusters and weak writing.
+- Do not use the em dash as a connector in the output. Replace it with a comma, colon, or full stop, or split the sentence.

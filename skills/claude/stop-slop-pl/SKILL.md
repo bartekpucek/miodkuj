@@ -22,14 +22,14 @@ Never promise detector evasion, "undetectable" writing, academic laundering, imp
 
 1. Identify genre and audience: public/plain Polish, marketing, technical docs, academic/scientific, legal/official, or social/opinion.
 2. Protect exact spans: code, commands, URLs, markdown links, quotes, citations, tables, numbers, dates, legal references, product/API names. Reproduce them character-for-character.
-3. Scan for Polish slop: chatbot residue, officialese, nominalizations, passive/impersonal fog, genitive chains, inflated importance, formulaic structures, generic endings.
+3. Scan for Polish slop: chatbot residue, officialese, nominalizations, passive/impersonal fog, genitive chains, inflated importance, formulaic structures, em-dash overuse, generic endings.
 4. Rewrite paragraph by paragraph. Prefer actors, verbs, concrete stakes, and natural Polish word order over noun stacks and abstraction.
 5. Run a second pass: what still sounds generated, bureaucratic, translated, too balanced, or too generic?
 6. Run an integrity pass: no changed facts, no invented proof, no lost caveats, no broken protected spans.
 
 ## Reference Navigation
 
-Read these only when the situation calls for them — they live one level down in `references/`:
+Read these only when the situation calls for them. They live one level down in `references/`:
 
 - Polish pattern lists and concrete rewrites: `references/polish-patterns.md`
 - Register-specific behavior and exceptions: `references/registers.md`
@@ -59,6 +59,7 @@ Read these only when the situation calls for them — they live one level down i
 - Do not replace official legal terms with loose paraphrases.
 - Do not add examples, data, dates, sources, or claims the user did not provide.
 - Do not treat one word like `kluczowy` or `ważny` as proof of AI style. Act on clusters and weak writing, not single tokens.
+- Do not use the em dash as a connector in the output. Replace it with a comma, colon, or full stop, or split the sentence.
 
 ## License
 

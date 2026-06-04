@@ -142,7 +142,7 @@ Keep:
 
 Do not:
 
-- switch to informal second person (`masz`, `musisz`, `złóż` addressed to the reader) for a statement of legal obligation unless the user explicitly asks for a plain, citizen-facing rewrite. Here "clarity" means a clearly named actor plus an active verb, not casual address — `Przedsiębiorca składa oświadczenie w terminie 14 dni` is clear and correct; `Masz 14 dni, żeby złożyć` quietly drops who is bound,
+- switch to informal second person (`masz`, `musisz`, `złóż` addressed to the reader) for a statement of legal obligation unless the user explicitly asks for a plain, citizen-facing rewrite. Here "clarity" means a clearly named actor plus an active verb, not casual address: `Przedsiębiorca składa oświadczenie w terminie 14 dni` is clear and correct; `Masz 14 dni, żeby złożyć` quietly drops who is bound,
 - generalize or delete the subject of an obligation,
 - weaken or strengthen legal force (`zobowiązany jest` is a duty, not a suggestion).
 

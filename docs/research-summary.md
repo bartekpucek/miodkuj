@@ -4,11 +4,11 @@ Stop Slop PL nie tłumaczy angielskich list zakazanych słów. Zamiast tego dost
 
 ## Co łączy zewnętrzne skille
 
-Najlepsze skille anti-slop — m.in. `hardikpandya/stop-slop`, `blader/humanizer`, `slopbuster`, `de-slop` i `deslopify` — zgadzają się co do kilku rzeczy:
+Najlepsze skille anti-slop (m.in. `hardikpandya/stop-slop`, `blader/humanizer`, `slopbuster`, `de-slop` i `deslopify`) zgadzają się co do kilku rzeczy:
 
 - Listy wzorców pomagają, ale tekst poprawia się na poziomie akapitu.
 - Sens, fakty, liczby, cytaty, linki i przytoczenia trzeba zachować.
-- Pojedyncze „zakazane" słowa to słaby sygnał — liczy się ich nagromadzenie.
+- Pojedyncze „zakazane" słowa to słaby sygnał. Liczy się ich nagromadzenie.
 - Głos i rejestr ważą więcej niż ogólna „humanizacja".
 - Druga tura audytu wyłapuje to, co zostało po pierwszym przejściu.
 - Wyjątki gatunkowe chronią przed przesadną korektą.

@@ -1,13 +1,13 @@
 # Stop Slop PL
 
-> **English:** Stop Slop PL is a Polish-language writing skill for Claude, Claude Code, and Codex — it rewrites AI-sounding, bureaucratic, or over-polished Polish into natural prose while keeping facts, numbers, and register intact. The rest of this README is in Polish, because that's the audience.
+> **English:** Stop Slop PL is a Polish-language writing skill for Claude, Claude Code, and Codex. It rewrites AI-sounding, bureaucratic, or over-polished Polish into natural prose while keeping facts, numbers, and register intact. The rest of this README is in Polish, because that's the audience.
 
 Stop Slop PL poprawia polski tekst, który brzmi jak z AI: sztywny, urzędowy, przegadany albo tłumaczony z angielskiego. Skill przepisuje go na naturalny język i nie rusza faktów, liczb, cytatów ani rejestru.
 
 Skill działa w dwóch wersjach z jednego repozytorium:
 
-- **Claude / Claude Code** — jako wtyczka albo plik wgrany na claude.ai,
-- **Codex / ChatGPT** — jako skill `$stop-slop-pl`.
+- **Claude / Claude Code**: wtyczka albo plik wgrany na claude.ai,
+- **Codex / ChatGPT**: skill `$stop-slop-pl`.
 
 Obie wersje korzystają z tych samych reguł, więc nie rozjeżdżają się w czasie.
 
@@ -36,16 +36,16 @@ Skill włącza się sam, gdy poprosisz o poprawę polskiego tekstu. Możesz go t
 
 Pobierz gotowy plik albo zbuduj go samodzielnie.
 
-**Sposób A — gotowy plik (bez terminala):** pobierz `stop-slop-pl.skill` z [ostatniego wydania](https://github.com/bartekpucek/stop-slop-PL/releases/latest) i wgraj go w ustawieniach: **Settings → Capabilities → Skills**.
+**Sposób A, gotowy plik (bez terminala).** Pobierz `stop-slop-pl.skill` z [ostatniego wydania](https://github.com/bartekpucek/stop-slop-PL/releases/latest) i wgraj go w ustawieniach: **Settings → Capabilities → Skills**.
 
-**Sposób B — zbuduj samodzielnie:**
+**Sposób B, zbuduj samodzielnie:**
 
 ```bash
 ./scripts/build.sh
 # tworzy dist/stop-slop-pl.skill
 ```
 
-> Tej ścieżki w claude.ai nie ma w oficjalnej dokumentacji Claude Code — sprawdź u siebie, bo interfejs bywa aktualizowany.
+> Tej ścieżki w claude.ai nie ma w oficjalnej dokumentacji Claude Code. Sprawdź u siebie, bo interfejs bywa aktualizowany.
 
 ## Instalacja w Codex lub ChatGPT
 
@@ -65,7 +65,7 @@ ln -s "$(pwd)/skills/codex/stop-slop-pl" ~/.agents/skills/stop-slop-pl
 
 Po instalacji przeładuj środowisko, żeby zobaczyło nowy skill.
 
-> Tej ścieżki też nie ma w oficjalnej dokumentacji — zweryfikuj ją w swojej wersji Codex.
+> Tej ścieżki też nie ma w oficjalnej dokumentacji. Zweryfikuj ją w swojej wersji Codex.
 
 ## Jak używać
 
@@ -90,7 +90,7 @@ Domyślnie skill zwraca najpierw poprawiony tekst. Uwagi dodaje tylko wtedy, gdy
 
 ```text
 .claude-plugin/         # manifesty wtyczki i marketplace dla Claude Code
-shared/references/      # reguły po polsku — jedno źródło prawdy
+shared/references/      # reguły po polsku, jedno źródło prawdy
 skills/
   claude/stop-slop-pl/   # wersja dla Claude / Claude Code
   codex/stop-slop-pl/    # wersja dla Codex / ChatGPT
