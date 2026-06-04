@@ -15,7 +15,7 @@ Obie wersje korzystają z tych samych reguł, więc nie rozjeżdżają się w cz
 
 - Domyślnie przepisuje tekst i od razu zwraca poprawioną wersję.
 - Zostawia bez zmian fakty, liczby, nazwy, linki, cytaty, kod i podstawy prawne.
-- Usuwa typowy polski slop: urzędowe zwroty, rzeczowniki odczasownikowe, stronę bierną bez sprawcy, łańcuchy dopełniaczy, puste przymiotniki, sztuczne kontrasty i ogólnikowe zakończenia.
+- Usuwa typowy polski slop: urzędowy żargon, sztuczne i bezosobowe zwroty (które ukrywają, kto coś robi), puste przymiotniki, wymuszone kontrasty i ogólnikowe zakończenia.
 - Dopasowuje styl do rejestru: prosty język, marketing, dokumentacja techniczna, tekst naukowy, pisma urzędowe i prawne, treści społecznościowe.
 - Na życzenie robi sam audyt, pokazuje listę zmian, upraszcza do prostego języka albo dopasowuje się do Twojego głosu.
 
