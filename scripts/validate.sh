@@ -4,5 +4,5 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 python3 "$ROOT/scripts/validate_skill.py" \
-  "$ROOT/skills/codex/polish-anti-slop" \
-  "$ROOT/skills/claude/polish-anti-slop"
+  "$ROOT/skills/codex/stop-slop-pl" \
+  "$ROOT/skills/claude/stop-slop-pl"

@@ -22,24 +22,24 @@ sync_refs() {
 }
 
 echo "Syncing references from shared/references ..."
-sync_refs "$ROOT/skills/codex/polish-anti-slop/references"
-sync_refs "$ROOT/skills/claude/polish-anti-slop/references"
+sync_refs "$ROOT/skills/codex/stop-slop-pl/references"
+sync_refs "$ROOT/skills/claude/stop-slop-pl/references"
 
 # Package the Claude skill as a .skill bundle (a zip whose root is the skill folder).
 # Works for both claude.ai upload and Cowork "Save skill". Uses Python's zipfile
 # so no external `zip` binary is required.
 DIST="$ROOT/dist"
 mkdir -p "$DIST"
-python3 - "$ROOT/skills/claude" "$DIST/polish-anti-slop.skill" <<'PY'
+python3 - "$ROOT/skills/claude" "$DIST/stop-slop-pl.skill" <<'PY'
 import sys, zipfile, pathlib
 base = pathlib.Path(sys.argv[1])
 out = sys.argv[2]
-root = base / "polish-anti-slop"
+root = base / "stop-slop-pl"
 with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
     for p in sorted(root.rglob("*")):
         if p.is_file() and p.name != ".DS_Store":
             z.write(p, p.relative_to(base).as_posix())
 PY
 
-echo "Built ${DIST#$ROOT/}/polish-anti-slop.skill"
+echo "Built ${DIST#$ROOT/}/stop-slop-pl.skill"
 echo "Done."

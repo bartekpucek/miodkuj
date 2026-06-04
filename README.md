@@ -7,7 +7,7 @@ Stop Slop PL poprawia polski tekst, który brzmi jak z AI: sztywny, urzędowy, p
 Skill działa w dwóch wersjach z jednego repozytorium:
 
 - **Claude / Claude Code** — jako wtyczka albo plik wgrany na claude.ai,
-- **Codex / ChatGPT** — jako skill `$polish-anti-slop`.
+- **Codex / ChatGPT** — jako skill `$stop-slop-pl`.
 
 Obie wersje korzystają z tych samych reguł, więc nie rozjeżdżają się w czasie.
 
@@ -30,19 +30,19 @@ Dodaj repozytorium jako marketplace wtyczek, a potem zainstaluj wtyczkę:
 /plugin install stop-slop-pl@stop-slop-pl
 ```
 
-Skill włącza się sam, gdy poprosisz o poprawę polskiego tekstu. Możesz go też wywołać wprost: `/stop-slop-pl:polish-anti-slop`.
+Skill włącza się sam, gdy poprosisz o poprawę polskiego tekstu. Możesz go też wywołać wprost: `/stop-slop-pl:stop-slop-pl`.
 
 ## Instalacja na claude.ai
 
 Pobierz gotowy plik albo zbuduj go samodzielnie.
 
-**Sposób A — gotowy plik (bez terminala):** pobierz `polish-anti-slop.skill` z [ostatniego wydania](https://github.com/bartekpucek/stop-slop-PL/releases/latest) i wgraj go w ustawieniach: **Settings → Capabilities → Skills**.
+**Sposób A — gotowy plik (bez terminala):** pobierz `stop-slop-pl.skill` z [ostatniego wydania](https://github.com/bartekpucek/stop-slop-PL/releases/latest) i wgraj go w ustawieniach: **Settings → Capabilities → Skills**.
 
 **Sposób B — zbuduj samodzielnie:**
 
 ```bash
 ./scripts/build.sh
-# tworzy dist/polish-anti-slop.skill
+# tworzy dist/stop-slop-pl.skill
 ```
 
 > Tej ścieżki w claude.ai nie ma w oficjalnej dokumentacji Claude Code — sprawdź u siebie, bo interfejs bywa aktualizowany.
@@ -53,14 +53,14 @@ Skopiuj albo podlinkuj folder skilla do katalogu, z którego korzysta Twój Code
 
 ```bash
 mkdir -p ~/.codex/skills
-ln -s "$(pwd)/skills/codex/polish-anti-slop" ~/.codex/skills/polish-anti-slop
+ln -s "$(pwd)/skills/codex/stop-slop-pl" ~/.codex/skills/stop-slop-pl
 ```
 
 Niektóre konfiguracje czytają skille też z `~/.agents/skills`:
 
 ```bash
 mkdir -p ~/.agents/skills
-ln -s "$(pwd)/skills/codex/polish-anti-slop" ~/.agents/skills/polish-anti-slop
+ln -s "$(pwd)/skills/codex/stop-slop-pl" ~/.agents/skills/stop-slop-pl
 ```
 
 Po instalacji przeładuj środowisko, żeby zobaczyło nowy skill.
@@ -92,8 +92,8 @@ Domyślnie skill zwraca najpierw poprawiony tekst. Uwagi dodaje tylko wtedy, gdy
 .claude-plugin/         # manifesty wtyczki i marketplace dla Claude Code
 shared/references/      # reguły po polsku — jedno źródło prawdy
 skills/
-  claude/polish-anti-slop/   # wersja dla Claude / Claude Code
-  codex/polish-anti-slop/    # wersja dla Codex / ChatGPT
+  claude/stop-slop-pl/   # wersja dla Claude / Claude Code
+  codex/stop-slop-pl/    # wersja dla Codex / ChatGPT
 scripts/                # build.sh, validate.sh, validate_skill.py
 docs/                   # research-summary.md, test-scenarios.md
 ```
@@ -103,7 +103,7 @@ docs/                   # research-summary.md, test-scenarios.md
 Reguły po polsku trzymamy w jednym miejscu: `shared/references/`. Zmieniaj je tam, a potem zsynchronizuj do obu wersji skilla i zbuduj paczkę:
 
 ```bash
-./scripts/build.sh      # synchronizuje reguły i buduje dist/polish-anti-slop.skill
+./scripts/build.sh      # synchronizuje reguły i buduje dist/stop-slop-pl.skill
 ./scripts/validate.sh   # sprawdza obie wersje skilla
 ```
 
@@ -111,7 +111,7 @@ Ręczne testy są w [docs/test-scenarios.md](docs/test-scenarios.md).
 
 ## Źródła
 
-Skill powstał na podstawie przeglądu otwartych narzędzi anti-slop i humanizujących oraz polskich materiałów o prostym języku, czytelności, stylometrii i polskich modelach językowych. Zobacz [docs/research-summary.md](docs/research-summary.md) i [references/sources.md](skills/claude/polish-anti-slop/references/sources.md).
+Skill powstał na podstawie przeglądu otwartych narzędzi anti-slop i humanizujących oraz polskich materiałów o prostym języku, czytelności, stylometrii i polskich modelach językowych. Zobacz [docs/research-summary.md](docs/research-summary.md) i [references/sources.md](skills/claude/stop-slop-pl/references/sources.md).
 
 ## Licencja
 

@@ -13,7 +13,7 @@ Initial public release.
   generic, or translated-from-English Polish prose into natural, register-appropriate
   text while preserving facts, numbers, citations, and meaning.
 - Two interchangeable delivery targets built from a single source: a Claude /
-  Claude Code skill and a Codex / ChatGPT skill (`$polish-anti-slop`).
+  Claude Code skill and a Codex / ChatGPT skill (`$stop-slop-pl`).
 - Shared Polish reference content in `shared/references/`: slop patterns, register
   rules, plain-Polish guide, voice calibration, scoring/severity, before/after
   examples, and sources.

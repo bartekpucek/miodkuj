@@ -1,37 +1,37 @@
-# Research Summary
+# Podsumowanie researchu
 
-Stop Slop PL adapts anti-AI-slop writing patterns to Polish instead of translating English banned-word lists.
+Stop Slop PL nie tłumaczy angielskich list zakazanych słów. Zamiast tego dostosowuje wzorce anti-slop do polszczyzny.
 
-## What The External Skills Agree On
+## Co łączy zewnętrzne skille
 
-The strongest anti-slop skills, including `hardikpandya/stop-slop`, `blader/humanizer`, `slopbuster`, `de-slop`, and `deslopify`, share a few core ideas:
+Najlepsze skille anti-slop — m.in. `hardikpandya/stop-slop`, `blader/humanizer`, `slopbuster`, `de-slop` i `deslopify` — zgadzają się co do kilku rzeczy:
 
-- Pattern lists help, but rewriting happens at paragraph level.
-- Meaning, facts, numbers, citations, links, and quoted text must be preserved.
-- Banned words are weak signals unless they cluster.
-- Voice and register matter more than generic "humanization."
-- A second audit pass catches residue left by the first rewrite.
-- Genre exceptions prevent overcorrection.
-- Detector-evasion claims should be avoided.
+- Listy wzorców pomagają, ale tekst poprawia się na poziomie akapitu.
+- Sens, fakty, liczby, cytaty, linki i przytoczenia trzeba zachować.
+- Pojedyncze „zakazane" słowa to słaby sygnał — liczy się ich nagromadzenie.
+- Głos i rejestr ważą więcej niż ogólna „humanizacja".
+- Druga tura audytu wyłapuje to, co zostało po pierwszym przejściu.
+- Wyjątki gatunkowe chronią przed przesadną korektą.
+- Nie obiecujemy obejścia wykrywaczy AI.
 
-## Polish Adaptation
+## Adaptacja do polszczyzny
 
-Polish slop often shows up as:
+Polski slop najczęściej wygląda tak:
 
-- officialese: `niniejszy`, `celem`, `w ramach`, `w zakresie`,
-- nominalizations: `dokonanie`, `wdrożenie`, `przeprowadzenie`, `realizacja działań`,
-- passive and impersonal forms: `zostało wykonane`, `dokonano`, `ustalono`, `należy`,
-- genitive chains: `w przypadku braku możliwości uruchomienia pojazdu`,
-- inflated importance: `kluczowy`, `fundamentalny`, `kompleksowy`, `przełomowy`,
-- formulaic structures: `nie tylko X, ale także Y`, `z jednej strony... z drugiej strony...`,
-- generic endings: `podsumowując`, `przyszłość pokaże`, `warto śledzić rozwój sytuacji`.
+- urzędowe zwroty: `niniejszy`, `celem`, `w ramach`, `w zakresie`,
+- rzeczowniki odczasownikowe: `dokonanie`, `wdrożenie`, `przeprowadzenie`, `realizacja działań`,
+- strona bierna i formy bezosobowe: `zostało wykonane`, `dokonano`, `ustalono`, `należy`,
+- łańcuchy dopełniaczy: `w przypadku braku możliwości uruchomienia pojazdu`,
+- puste przymiotniki: `kluczowy`, `fundamentalny`, `kompleksowy`, `przełomowy`,
+- schematyczne konstrukcje: `nie tylko X, ale także Y`, `z jednej strony... z drugiej strony...`,
+- ogólnikowe zakończenia: `podsumowując`, `przyszłość pokaże`, `warto śledzić rozwój sytuacji`.
 
-The skill uses Gov.pl plain-language guidance and Jasnopis-style readability signals: short public-facing sentences, actors and verbs, direct reader perspective, fewer noun chains, less passive voice, fewer participles, and less abstract vocabulary.
+Skill korzysta z wytycznych prostego języka z Gov.pl i sygnałów czytelności w stylu Jasnopisu: krótkie zdania w tekstach dla szerokiego odbiorcy, sprawcy i czasowniki, bezpośrednia perspektywa czytelnika, mniej łańcuchów rzeczownikowych, mniej strony biernej, mniej imiesłowów i mniej abstrakcyjnego słownictwa.
 
-## Polish LLM Context
+## Kontekst polskich modeli (LLM)
 
-PLLuM and Bielik show why Polish-specific instructions matter. They are useful references for Polish language capability and prompt style, but they do not remove the need for editorial guardrails. The skill therefore treats Polish LLMs as possible helpers, not sources of truth.
+PLLuM i Bielik pokazują, dlaczego instrukcje pod polszczyznę mają znaczenie. To dobre punkty odniesienia dla jakości polskiego i stylu promptów, ale nie zastępują redakcyjnych zabezpieczeń. Dlatego skill traktuje polskie modele jako możliwych pomocników, nie źródła prawdy.
 
-## Boundary
+## Granica
 
-Stop Slop PL improves clarity, specificity, register fit, and voice. It does not claim to bypass AI detectors or make text "undetectable."
+Stop Slop PL poprawia jasność, konkret, dopasowanie rejestru i głos. Nie obiecuje obejścia wykrywaczy AI ani „niewykrywalnego" tekstu.

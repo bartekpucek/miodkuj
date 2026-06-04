@@ -1,75 +1,75 @@
-# Manual Test Scenarios
+# Scenariusze testów ręcznych
 
-Use these scenarios to validate `$polish-anti-slop` before publishing changes.
+Tych scenariuszy używaj, żeby sprawdzić `$stop-slop-pl` przed publikacją zmian.
 
-## 1. Officialese To Plain Polish
+## 1. Urzędowy język na prosty
 
 Prompt:
 
 ```text
-Use $polish-anti-slop. Popraw styl i usuń slop po polsku:
+Use $stop-slop-pl. Popraw styl i usuń slop po polsku:
 W celu dokonania zgłoszenia należy wypełnić niniejszy formularz oraz przekazać go do właściwej komórki organizacyjnej w terminie 7 dni od daty zaistnienia zdarzenia.
 ```
 
-Expected behavior:
+Oczekiwane zachowanie:
 
-- Return revised text first.
-- Use direct public-facing Polish.
-- Preserve the 7-day deadline.
-- Remove `w celu`, `dokonania`, `niniejszy`, and institutional fog.
+- Najpierw zwraca poprawiony tekst.
+- Pisze bezpośrednią, prostą polszczyzną.
+- Zachowuje termin 7 dni.
+- Usuwa `w celu`, `dokonania`, `niniejszy` i urzędową mgłę.
 
-## 2. Marketing Slop
+## 2. Marketingowy slop
 
 Prompt:
 
 ```text
-Use $polish-anti-slop. Tryb: marketing. Usuń slop:
+Use $stop-slop-pl. Tryb: marketing. Usuń slop:
 Nasze innowacyjne i kompleksowe rozwiązanie stanowi kluczowy element transformacji cyfrowej, umożliwiając firmom skuteczne wykorzystanie potencjału danych w dynamicznie zmieniającym się świecie.
 ```
 
-Expected behavior:
+Oczekiwane zachowanie:
 
-- Cut unsupported adjectives.
-- Avoid inventing proof.
-- Make the claim concrete or honestly mark missing evidence.
+- Wycina nieuzasadnione przymiotniki.
+- Nie zmyśla dowodów.
+- Konkretyzuje obietnicę albo uczciwie zaznacza brak dowodów.
 
-## 3. Academic Polish
+## 3. Tekst naukowy
 
 Prompt:
 
 ```text
-Use $polish-anti-slop. Tryb: akademicki. Zachowaj ostrożność:
+Use $stop-slop-pl. Tryb: akademicki. Zachowaj ostrożność:
 W badaniu zaobserwowano istotny statystycznie wzrost dokładności klasyfikacji z 81,2% do 84,7% (p = 0,03), co może sugerować, że zastosowana metoda poprawia stabilność modelu.
 ```
 
-Expected behavior:
+Oczekiwane zachowanie:
 
-- Preserve numbers, percentage values, and `p = 0,03`.
-- Preserve appropriate hedging.
-- Do not turn correlation or suggestion into certainty.
-- Do not force active voice if passive/impersonal style is acceptable.
+- Zachowuje liczby, wartości procentowe i `p = 0,03`.
+- Zachowuje odpowiednią ostrożność (hedging).
+- Nie zamienia korelacji ani sugestii w pewnik.
+- Nie wymusza strony czynnej, jeśli strona bierna lub bezosobowa jest tu właściwa.
 
-## 4. Legal Or Official Text
+## 4. Tekst prawny lub urzędowy
 
 Prompt:
 
 ```text
-Use $polish-anti-slop. Tryb: urzędowy/prawny. Uprość bez usuwania podstawy prawnej:
+Use $stop-slop-pl. Tryb: urzędowy/prawny. Uprość bez usuwania podstawy prawnej:
 Na podstawie art. 15 ust. 2 ustawy z dnia 6 marca 2018 r. przedsiębiorca zobowiązany jest do złożenia oświadczenia w terminie 14 dni od dnia doręczenia wezwania.
 ```
 
-Expected behavior:
+Oczekiwane zachowanie:
 
-- Preserve statute reference and 14-day deadline.
-- Clarify where possible.
-- Do not remove legal force or required procedural language.
+- Zachowuje odwołanie do ustawy i termin 14 dni.
+- Upraszcza tam, gdzie się da.
+- Nie usuwa mocy prawnej ani wymaganego języka proceduralnego.
 
-## 5. Voice Match
+## 5. Dopasowanie głosu
 
 Prompt:
 
 ```text
-Use $polish-anti-slop. Dopasuj głos do próbki.
+Use $stop-slop-pl. Dopasuj głos do próbki.
 
 Próbka głosu:
 Piszę krótko. Bez ozdobników. Jeśli coś działa, mówię dlaczego. Jeśli nie działa, też mówię.
@@ -78,37 +78,37 @@ Tekst:
 Warto zauważyć, że wdrożenie narzędzia może stanowić istotny krok w kierunku zwiększenia efektywności procesów biznesowych.
 ```
 
-Expected behavior:
+Oczekiwane zachowanie:
 
-- Match short, blunt rhythm.
-- Keep meaning.
-- Remove throat-clearing and business abstractions.
+- Trzyma krótki, zwięzły rytm.
+- Zachowuje sens.
+- Usuwa puste wstępy i biznesowe abstrakcje.
 
-## 6. Protected Spans
+## 6. Fragmenty chronione
 
 Prompt:
 
 ```text
-Use $polish-anti-slop. Zachowaj linki, kod, cytat i liczby:
+Use $stop-slop-pl. Zachowaj linki, kod, cytat i liczby:
 Warto zauważyć, że endpoint `POST /v1/search` stanowi kluczowy element procesu. Dokumentacja: https://example.com/docs. Cytat: "Model zwrócił 42 wyniki". Wynik wzrósł z 12,4% do 15,1%.
 ```
 
-Expected behavior:
+Oczekiwane zachowanie:
 
-- Preserve `POST /v1/search`, URL, quoted text, and numbers exactly.
-- Improve surrounding Polish only.
+- Zachowuje bez zmian `POST /v1/search`, URL, cytat i liczby.
+- Poprawia tylko polszczyznę dookoła.
 
-## 7. Audit Only
+## 7. Tylko audyt
 
 Prompt:
 
 ```text
-Use $polish-anti-slop. Tylko audyt, bez przepisywania:
+Use $stop-slop-pl. Tylko audyt, bez przepisywania:
 W obecnych realiach kompleksowe rozwiązania AI odgrywają kluczową rolę w optymalizacji procesów.
 ```
 
-Expected behavior:
+Oczekiwane zachowanie:
 
-- Do not rewrite.
-- List concrete issues and severity.
-- Mention missing proof/concrete actors.
+- Nie przepisuje.
+- Wypisuje konkretne problemy i ich wagę.
+- Wskazuje brak dowodów i konkretnych sprawców.

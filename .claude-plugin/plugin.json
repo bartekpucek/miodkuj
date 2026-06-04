@@ -24,6 +24,6 @@
     "style"
   ],
   "skills": [
-    "./skills/claude/polish-anti-slop"
+    "./skills/claude/stop-slop-pl"
   ]
 }

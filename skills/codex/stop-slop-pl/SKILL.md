@@ -1,9 +1,9 @@
 ---
-name: polish-anti-slop
+name: stop-slop-pl
 description: Use when Polish prose sounds AI-generated, over-formal, generic, bureaucratic, or translated from English; also when asked to popraw styl, napisz po ludzku, napisz prościej, uprość, uprość do prostego języka, usuń slop, or when the text brzmi jak ChatGPT or brzmi sztucznie. Matches a Polish voice or register when a sample is given.
 ---
 
-# Polish Anti Slop
+# Stop Slop PL
 
 ## Core Rule
 
