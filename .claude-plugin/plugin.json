@@ -8,10 +8,7 @@
     "url": "https://pucek.com"
   },
   "homepage": "https://github.com/bartekpucek/stop-slop-PL",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bartekpucek/stop-slop-PL.git"
-  },
+  "repository": "https://github.com/bartekpucek/stop-slop-PL.git",
   "license": "MIT",
   "keywords": [
     "polish",
