@@ -1,15 +1,15 @@
-# Stop Slop PL
+# Miodkuj
 
-> **English:** Stop Slop PL is a Polish-language writing skill for Claude, Claude Code, and Codex. It makes the minimum effective edit to AI-sounding, bureaucratic, or over-polished Polish while preserving facts, register, and the writer's voice. The rest of this README is in Polish, because that's the audience.
+> **English:** Miodkuj is a Polish-language writing skill for Claude, Claude Code, and Codex. It makes the minimum effective edit to AI-sounding, bureaucratic, or over-polished Polish while preserving facts, register, and the writer's voice. The rest of this README is in Polish, because that's the audience.
 
-Stop Slop PL poprawia polski tekst, który brzmi jak z AI: sztywny, urzędowy, przegadany albo tłumaczony z angielskiego. Robi najmniejszą potrzebną redakcję i nie rusza faktów, liczb, cytatów, rejestru ani rozpoznawalnego głosu autora.
+Miodkuj poprawia polski tekst, który brzmi jak z AI: sztywny, urzędowy, przegadany albo tłumaczony z angielskiego. Robi najmniejszą potrzebną redakcję i nie rusza faktów, liczb, cytatów, rejestru ani rozpoznawalnego głosu autora.
 
-Skill działa w dwóch wersjach z jednego repozytorium:
+Skill działa jako jedna przenośna wersja z jednego repozytorium:
 
-- **Claude / Claude Code**: wtyczka albo plik wgrany na claude.ai,
-- **Codex / ChatGPT**: skill `$stop-slop-pl`.
+- **Claude / Claude Code**: skill `/miodkuj` po instalacji folderu,
+- **Codex / ChatGPT**: skill `$miodkuj`.
 
-Obie wersje korzystają z tych samych reguł, więc nie rozjeżdżają się w czasie.
+Wszystkie środowiska korzystają z tych samych reguł, więc nie rozjeżdżają się w czasie.
 
 ## Co robi
 
@@ -24,26 +24,26 @@ Czego **nie** robi: nie obiecuje obejścia wykrywaczy AI, tekstu „nie do wykry
 
 ## Instalacja w Claude Code
 
-Dodaj repozytorium jako marketplace wtyczek, a potem zainstaluj wtyczkę:
+Skopiuj albo podlinkuj folder skilla:
 
-```text
-/plugin marketplace add bartekpucek/stop-slop-PL
-/plugin install stop-slop-pl@stop-slop-pl
+```bash
+mkdir -p ~/.claude/skills
+ln -s "$(pwd)/skills/miodkuj" ~/.claude/skills/miodkuj
 ```
 
-Skill włącza się sam, gdy poprosisz o poprawę polskiego tekstu. Możesz go też wywołać wprost: `/stop-slop-pl:stop-slop-pl`.
+Skill włącza się sam, gdy poprosisz o poprawę polskiego tekstu. Możesz go też wywołać wprost: `/miodkuj`.
 
 ## Instalacja na claude.ai
 
 Pobierz gotowy plik albo zbuduj go samodzielnie.
 
-**Sposób A, gotowy plik (bez terminala).** Pobierz `stop-slop-pl.skill` z [ostatniego wydania](https://github.com/bartekpucek/stop-slop-PL/releases/latest) i wgraj go w ustawieniach: **Settings → Capabilities → Skills**.
+**Sposób A, gotowy plik (bez terminala).** Pobierz `miodkuj.skill` z [ostatniego wydania](https://github.com/bartekpucek/miodkuj/releases/latest) i wgraj go w ustawieniach: **Settings → Capabilities → Skills**.
 
 **Sposób B, zbuduj samodzielnie:**
 
 ```bash
 ./scripts/build.sh
-# tworzy dist/stop-slop-pl.skill
+# tworzy dist/miodkuj.skill
 ```
 
 > Tej ścieżki w claude.ai nie ma w oficjalnej dokumentacji Claude Code. Sprawdź u siebie, bo interfejs bywa aktualizowany.
@@ -54,14 +54,14 @@ Skopiuj albo podlinkuj folder skilla do katalogu, z którego korzysta Twój Code
 
 ```bash
 mkdir -p ~/.codex/skills
-ln -s "$(pwd)/skills/codex/stop-slop-pl" ~/.codex/skills/stop-slop-pl
+ln -s "$(pwd)/skills/miodkuj" ~/.codex/skills/miodkuj
 ```
 
 Niektóre konfiguracje czytają skille też z `~/.agents/skills`:
 
 ```bash
 mkdir -p ~/.agents/skills
-ln -s "$(pwd)/skills/codex/stop-slop-pl" ~/.agents/skills/stop-slop-pl
+ln -s "$(pwd)/skills/miodkuj" ~/.agents/skills/miodkuj
 ```
 
 Po instalacji przeładuj środowisko, żeby zobaczyło nowy skill.
@@ -90,11 +90,9 @@ Domyślnie skill zwraca najpierw tekst po minimalnej redakcji. Uwagi dodaje tylk
 ## Układ repozytorium
 
 ```text
-.claude-plugin/         # manifesty wtyczki i marketplace dla Claude Code
 shared/references/      # reguły po polsku, jedno źródło prawdy
 skills/
-  claude/stop-slop-pl/   # wersja dla Claude / Claude Code
-  codex/stop-slop-pl/    # wersja dla Codex / ChatGPT
+  miodkuj/               # wersja dla Claude, Claude Code, Codex i ChatGPT
 scripts/                # build.sh, validate.sh, validate_skill.py
 tests/                  # testy synchronizacji i pakowania
 docs/                   # research, źródła i scenariusze zachowania
@@ -102,10 +100,10 @@ docs/                   # research, źródła i scenariusze zachowania
 
 ## Rozwój
 
-Reguły po polsku trzymamy w jednym miejscu: `shared/references/`. Zmieniaj je tam, a potem zsynchronizuj do obu wersji skilla i zbuduj paczkę:
+Reguły po polsku trzymamy w jednym miejscu: `shared/references/`. Zmieniaj je tam, a potem zsynchronizuj je do skilla i zbuduj paczkę:
 
 ```bash
-./scripts/build.sh      # synchronizuje reguły i buduje dist/stop-slop-pl.skill
+./scripts/build.sh      # synchronizuje reguły i buduje dist/miodkuj.skill
 ./scripts/validate.sh   # sprawdza skille, metadane, wersje, synchronizację i paczkę
 ```
 

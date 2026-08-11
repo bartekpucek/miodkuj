@@ -1,13 +1,13 @@
 # Scenariusze testów ręcznych
 
-Używaj tych scenariuszy do oceny `$stop-slop-pl` przed publikacją zmian. Nie wymagają jednego wzorcowego brzmienia. Sprawdzają zachowanie, fakty i granice ingerencji.
+Używaj tych scenariuszy do oceny `$miodkuj` przed publikacją zmian. Nie wymagają jednego wzorcowego brzmienia. Sprawdzają zachowanie, fakty i granice ingerencji.
 
 ## 1. Urzędowy język na prosty
 
 Prompt:
 
 ```text
-Use $stop-slop-pl. Popraw styl i usuń slop po polsku:
+Use $miodkuj. Popraw styl i usuń slop po polsku:
 W celu dokonania zgłoszenia należy wypełnić niniejszy formularz oraz przekazać go do właściwej komórki organizacyjnej w terminie 7 dni od daty zaistnienia zdarzenia.
 ```
 
@@ -27,7 +27,7 @@ Expected behavior:
 Prompt:
 
 ```text
-Use $stop-slop-pl. Tryb: marketing. Usuń slop:
+Use $miodkuj. Tryb: marketing. Usuń slop:
 Nasze innowacyjne i kompleksowe rozwiązanie stanowi kluczowy element transformacji cyfrowej, umożliwiając firmom skuteczne wykorzystanie potencjału danych w dynamicznie zmieniającym się świecie.
 ```
 
@@ -46,7 +46,7 @@ Expected behavior:
 Prompt:
 
 ```text
-Use $stop-slop-pl. Tryb: akademicki. Zachowaj ostrożność:
+Use $miodkuj. Tryb: akademicki. Zachowaj ostrożność:
 W badaniu zaobserwowano istotny statystycznie wzrost dokładności klasyfikacji z 81,2% do 84,7% (p = 0,03), co może sugerować, że zastosowana metoda poprawia stabilność modelu.
 ```
 
@@ -65,7 +65,7 @@ Expected behavior:
 Prompt:
 
 ```text
-Use $stop-slop-pl. Tryb: urzędowy/prawny. Uprość bez usuwania podstawy prawnej:
+Use $miodkuj. Tryb: urzędowy/prawny. Uprość bez usuwania podstawy prawnej:
 Na podstawie art. 15 ust. 2 ustawy z dnia 6 marca 2018 r. przedsiębiorca zobowiązany jest do złożenia oświadczenia w terminie 14 dni od dnia doręczenia wezwania.
 ```
 
@@ -84,7 +84,7 @@ Expected behavior:
 Prompt:
 
 ```text
-Use $stop-slop-pl. Dopasuj głos do próbki.
+Use $miodkuj. Dopasuj głos do próbki.
 
 Próbka głosu:
 Piszę krótko. Bez ozdobników. Jeśli coś działa, mówię dlaczego. Jeśli nie działa, też mówię.
@@ -108,7 +108,7 @@ Expected behavior:
 Prompt:
 
 ```text
-Use $stop-slop-pl. Zachowaj linki, kod, cytat i liczby:
+Use $miodkuj. Zachowaj linki, kod, cytat i liczby:
 Warto zauważyć, że endpoint `POST /v1/search` stanowi kluczowy element procesu. Dokumentacja: https://example.com/docs. Cytat: "Model zwrócił 42 wyniki". Wynik wzrósł z 12,4% do 15,1%.
 ```
 
@@ -127,7 +127,7 @@ Expected behavior:
 Prompt:
 
 ```text
-Use $stop-slop-pl. Tylko audyt, bez przepisywania:
+Use $miodkuj. Tylko audyt, bez przepisywania:
 W obecnych realiach kompleksowe rozwiązania AI odgrywają kluczową rolę w optymalizacji procesów.
 ```
 
@@ -146,7 +146,7 @@ Expected behavior:
 Prompt:
 
 ```text
-Use $stop-slop-pl. Popraw tylko to, co naprawdę wymaga poprawy:
+Use $miodkuj. Popraw tylko to, co naprawdę wymaga poprawy:
 W piątek znowu próbowałem skrócić ten raport. Nie wyszło. Za każdym razem usuwałem zdanie, a potem odkrywałem, że bez niego następne nie ma sensu. Może problemem nie jest długość, tylko to, że nadal nie wiem, komu ten raport ma pomóc.
 ```
 
@@ -165,7 +165,7 @@ Expected behavior:
 Prompt:
 
 ```text
-Use $stop-slop-pl. Zachowaj uzasadnioną retorykę:
+Use $miodkuj. Zachowaj uzasadnioną retorykę:
 Mamy trzy problemy: dane są niepełne, definicje się różnią, a raport przychodzi po terminie. To nie spór o słowa, lecz trzy różne wyniki przedstawiane jako jedna liczba.
 ```
 
@@ -184,7 +184,7 @@ Expected behavior:
 Prompt:
 
 ```text
-Use $stop-slop-pl. Popraw analizę, ale zachowaj cytat:
+Use $miodkuj. Popraw analizę, ale zachowaj cytat:
 Autor zaczyna od zdania „Warto podkreślić, że transformacja ma kluczowe znaczenie”, a następnie nie przedstawia żadnego przykładu.
 ```
 
@@ -203,7 +203,7 @@ Expected behavior:
 Prompt:
 
 ```text
-Use $stop-slop-pl. Dopasuj tekst do próbki, również interpunkcję.
+Use $miodkuj. Dopasuj tekst do próbki, również interpunkcję.
 
 Próbka:
 Nie lubię wielkich deklaracji — zwykle przykrywają brak decyzji. Wolę jedno „nie wiem” niż trzy slajdy pewności.
@@ -227,7 +227,7 @@ Expected behavior:
 Prompt:
 
 ```text
-Use $stop-slop-pl. Nie wygładzaj mojego tonu:
+Use $miodkuj. Nie wygładzaj mojego tonu:
 No dobra, dowieźliśmy. Trochę późno, trochę bokiem, ale działa. I serio nie mam dziś ochoty udawać, że od początku taki był plan :)
 ```
 
@@ -246,7 +246,7 @@ Expected behavior:
 Prompt:
 
 ```text
-Use $stop-slop-pl. Skróć i uczyń wiarygodnym bez wymyślania konkretów:
+Use $miodkuj. Skróć i uczyń wiarygodnym bez wymyślania konkretów:
 Każdy dział używa innej definicji klienta premium. To właśnie dane zmieniają zasady gry.
 ```
 
@@ -266,7 +266,7 @@ Expected behavior:
 Prompt:
 
 ```text
-Use $stop-slop-pl. Popraw dokumentację bez zmiany terminów:
+Use $miodkuj. Popraw dokumentację bez zmiany terminów:
 Endpoint `POST /v1/search` wykonuje walidację pola `query`, po czym Search Worker publikuje zdarzenie `search.requested` do kolejki `search-jobs`. Warto zauważyć, że retry policy pozostaje bez zmian w wersji 2.4.1.
 ```
 
@@ -285,7 +285,7 @@ Expected behavior:
 Prompt:
 
 ```text
-Use $stop-slop-pl. Uprość wyjaśnienie dla przedsiębiorcy:
+Use $miodkuj. Uprość wyjaśnienie dla przedsiębiorcy:
 Przedsiębiorca składa oświadczenie w terminie 14 dni od doręczenia wezwania. Niezłożenie oświadczenia skutkuje pozostawieniem wniosku bez rozpoznania.
 ```
 
@@ -304,7 +304,7 @@ Expected behavior:
 Prompt:
 
 ```text
-Use $stop-slop-pl. Popraw tylko styl:
+Use $miodkuj. Popraw tylko styl:
 Zaobserwowana korelacja (r = 0,42; 95% CI: 0,18–0,61) może wynikać ze sposobu doboru próby. Wynik nie pozwala stwierdzić, że interwencja spowodowała zmianę zachowania.
 ```
 
@@ -323,7 +323,7 @@ Expected behavior:
 Prompt:
 
 ````text
-Use $stop-slop-pl. Popraw prozę, zachowaj strukturę Markdown:
+Use $miodkuj. Popraw prozę, zachowaj strukturę Markdown:
 ---
 title: "Search API"
 version: 2.4.1
@@ -357,7 +357,7 @@ Expected behavior:
 Prompt:
 
 ```text
-Use $stop-slop-pl. Oceń, co brzmi sztucznie, ale nie oceniaj autorstwa i nie przepisuj:
+Use $miodkuj. Oceń, co brzmi sztucznie, ale nie oceniaj autorstwa i nie przepisuj:
 Oto czego nikt ci nie mówi: prawdziwa innowacja nie polega na narzędziach. Polega na odwadze. Dane są walutą przyszłości.
 ```
 
@@ -376,7 +376,7 @@ Expected behavior:
 Prompt:
 
 ```text
-Use $stop-slop-pl. Zredaguj całość bez utraty faktów:
+Use $miodkuj. Zredaguj całość bez utraty faktów:
 Projekt rozpoczął się 3 marca 2026 r. Zespół miał sześć tygodni i budżet 180 000 zł. W obecnych realiach kluczowym wyzwaniem okazała się integracja danych.
 
 Pierwszy test objął 42 konsultantów. Średni czas odpowiedzi spadł z 18 do 11 minut, ale liczba ponownych kontaktów nie zmieniła się. Wynik może zależeć od tego, że test trwał tylko 14 dni.

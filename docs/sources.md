@@ -1,6 +1,6 @@
 # Źródła i inspiracje
 
-Ten plik dokumentuje materiały wykorzystane przy projektowaniu skilla. Nie jest częścią kontekstu uruchomieniowego: agent nie potrzebuje listy źródeł, żeby redagować tekst.
+Ten plik dokumentuje materiały wykorzystane przy projektowaniu Miodkuj. Nie jest częścią kontekstu uruchomieniowego: agent nie potrzebuje listy źródeł, żeby redagować tekst.
 
 ## Zewnętrzne skille anti-slop i humanizujące
 

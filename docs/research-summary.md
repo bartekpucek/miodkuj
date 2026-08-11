@@ -1,6 +1,6 @@
 # Podsumowanie researchu
 
-Stop Slop PL nie tłumaczy angielskich list zakazanych słów. Dostosowuje wzorce anti-slop do polszczyzny, ale traktuje je jako wskazówki redakcyjne, a nie dowód autorstwa.
+Miodkuj nie tłumaczy angielskich list zakazanych słów. Dostosowuje wzorce anti-slop do polszczyzny, ale traktuje je jako wskazówki redakcyjne, a nie dowód autorstwa.
 
 ## Co łączy zewnętrzne skille
 
@@ -40,6 +40,6 @@ PLLuM i Bielik pokazują, dlaczego instrukcje pod polszczyznę mają znaczenie. 
 
 ## Granica
 
-Stop Slop PL poprawia jasność, konkret, dopasowanie rejestru i głos. Nie obiecuje obejścia wykrywaczy AI ani „niewykrywalnego" tekstu.
+Miodkuj poprawia jasność, konkret, dopasowanie rejestru i głos. Nie obiecuje obejścia wykrywaczy AI ani „niewykrywalnego" tekstu.
 
 Audyt wskazuje nazwane wzorce i cytuje dowody z tekstu. Nie orzeka, czy tekst napisał człowiek, model ani konkretny system.

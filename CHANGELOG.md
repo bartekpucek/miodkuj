@@ -8,12 +8,15 @@ All notable changes to this project are documented here. The format is based on
 
 ### Changed
 
-- Consolidated the runtime into the portable `miodkuj` skill and release bundle.
-- Kept generated runtime references synchronized from `shared/references/`.
+- Renamed the project and skill to Miodkuj.
+- Consolidated Claude, ChatGPT, and Codex distribution into one portable Agent Skill.
+- Changed direct invocation to `/miodkuj` in Claude Code and `$miodkuj` in Codex.
+- Rewrote installation and usage documentation around the supported platform behavior.
 
 ### Removed
 
-- Platform-specific runtime copies and Claude plugin manifests.
+- Claude plugin and marketplace packaging, which forced a namespaced slash command.
+- Platform-specific duplicate skill directories and the previous project identifiers.
 
 ## [1.1.0] - 2026-08-11
 
@@ -45,16 +48,16 @@ Initial public release.
 - Polish-language anti-slop writing skill that rewrites AI-sounding, bureaucratic,
   generic, or translated-from-English Polish prose into natural, register-appropriate
   text while preserving facts, numbers, citations, and meaning.
-- Two interchangeable delivery targets built from a single source: a Claude /
-  Claude Code skill and a Codex / ChatGPT skill (`$stop-slop-pl`).
+- A pre-2.0 layout with two delivery targets built from a single source.
 - Shared Polish reference content in `shared/references/`: slop patterns, register
   rules, plain-Polish guide, voice calibration, scoring/severity, before/after
   examples, and sources.
-- `scripts/build.sh` (sync references into both targets + bundle the `.skill`),
+- `scripts/build.sh` (sync references into the pre-2.0 targets + bundle the `.skill`),
   `scripts/validate.sh`, and a stdlib-only `scripts/validate_skill.py`.
-- Claude Code plugin and marketplace manifests, MIT license, and documentation
+- Pre-2.0 plugin and marketplace manifests, MIT license, and documentation
   (`README.md`, `docs/research-summary.md`, `docs/test-scenarios.md`).
-- CI workflow that validates both skill targets and guards against reference drift.
+- CI workflow that validates the pre-2.0 targets and guards against reference drift.
 
-[1.1.0]: https://github.com/bartekpucek/stop-slop-PL/compare/v1.0.0...v1.1.0
-[1.0.0]: https://github.com/bartekpucek/stop-slop-PL/releases/tag/v1.0.0
+[2.0.0]: https://github.com/bartekpucek/miodkuj/compare/v1.1.0...v2.0.0
+[1.1.0]: https://github.com/bartekpucek/miodkuj/compare/v1.0.0...v1.1.0
+[1.0.0]: https://github.com/bartekpucek/miodkuj/releases/tag/v1.0.0
