@@ -64,13 +64,24 @@ ln -s "$(pwd)/skills/miodkuj" ~/.agents/skills/miodkuj
 
 W Codex wpisz `$miodkuj`. Skill może też uruchomić się automatycznie, gdy prośba pasuje do jego opisu.
 
-## ChatGPT i Claude.ai
+## ChatGPT
 
-Pobierz `miodkuj.skill` z [najnowszego wydania](https://github.com/bartekpucek/miodkuj/releases/latest). Możesz też zbudować plik lokalnie poleceniem `./scripts/build.sh`; wynik znajdziesz w `dist/miodkuj.skill`.
+1. [Pobierz `miodkuj.skill`](https://github.com/bartekpucek/miodkuj/releases/latest/download/miodkuj.skill).
+2. W ChatGPT otwórz **Plugins**, a potem kartę **Skills**. Możesz też wejść bezpośrednio na [chatgpt.com/skills](https://chatgpt.com/skills).
+3. Wybierz **Create** → **Upload from your computer**.
+4. Wskaż pobrany plik `miodkuj.skill` i poczekaj, aż ChatGPT go sprawdzi.
+5. Otwórz czat i napisz na przykład: `Użyj Miodkuj, aby poprawić ten tekst: …`
 
-W ChatGPT Personal Skills (umiejętności osobiste) są ogólnie dostępne na kontach Business, Enterprise, Healthcare i Edu. Administratorzy kont Enterprise i Edu mogą najpierw musieć włączyć Skills oraz przesyłanie plików. Jeśli Twoje konto obsługuje Personal Skills, wgraj i zainstaluj skill. ChatGPT może wybrać go automatycznie. Możesz też napisać: `Użyj Miodkuj, aby…`. Nie używaj tutaj polecenia slash. Szczegóły znajdziesz w [dokumentacji Skills w ChatGPT](https://help.openai.com/en/articles/20001066-skills-in-chatgpt).
+ChatGPT może też wybrać Miodkuj automatycznie, gdy poprosisz o poprawę polskiego tekstu. Nie używaj polecenia slash. Jeśli nie widzisz sekcji **Skills**, Twój plan może jej nie obsługiwać albo administrator firmowego konta jeszcze jej nie włączył. Personal Skills są obecnie ogólnie dostępne na kontach Business, Enterprise, Healthcare i Edu. Na kontach Enterprise i Edu administrator zarządza również zgodą na przesyłanie plików. Szczegóły znajdziesz w [oficjalnej instrukcji OpenAI](https://help.openai.com/en/articles/20001066-skills-in-chatgpt).
 
-W Claude.ai najpierw włącz wykonywanie kodu, zgodnie z [instrukcją korzystania ze skilli](https://support.claude.com/en/articles/12512180-use-skills-in-claude). Potem wgraj `miodkuj.skill`. Claude.ai może wybrać skill automatycznie. Możesz też zwykłym językiem poprosić o użycie Miodkuj. Nie zakładaj, że zadziała tam polecenie slash.
+## Claude.ai
+
+1. [Pobierz `miodkuj.skill`](https://github.com/bartekpucek/miodkuj/releases/latest/download/miodkuj.skill).
+2. Włącz wykonywanie kodu zgodnie z [instrukcją korzystania ze skilli](https://support.claude.com/en/articles/12512180-use-skills-in-claude).
+3. Wgraj pobrany plik `miodkuj.skill`.
+4. Poproś zwykłym językiem o użycie Miodkuj. Claude.ai może też wybrać skill automatycznie.
+
+W Claude.ai nie zakładaj, że zadziała polecenie slash. Jeśli rozwijasz skill lokalnie, zbudujesz nową paczkę poleceniem `./scripts/build.sh`; plik znajdziesz w `dist/miodkuj.skill`.
 
 ## Jak używać
 
