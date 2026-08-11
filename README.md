@@ -16,50 +16,50 @@ Miodkuj nie obiecuje obchodzenia wykrywaczy AI, tekstu „nie do wykrycia”, po
 
 ## Claude Code: /miodkuj
 
-Zainstaluj samodzielny folder skilla przez dowiązanie symboliczne:
-
-```bash
-mkdir -p ~/.claude/skills
-ln -s "$(pwd)/skills/miodkuj" ~/.claude/skills/miodkuj
-```
-
-Jeśli nie chcesz używać dowiązania, skopiuj folder:
+Najprościej skopiuj folder `skills/miodkuj` do katalogu skilli Claude Code:
 
 ```bash
 mkdir -p ~/.claude/skills
 cp -R skills/miodkuj ~/.claude/skills/miodkuj
 ```
 
+Jeśli rozwijasz Miodkuj i chcesz od razu widzieć każdą zmianę, zamiast kopiowania utwórz skrót do folderu w tym repozytorium (tzw. dowiązanie symboliczne):
+
+```bash
+mkdir -p ~/.claude/skills
+ln -s "$(pwd)/skills/miodkuj" ~/.claude/skills/miodkuj
+```
+
 Po instalacji wywołaj skill bezpośrednio poleceniem `/miodkuj`. Zobacz [dokumentację poleceń slash w Claude Code](https://code.claude.com/docs/en/slash-commands).
 
 ## Codex: $miodkuj
 
-Zainstaluj ten sam folder przez dowiązanie symboliczne:
-
-```bash
-mkdir -p ~/.codex/skills
-ln -s "$(pwd)/skills/miodkuj" ~/.codex/skills/miodkuj
-```
-
-Albo skopiuj folder:
+Najprościej skopiuj folder `skills/miodkuj` do katalogu skilli Codex:
 
 ```bash
 mkdir -p ~/.codex/skills
 cp -R skills/miodkuj ~/.codex/skills/miodkuj
 ```
 
-Jeśli Twoja konfiguracja korzysta ze wspólnego katalogu skilli, użyj `~/.agents/skills`:
+Jeśli rozwijasz Miodkuj i chcesz od razu widzieć każdą zmianę, użyj skrótu do folderu w tym repozytorium:
 
 ```bash
-mkdir -p ~/.agents/skills
-ln -s "$(pwd)/skills/miodkuj" ~/.agents/skills/miodkuj
+mkdir -p ~/.codex/skills
+ln -s "$(pwd)/skills/miodkuj" ~/.codex/skills/miodkuj
 ```
 
-Wersja bez dowiązania:
+Codex może też czytać skille ze wspólnego katalogu `~/.agents/skills`. Aby skopiować tam Miodkuj, wpisz:
 
 ```bash
 mkdir -p ~/.agents/skills
 cp -R skills/miodkuj ~/.agents/skills/miodkuj
+```
+
+Jeśli wolisz skrót do folderu w repozytorium:
+
+```bash
+mkdir -p ~/.agents/skills
+ln -s "$(pwd)/skills/miodkuj" ~/.agents/skills/miodkuj
 ```
 
 W Codex wpisz `$miodkuj`. Skill może też uruchomić się automatycznie, gdy prośba pasuje do jego opisu.
