@@ -130,6 +130,7 @@ class ValidateRepoTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             copy = self.copy_repository(Path(tmp))
             target = copy / "[REDACTED]" / "[REDACTED]" / "review.diff"
+            target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text(LEGACY_DISPLAY, encoding="utf-8")
 
             errors = MODULE.validate_repo(copy)
