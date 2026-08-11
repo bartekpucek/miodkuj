@@ -1,8 +1,10 @@
 # Polish Voice Calibration
 
-Use this when the user supplies a writing sample or asks to match a voice.
+Use this for every personal, marketing, newsletter, social, or opinion edit. Infer a working voice profile from the draft itself. If the user supplies a separate writing sample, treat it as stronger evidence of voice than the draft being repaired.
 
-## Fingerprint The Sample
+## Fingerprint The Draft
+
+Choose three to five signals that most distinguish this writer. Do not regularize the text before identifying them.
 
 Look for:
 
@@ -16,7 +18,20 @@ Look for:
 - first-person opinions,
 - favorite connectors,
 - appetite for examples,
-- level of warmth or bluntness.
+- level of warmth or bluntness,
+- useful repetition and favorite terms,
+- fragments, asides, self-corrections, and digressions,
+- mixed feelings or unresolved tension,
+- profanity or deliberate informality,
+- stable domain vocabulary,
+- intentional punctuation, including dashes, ellipses, parentheses, or sentence fragments.
+
+## Separate Voice Sample
+
+- Use a supplied sample to distinguish the writer's habits from defects in the draft.
+- Match only traits supported by the sample; do not copy its subject matter, facts, jokes, or opinions.
+- Preserve roughly the sample's punctuation and rhythm when they do not conflict with an explicit user constraint.
+- Let fidelity, legal force, scientific uncertainty, and protected spans outrank voice matching.
 
 ## Rewrite Rules
 
@@ -27,6 +42,9 @@ Look for:
 - Do not add slang unless the sample uses it.
 - Do not add jokes, vulnerability, or attitude that the sample does not support.
 - Preserve intentional roughness if it makes the voice recognizable.
+- Keep useful repetition when it creates emphasis, cohesion, or a recognizable verbal habit.
+- Keep fragments, asides, self-corrections, mixed feelings, profanity, and domain language when they are clear and characteristic.
+- Do not make every paragraph equally tidy or force the same sentence pattern throughout the piece.
 
 ## Quick Voice Labels
 

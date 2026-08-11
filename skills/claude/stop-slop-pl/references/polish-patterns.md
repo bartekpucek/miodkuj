@@ -2,6 +2,14 @@
 
 Use these as cluster-sensitive signals. Most items are not absolute bans.
 
+## Contents
+
+- Chatbot residue, throat-clearing, and inflated importance
+- Officialese, nominalizations, passive fog, genitive chains, and participial heaviness
+- Formulaic structures, faux insight, metadiscourse, colon reveals, and negative listing
+- Synonym cycling, fake-profound endings, formatting slop, and second-hand text
+- Em dashes, generic endings, and generic specificity
+
 ## Chatbot Residue
 
 Red flags:
@@ -209,6 +217,223 @@ Fix:
 - Keep contrast only if it carries a real distinction.
 - Replace generic synthesis with actual consequence.
 - Avoid balanced pairs unless the text genuinely compares two sides.
+
+## Faux Insight And Exclusivity
+
+Watchlist:
+
+- `oto czego nikt ci nie mówi`
+- `większość ludzi nie rozumie`
+- `najczęściej pomijany element`
+- `to część, której wszyscy nie dostrzegają`
+- `prawdziwy problem polega na tym`
+
+Problem:
+
+- The setup presents an ordinary claim as hidden knowledge and flatters the writer or reader as part of an informed minority.
+
+Fix:
+
+- Remove the exclusivity claim and state the substantive point.
+
+Before:
+
+> Oto czego większość firm nie rozumie: dane są prawdziwą przewagą.
+
+After:
+
+> Przewagę daje sposób, w jaki firma zbiera i wykorzystuje dane.
+
+False-positive guard: Keep the construction when the text can identify a specific, evidenced misconception held by a defined group. Do not infer that evidence from the setup itself.
+
+## Interpretive Metadiscourse
+
+Watchlist:
+
+- `ten punkt jest ważniejszy, niż się wydaje`
+- `jak widać`
+- `warto zwrócić uwagę na to, że`
+- `innymi słowy` followed by a repetition
+- `to rozróżnienie ma kluczowe znaczenie`
+
+Problem:
+
+- The prose steps outside the subject to tell the reader how much weight to give a claim instead of supplying the reason.
+
+Fix:
+
+- Delete the instruction when the point is already clear. Otherwise replace it with the source-grounded consequence.
+
+Before:
+
+> Ten punkt jest ważniejszy, niż się wydaje. Zespół nie ma jednej definicji aktywnego klienta.
+
+After:
+
+> Zespół nie ma jednej definicji aktywnego klienta, więc każdy raport liczy go inaczej.
+
+False-positive guard: Keep genuine signposting in long, technical, legal, or academic arguments when it helps readers navigate a real distinction. Remove only commentary that adds no reasoning.
+
+## Colon Reveals
+
+Watchlist:
+
+- a short evaluative label followed by a colon and a dramatic reveal,
+- `najważniejsze:`, `najlepsze:`, `wniosek:`, `sekret:` used as a hook rather than a label.
+
+Problem:
+
+- The colon manufactures a reveal where an ordinary sentence would be clearer.
+
+Fix:
+
+- Turn the label and reveal into a direct sentence.
+
+Before:
+
+> Największa zmiana: system uczy się sam.
+
+After:
+
+> Najbardziej zmienia pracę to, że system uczy się na kolejnych zgłoszeniach.
+
+False-positive guard: Keep colons for lists, definitions, quotations, UI labels, headings, and concise summaries where the text after the colon genuinely specifies the label.
+
+## Negative Listing
+
+Watchlist:
+
+- `Nie X. Nie Y. Z.`
+- several consecutive negated fragments followed by a positive label,
+- clipped rejections used to build a slogan.
+
+Problem:
+
+- Stacked negations manufacture force while delaying the actual claim.
+
+Fix:
+
+- State the positive claim and keep only a contrast that changes its meaning.
+
+Before:
+
+> Nie raport. Nie dashboard. System decyzji.
+
+After:
+
+> To system, który łączy dane z decyzjami zespołu.
+
+False-positive guard: Keep a short negative series in dialogue, literary prose, political rhetoric, or a voice sample when its cadence is deliberate and distinctive rather than repeated throughout the text.
+
+## Synonym Cycling
+
+Watch for:
+
+- changing `agent`, `asystent`, `narzędzie`, and `system` while referring to the same product,
+- rotating `firma`, `organizacja`, `przedsiębiorstwo`, and `podmiot` only to avoid repetition,
+- unclear pronouns introduced by unnecessary variation.
+
+Problem:
+
+- Forced variation makes terminology unstable and can suggest distinctions that do not exist.
+
+Fix:
+
+- Repeat the clearest established term. Use a different term only for a different concept.
+
+Before:
+
+> Agent porządkuje zgłoszenia. Asystent przypisuje priorytety. Następnie narzędzie przekazuje sprawy zespołowi.
+
+After:
+
+> Agent porządkuje zgłoszenia, przypisuje im priorytety i przekazuje sprawy zespołowi.
+
+False-positive guard: Keep distinct terms when the source defines distinct components, legal roles, system layers, or actors. Precision outranks stylistic repetition.
+
+## Fake-Profound Kickers And Aphorisms
+
+Watchlist:
+
+- `dane są walutą przyszłości`
+- `X jest językiem Y`
+- `X staje się lustrem Y`
+- `przyszłość nie czeka`
+- a final metaphor or mic-drop sentence that adds no consequence or action.
+
+Problem:
+
+- The ending converts an ordinary point into a reusable slogan and often replaces the actual implication.
+
+Fix:
+
+- Delete the kicker and end on the last concrete fact, unresolved tension, decision, or next action already supported by the source.
+
+Before:
+
+> Dane są walutą przyszłości.
+
+After:
+
+> Bez wspólnej definicji klienta zarząd nadal nie może porównać wyników sprzedaży.
+
+False-positive guard: Keep a metaphor when it is original, developed by the author, and carries reasoning that plain paraphrase would lose. A familiar phrase alone is not enough.
+
+## Formatting Slop
+
+Watch for:
+
+- emoji decorating headings or bullets,
+- bold applied to routine phrases mid-sentence,
+- many headings over one- or two-sentence sections,
+- a bullet list that hides a simple relationship better expressed in prose.
+
+Problem:
+
+- Formatting performs importance and fragments the argument instead of clarifying its structure.
+
+Fix:
+
+- Keep headings for real sections, bold for genuine scanning needs, and lists for parallel items. Merge decorative fragments into prose.
+
+Before:
+
+> ## 🚀 **Wdrożenie**
+>
+> **Kluczowy wniosek:** Zaczynamy w maju.
+
+After:
+
+> ## Wdrożenie
+>
+> Zaczynamy w maju.
+
+False-positive guard: Keep required brand formatting, accessibility-oriented structure, UI copy conventions, checklists, comparison tables, and user-requested Markdown.
+
+## Second-Hand Text Guard
+
+Watch for:
+
+- watched phrases inside quotations, titles, proper names, code, examples, or passages that discuss the phrase itself,
+- an edit that silently changes a cited speaker's wording.
+
+Problem:
+
+- Pattern matching without scope awareness corrupts evidence and protected text.
+
+Fix:
+
+- Leave second-hand text exact. Edit only the surrounding prose unless the user explicitly asks to alter the quotation or example.
+
+Before:
+
+> Autor zaczyna od zdania „Warto podkreślić, że transformacja ma kluczowe znaczenie”, a potem nie podaje żadnego przykładu.
+
+After:
+
+> Autor zaczyna od zdania „Warto podkreślić, że transformacja ma kluczowe znaczenie”, ale nie podaje żadnego przykładu.
+
+False-positive guard: This is a preservation rule. It does not protect unattributed prose merely because it uses quotation marks decoratively; determine whether the words are genuinely cited, named, or discussed.
 
 ## Em Dashes
 

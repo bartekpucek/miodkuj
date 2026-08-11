@@ -2,6 +2,15 @@
 
 Choose register before rewriting. Register fit beats generic naturalness.
 
+## Contents
+
+- Public-facing plain Polish
+- Business and marketing
+- Technical and product documentation
+- Academic and scientific Polish
+- Legal and official text
+- Social, newsletter, and opinion writing
+
 ## Public-Facing Plain Polish
 
 Use for citizen services, onboarding, instructions, product flows, help docs, and public communication.

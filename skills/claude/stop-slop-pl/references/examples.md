@@ -1,5 +1,12 @@
 # Polish Before And After Examples
 
+## Contents
+
+- Officialese, generic introductions, nominalizations, and passive forms
+- Fake synthesis and unsupported marketing claims
+- Voice matching and protected spans
+- Portability, synonym cycling, fake-profound endings, and second-hand phrases
+
 ## Officialese
 
 Before:
@@ -99,3 +106,51 @@ Before:
 After:
 
 > Endpoint `POST /v1/search` obsługuje ten proces. Dokumentacja: https://example.com/docs. Cytat: "Model zwrócił 42 wyniki".
+
+## Portability Test
+
+Before:
+
+> W dynamicznie zmieniającym się otoczeniu organizacje muszą elastycznie odpowiadać na nowe wyzwania.
+
+After, no supporting detail available:
+
+> Organizacje muszą szybciej reagować na zmiany. Tekst potrzebuje konkretu: jakie zmiany i co dziś opóźnia reakcję?
+
+The original sentence could describe almost any organization. Make it smaller or ask for the missing detail; do not invent one.
+
+## Synonym Cycling
+
+Before:
+
+> Agent analizuje zgłoszenie. Asystent wybiera kategorię. Następnie narzędzie przekazuje sprawę konsultantowi.
+
+After:
+
+> Agent analizuje zgłoszenie, wybiera kategorię i przekazuje sprawę konsultantowi.
+
+Repeat a stable term when it names the same thing.
+
+## Fake-Profound Ending
+
+Before:
+
+> Zespół nadal używa trzech definicji aktywnego klienta. Dane są walutą przyszłości.
+
+After:
+
+> Zespół nadal używa trzech definicji aktywnego klienta, więc raportów sprzedaży nie da się porównać.
+
+Use the supported consequence instead of a generic aphorism. If the source does not give the consequence, end on the first sentence.
+
+## Second-Hand Phrase
+
+Before:
+
+> W prezentacji pada zdanie „Warto podkreślić, że AI odgrywa kluczową rolę”. To jedyne uzasadnienie inwestycji.
+
+After:
+
+> W prezentacji pada zdanie „Warto podkreślić, że AI odgrywa kluczową rolę”, ale to jedyne uzasadnienie inwestycji.
+
+Keep the quoted wording exact and edit only the surrounding analysis.
