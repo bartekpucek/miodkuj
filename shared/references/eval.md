@@ -8,6 +8,8 @@ Answer every applicable check with pass or fail. If any check fails, revise once
 
 - Does every source claim and qualification survive with the same degree of certainty?
 - Did the edit avoid adding facts, examples, opinions, numbers, dates, quotations, sources, customers, mechanisms, or outcomes?
+- Does every stated cause, consequence, comparison, performance claim, and affected workflow appear explicitly in the source or supplied context? Plausibility is not evidence.
+- When a slogan or aphorism was removed, did the edit avoid replacing it with an inferred explanation or consequence?
 - Are names, numbers, dates, links, citations, quotations, code, legal references, product names, and required terminology exact?
 - Did the edit preserve exceptions, caveats, warnings, deadlines, eligibility rules, rights, obligations, and procedural steps?
 
@@ -45,6 +47,12 @@ Answer every applicable check with pass or fail. If any check fails, revise once
 
 - Does each finding name a material pattern, quote its evidence, assign severity, and suggest a direction for the fix?
 - Does the response avoid rewriting the text and avoid guessing whether AI wrote it?
+
+Use this non-numerical severity rubric:
+
+- **Red:** the wording invents or distorts a claim, hides responsibility or evidence, changes legal or scientific force, or materially blocks understanding. Fix before use.
+- **Yellow:** a localized clarity, cadence, or voice problem is real, but the meaning remains recoverable. Revise unless the construction serves the source's register or voice.
+- **Green:** a watched construction is justified by the source, quotation, register, or deliberate voice. Preserve it and explain briefly why it is not a problem here.
 
 ### Embedded Or File Mode
 

@@ -242,7 +242,7 @@ Before:
 
 After:
 
-> Przewagę daje sposób, w jaki firma zbiera i wykorzystuje dane.
+> Dane są przewagą firmy.
 
 False-positive guard: Keep the construction when the text can identify a specific, evidenced misconception held by a defined group. Do not infer that evidence from the setup itself.
 
@@ -270,7 +270,7 @@ Before:
 
 After:
 
-> Zespół nie ma jednej definicji aktywnego klienta, więc każdy raport liczy go inaczej.
+> Zespół nie ma jednej definicji aktywnego klienta.
 
 False-positive guard: Keep genuine signposting in long, technical, legal, or academic arguments when it helps readers navigate a real distinction. Remove only commentary that adds no reasoning.
 
@@ -295,7 +295,7 @@ Before:
 
 After:
 
-> Najbardziej zmienia pracę to, że system uczy się na kolejnych zgłoszeniach.
+> Największą zmianą jest to, że system uczy się sam.
 
 False-positive guard: Keep colons for lists, definitions, quotations, UI labels, headings, and concise summaries where the text after the colon genuinely specifies the label.
 
@@ -321,7 +321,7 @@ Before:
 
 After:
 
-> To system, który łączy dane z decyzjami zespołu.
+> To system decyzji, a nie raport ani dashboard.
 
 False-positive guard: Keep a short negative series in dialogue, literary prose, political rhetoric, or a voice sample when its cadence is deliberate and distinctive rather than repeated throughout the text.
 
@@ -371,11 +371,11 @@ Fix:
 
 Before:
 
-> Dane są walutą przyszłości.
+> Zespół nadal używa trzech definicji aktywnego klienta. Dane są walutą przyszłości.
 
 After:
 
-> Bez wspólnej definicji klienta zarząd nadal nie może porównać wyników sprzedaży.
+> Zespół nadal używa trzech definicji aktywnego klienta.
 
 False-positive guard: Keep a metaphor when it is original, developed by the author, and carries reasoning that plain paraphrase would lose. A familiar phrase alone is not enough.
 
@@ -400,13 +400,23 @@ Before:
 
 > ## 🚀 **Wdrożenie**
 >
-> **Kluczowy wniosek:** Zaczynamy w maju.
+> ### **Start**
+>
+> Zaczynamy w maju. Pilotaż obejmie dział sprzedaży.
+>
+> ### **Zakres**
+>
+> Najpierw uruchomimy raportowanie. Integracje poczekają.
+>
+> ### **Decyzja**
+>
+> Ania zatwierdzi harmonogram. Zespół wdrożeniowy rozpocznie prace po akceptacji.
 
 After:
 
 > ## Wdrożenie
 >
-> Zaczynamy w maju.
+> Zaczynamy w maju od pilotażu w dziale sprzedaży. Najpierw uruchomimy raportowanie; integracje poczekają. Po zatwierdzeniu harmonogramu przez Anię zespół wdrożeniowy rozpocznie prace.
 
 False-positive guard: Keep required brand formatting, accessibility-oriented structure, UI copy conventions, checklists, comparison tables, and user-requested Markdown.
 

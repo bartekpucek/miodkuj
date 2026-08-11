@@ -115,7 +115,7 @@ Before:
 
 After, no supporting detail available:
 
-> Organizacje muszą szybciej reagować na zmiany. Tekst potrzebuje konkretu: jakie zmiany i co dziś opóźnia reakcję?
+> Organizacje muszą elastycznie odpowiadać na zmiany. Tekst potrzebuje konkretu: jakie zmiany i na czym ma polegać elastyczna odpowiedź?
 
 The original sentence could describe almost any organization. Make it smaller or ask for the missing detail; do not invent one.
 
@@ -139,9 +139,9 @@ Before:
 
 After:
 
-> Zespół nadal używa trzech definicji aktywnego klienta, więc raportów sprzedaży nie da się porównać.
+> Zespół nadal używa trzech definicji aktywnego klienta.
 
-Use the supported consequence instead of a generic aphorism. If the source does not give the consequence, end on the first sentence.
+Use a source-supported consequence instead of a generic aphorism. Here the source does not give one, so the edit ends on the first sentence.
 
 ## Second-Hand Phrase
 

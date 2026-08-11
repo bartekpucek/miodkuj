@@ -247,18 +247,19 @@ Prompt:
 
 ```text
 Use $stop-slop-pl. Skróć i uczyń wiarygodnym bez wymyślania konkretów:
-Platforma zapewnia przełomowe doświadczenie, które fundamentalnie zmienia sposób, w jaki nowoczesne zespoły wykorzystują pełny potencjał sztucznej inteligencji.
+Każdy dział używa innej definicji klienta premium. To właśnie dane zmieniają zasady gry.
 ```
 
 Protected invariants:
 
-- Źródło nie podaje funkcji, grupy klientów, wyniku ani mechanizmu.
-- Nie wolno dopisać żadnej funkcji, liczby, przykładu lub opinii klienta.
+- Jedynym konkretnym faktem jest to, że działy używają różnych definicji klienta premium.
+- Źródło nie podaje skutku, mechanizmu ani wpływu na raporty, sprzedaż, porównywanie danych lub pracę zespołu.
+- Nie wolno dopisać żadnej funkcji, liczby, przykładu, opinii klienta ani prawdopodobnego skutku.
 
 Expected behavior:
 
-- Usuń puste wzmacniacze i uczciwie zmniejsz twierdzenie.
-- Jeśli nie da się stworzyć użytecznego zdania, nazwij jeden brakujący rodzaj informacji.
+- Zachowaj pierwszy fakt i usuń lub zmniejsz slogan.
+- Nie zastępuj sloganu atrakcyjnym, ale niewspieranym wyjaśnieniem. Jeśli skutek jest potrzebny, nazwij brakujący rodzaj informacji.
 
 ## 14. Technical terminology
 

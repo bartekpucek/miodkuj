@@ -38,7 +38,7 @@ When a generic claim needs grounding:
 3. Make the unsupported claim smaller or remove it.
 4. If the missing detail blocks a useful rewrite, flag the gap or ask for the information.
 
-Never invent a number, example, customer, source, mechanism, or opinion to make prose sound human.
+Never invent a number, example, customer, source, mechanism, consequence, affected workflow, performance claim, comparison, or opinion to make prose sound human. A plausible inference is still new information: removing a slogan does not authorize replacing it with an inferred explanation. If the source gives no support, end on the preceding supported statement or flag the gap.
 
 ## Portability Test
 
