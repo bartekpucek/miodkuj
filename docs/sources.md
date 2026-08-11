@@ -1,13 +1,12 @@
-# Źródła
+# Źródła i inspiracje
+
+Ten plik dokumentuje materiały wykorzystane przy projektowaniu skilla. Nie jest częścią kontekstu uruchomieniowego: agent nie potrzebuje listy źródeł, żeby redagować tekst.
 
 ## Zewnętrzne skille anti-slop i humanizujące
 
 - `hardikpandya/stop-slop`: https://github.com/hardikpandya/stop-slop
-- `hardikpandya/stop-slop` SKILL.md: https://raw.githubusercontent.com/hardikpandya/stop-slop/main/SKILL.md
-- `hardikpandya/stop-slop` frazy: https://raw.githubusercontent.com/hardikpandya/stop-slop/main/references/phrases.md
-- `hardikpandya/stop-slop` struktury: https://raw.githubusercontent.com/hardikpandya/stop-slop/main/references/structures.md
-- `hardikpandya/stop-slop` przykłady: https://raw.githubusercontent.com/hardikpandya/stop-slop/main/references/examples.md
 - `blader/humanizer`: https://github.com/blader/humanizer
+- `petergyang/no-ai-slop`: https://github.com/petergyang/no-ai-slop
 - `gabelul/slopbuster`: https://github.com/gabelul/slopbuster
 - `petekp/de-slop`: https://playbooks.com/skills/petekp/agent-skills/de-slop
 - `shreyas-makes/deslopify`: https://github.com/shreyas-makes/deslopify
@@ -16,6 +15,7 @@
 - `aplaceforallmystuff/the-antislop`: https://github.com/aplaceforallmystuff/the-antislop
 - `machinemade-mm/humanmade-antislop`: https://github.com/machinemade-mm/humanmade-antislop
 - `theclaymethod/unslop`: https://github.com/theclaymethod/unslop
+- `researchanddeploy/sztuczny-miodek`: https://github.com/researchanddeploy/sztuczny-miodek
 
 ## Ogólne materiały o pisaniu z AI
 
@@ -45,7 +45,7 @@
 - Ludzie Nauki o idiolektach AI: https://ludzie.nauka.gov.pl/wp/aktualnosci/kazda-sztuczna-inteligencja-ma-swoj-styl-artykul-polki-w-scientific-american/
 - Wykład HF Studio o idiolektach LLM: https://www.hf.uio.no/hf-studio/arrangementer/2026/Beyond%20%E2%80%9CAI%20Language%E2%80%9D:%20The%20case%20for%20treating%20LLM%20output%20as%20idiolects.html
 
-## Polskie modele językowe (LLM)
+## Polskie modele językowe
 
 - PLLuM prompt book: https://pllum.org.pl/prompt_book
 - Artykuł o PLLuM: https://arxiv.org/html/2511.03823

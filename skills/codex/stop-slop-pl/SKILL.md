@@ -1,60 +1,80 @@
 ---
 name: stop-slop-pl
-description: Use when Polish prose sounds AI-generated, over-formal, generic, bureaucratic, or translated from English; also when asked to popraw styl, napisz po ludzku, napisz prościej, uprość, uprość do prostego języka, usuń slop, or when the text brzmi jak ChatGPT or brzmi sztucznie. Matches a Polish voice or register when a sample is given.
+description: Use when Polish prose sounds AI-generated, over-formal, generic, bureaucratic, or translated from English; also when asked to popraw styl, napisz po ludzku, napisz prościej, uprość, uprość do prostego języka, usuń slop, or when the text brzmi jak ChatGPT or brzmi sztucznie. Edits minimally, preserves the writer's voice and register, or audits named patterns without guessing authorship.
 ---
 
 # Stop Slop PL
 
 ## Core Rule
 
-Improve Polish prose so it sounds natural, specific, and appropriate to its genre. Rewrite first by default. Preserve meaning, facts, names, numbers, links, citations, quotes, code, legal references, and user constraints.
+Make the minimum effective edit. Preserve the writer's point, recognizable voice, structure, and useful irregularities while removing Polish AI-writing patterns, bureaucratic fog, translation residue, repetition, and unclear passages.
 
-Never promise detector evasion, "undetectable" writing, academic laundering, impersonation, or fact invention.
+Preserve meaning, facts, qualifications, names, numbers, dates, links, citations, quotations, code, legal references, product names, and user constraints. Never invent specificity or promise detector evasion, "undetectable" writing, academic laundering, or impersonation.
 
-## Default Output
+## Modes
 
-- If the user asks to rewrite, popraw styl, napisz po ludzku, uprość, usuń slop, make natural, or remove AI style: return the revised Polish text first.
-- Add short notes only when requested or when a constraint/risk matters.
-- If the user asks for audit only: do not rewrite.
-- If the user gives a voice sample: match it before applying generic preferences.
+- **Edit mode:** Default for pasted text. Return the revised Polish text first. Add a short change note only when requested or when a material constraint or evidence gap needs explanation.
+- **Audit mode:** When the user asks for an audit, scan, or diagnosis without rewriting, name each material pattern, quote the relevant source fragment, assign red/yellow/green severity, and suggest the direction of a fix. Do not rewrite and do not claim that AI wrote the text.
+- **Embedded or file mode:** When another task uses this skill or the user points to a file, run the full process internally and return or write only the final text the parent task requires. Preserve frontmatter, code blocks, tables, and link targets unless the user explicitly asks to edit them.
+
+If the user has not supplied text or a file, ask for it. Ask about audience or purpose only when the answer would materially change the edit and cannot be inferred from context.
 
 ## Workflow
 
-1. Identify genre and audience: public/plain Polish, marketing, technical docs, academic/scientific, legal/official, or social/opinion.
-2. Protect exact spans: code, commands, URLs, markdown links, quotes, citations, tables, numbers, dates, legal references, product/API names.
-3. Scan for Polish slop: chatbot residue, officialese, nominalizations, passive/impersonal fog, genitive chains, inflated importance, formulaic structures, em-dash overuse, generic endings.
-4. Rewrite paragraph by paragraph. Prefer actors, verbs, concrete stakes, and natural Polish order.
-5. Run a second pass: what still sounds generated, bureaucratic, translated, too balanced, or too generic?
-6. Run an integrity pass: no changed facts, no invented proof, no lost caveats, no broken protected spans.
+1. Read the complete source before editing. Identify its job, audience, and register.
+2. Infer three to five voice signals from the source: vocabulary, cadence, formality, directness, punctuation, humor, uncertainty, asides, fragments, or digressions. If the user supplies a separate voice sample, treat it as stronger evidence.
+3. Protect exact spans: code, commands, URLs, Markdown links, quotations, citations, tables, numbers, dates, legal references, product/API names, and required terminology.
+4. Scan for clusters of Polish slop and weak writing. Do not treat a single word or construction as proof of a problem.
+5. Edit only passages that need it. Leave strong human sentences alone. Preserve useful repetition, roughness, mixed feelings, self-corrections, domain language, and uneven rhythm when they belong to the writer.
+6. Run a second pass for generated cadence, bureaucratic or translated phrasing, generic claims, and over-regular structure.
+7. Run `references/eval.md`. If a check fails, revise once before returning the result.
+
+## Specificity Ladder
+
+When a generic claim needs grounding:
+
+1. Use a fact, mechanism, example, constraint, consequence, or judgment already present in the source.
+2. Recombine source information into a more direct statement without increasing certainty.
+3. Make the unsupported claim smaller or remove it.
+4. If the missing detail blocks a useful rewrite, flag the gap or ask for the information.
+
+Never invent a number, example, customer, source, mechanism, or opinion to make prose sound human.
+
+## Portability Test
+
+If a sentence could move unchanged to another company, ministry, product, project, or person, it is probably filler. Cut it, ground it in available source material, or make the claim smaller.
+
+Do not apply this test mechanically to definitions, legal formulas, standard warnings, or necessary procedural language.
 
 ## Reference Navigation
 
-- For Polish pattern lists and rewrites, read `references/polish-patterns.md`.
-- For register-specific behavior and exceptions, read `references/registers.md`.
-- For public-facing simplification, read `references/plain-polish.md`.
-- For voice matching from a Polish sample, read `references/voice-calibration.md`.
-- For severity and internal scoring, read `references/scoring.md`.
-- For before/after patterns, read `references/examples.md`.
-- For research and upstream sources, read `references/sources.md`.
+- For Polish slop patterns and their false-positive guards, read `references/polish-patterns.md`.
+- For the final pass/fail quality gate, read `references/eval.md` on every edit or audit.
+- For genre-specific behavior and exceptions, read `references/registers.md`.
+- For public-facing, instructional, civic, UX, or broad-audience text, read `references/plain-polish.md`.
+- For every personal, marketing, newsletter, or opinion edit, read `references/voice-calibration.md`.
+- For ambiguous transformations or useful Polish before/after models, read `references/examples.md`.
 
 ## Quick Decisions
 
 | Situation | Default |
 | --- | --- |
-| User says "popraw styl" / "usuń slop" | Rewrite first |
-| User says "tylko audyt" | Audit only |
-| Public/citizen text | Plain Polish, direct address, action first |
-| Marketing | Replace adjectives with proof or concrete benefit |
-| Technical docs | Keep terms/code exact, cut filler |
-| Academic text | Preserve hedging, data, citations, and valid passive |
-| Legal/official text | Clarify explanatory parts; keep the obligated party and formal register; preserve legal force |
-| Voice sample supplied | Match sample over generic naturalness |
+| `popraw styl`, `usuń slop`, `napisz po ludzku` | Edit minimally and return the text first |
+| `tylko audyt`, `wskaż problemy` | Audit only; quote evidence and do not rewrite |
+| Public or citizen text | Use plain Polish, direct address, and action first |
+| Marketing | Replace unsupported adjectives with source-grounded benefit or a smaller claim |
+| Technical documentation | Preserve terms and code; remove filler and hidden steps |
+| Academic text | Preserve hedging, data, citations, and valid passive forms |
+| Legal or official text | Preserve the obligated party, legal force, definitions, and formal register |
+| Voice sample supplied | Match the sample over generic preferences when fidelity remains intact |
 
 ## Common Mistakes
 
-- Do not flatten every text into casual Polish. Register matters.
-- Do not remove passive/impersonal forms when they are conventional or precise.
-- Do not replace official legal terms with loose paraphrases.
-- Do not add examples, data, dates, sources, or claims that the user did not provide.
-- Do not treat one word like `kluczowy` or `ważny` as proof of AI style. Act on clusters and weak writing.
-- Do not use the em dash as a connector in the output. Replace it with a comma, colon, or full stop, or split the sentence.
+- Do not flatten every text into casual, clipped, or uniformly polished Polish.
+- Do not infer AI authorship from stylistic patterns. Describe the writing that is present.
+- Do not remove passive or impersonal forms when they are conventional or precise.
+- Do not replace official legal or technical terms with loose paraphrases.
+- Do not regularize intentional fragments, repetition, punctuation, or digressions merely for consistency.
+- Do not add examples, data, dates, sources, opinions, or claims the user did not provide.
+- Do not treat one use of `kluczowy`, a triad, a contrast, or an em dash as proof of slop. Judge function and clusters.
+- Do not use the em dash as a default connector. Preserve or use it only when the source or supplied voice supports it and it clearly works better than a comma, colon, full stop, or parentheses.

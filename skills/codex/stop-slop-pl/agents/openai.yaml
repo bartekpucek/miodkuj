@@ -1,6 +1,6 @@
 interface:
   display_name: "Stop Slop PL"
-  short_description: "Naturalna polszczyzna bez AI slopu"
-  default_prompt: "Use $stop-slop-pl, aby usunąć slop i poprawić styl po polsku, zachowując sens, fakty i rejestr."
+  short_description: "Naturalna polszczyzna bez utraty głosu"
+  default_prompt: "Use $stop-slop-pl to make the minimum effective edit to this Polish text while preserving its facts, register, and voice."
 policy:
   allow_implicit_invocation: true

@@ -13,11 +13,12 @@ Obie wersje korzystają z tych samych reguł, więc nie rozjeżdżają się w cz
 
 ## Co robi
 
-- Domyślnie przepisuje tekst i od razu zwraca poprawioną wersję.
+- Domyślnie robi najmniejszą skuteczną redakcję: poprawia to, co przeszkadza, i zostawia mocne zdania w spokoju.
 - Zostawia bez zmian fakty, liczby, nazwy, linki, cytaty, kod i podstawy prawne.
 - Usuwa typowy polski slop: urzędowy żargon, sztuczne i bezosobowe zwroty (które ukrywają, kto coś robi), puste przymiotniki, wymuszone kontrasty i ogólnikowe zakończenia.
 - Dopasowuje styl do rejestru: prosty język, marketing, dokumentacja techniczna, tekst naukowy, pisma urzędowe i prawne, treści społecznościowe.
-- Na życzenie robi sam audyt, pokazuje listę zmian, upraszcza do prostego języka albo dopasowuje się do Twojego głosu.
+- Rozpoznaje głos autora z samego tekstu, a jeśli dostanie osobną próbkę, traktuje ją jako mocniejszy wzorzec.
+- Na życzenie robi sam audyt: cytuje konkretne wzorce i proponuje kierunek poprawki, ale nie zgaduje, czy tekst napisało AI.
 
 Czego **nie** robi: nie obiecuje obejścia wykrywaczy AI, tekstu „nie do wykrycia", podszywania się pod kogoś ani zmyślania faktów.
 
@@ -84,7 +85,7 @@ Usuń slop. Pokaż też krótką listę zmian:
 ...
 ```
 
-Domyślnie skill zwraca najpierw poprawiony tekst. Uwagi dodaje tylko wtedy, gdy o nie poprosisz albo gdy ostrzega przed ryzykowną zmianą. Jeśli chcesz sam audyt, napisz `tylko audyt`.
+Domyślnie skill zwraca najpierw tekst po minimalnej redakcji. Uwagi dodaje tylko wtedy, gdy o nie poprosisz albo gdy ostrzega przed ryzykowną zmianą lub brakiem dowodu. Jeśli chcesz sam audyt, napisz `tylko audyt`.
 
 ## Układ repozytorium
 
@@ -111,7 +112,7 @@ Ręczne testy są w [docs/test-scenarios.md](docs/test-scenarios.md).
 
 ## Źródła
 
-Skill powstał na podstawie przeglądu otwartych narzędzi anti-slop i humanizujących oraz polskich materiałów o prostym języku, czytelności, stylometrii i polskich modelach językowych. Zobacz [docs/research-summary.md](docs/research-summary.md) i [references/sources.md](skills/claude/stop-slop-pl/references/sources.md).
+Skill powstał na podstawie przeglądu otwartych narzędzi anti-slop i humanizujących oraz polskich materiałów o prostym języku, czytelności, stylometrii i polskich modelach językowych. Zobacz [podsumowanie researchu](docs/research-summary.md) i [pełną listę źródeł](docs/sources.md).
 
 ## Licencja
 
