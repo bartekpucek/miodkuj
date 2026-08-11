@@ -7,6 +7,21 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+REQUIRED_DISCOVERY_TRIGGERS = (
+    "AI-generated",
+    "over-formal",
+    "generic",
+    "bureaucratic",
+    "translated",
+    "brzmi jak ChatGPT",
+    "brzmi sztucznie",
+    "popraw styl",
+    "napisz po ludzku",
+    "napisz prościej",
+    "uprość",
+    "usuń slop",
+    "miodkuj",
+)
 SPEC = importlib.util.spec_from_file_location(
     "validate_skill", ROOT / "scripts" / "validate_skill.py"
 )
@@ -39,6 +54,24 @@ class ValidateSkillTests(unittest.TestCase):
             skill = self.write_skill(Path(tmp), "x" * 201)
 
             self.assertFalse(self.validate_silently(skill))
+
+    def test_current_description_keeps_every_discovery_trigger(self):
+        skill_md = (ROOT / "skills" / "miodkuj" / "SKILL.md").read_text(
+            encoding="utf-8"
+        )
+        description = next(
+            line.removeprefix("description: ")
+            for line in skill_md.splitlines()
+            if line.startswith("description: ")
+        )
+
+        missing = [
+            trigger
+            for trigger in REQUIRED_DISCOVERY_TRIGGERS
+            if trigger not in description
+        ]
+        self.assertEqual(missing, [])
+        self.assertLessEqual(len(description), MODULE.MAX_DESCRIPTION_LENGTH)
 
 
 if __name__ == "__main__":

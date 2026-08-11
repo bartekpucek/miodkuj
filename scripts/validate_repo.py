@@ -27,6 +27,12 @@ EXPECTED_DEFAULT_PROMPT = (
     "Use $miodkuj to make the minimum effective edit to this Polish text while "
     "preserving its facts, register, and voice."
 )
+ALLOWED_METADATA_KEYS = {
+    "interface": frozenset(
+        {"display_name", "short_description", "default_prompt"}
+    ),
+    "policy": frozenset({"allow_implicit_invocation"}),
+}
 
 
 def repository_files(root: Path) -> list[Path]:
@@ -158,7 +164,7 @@ def parse_metadata_scalar(value: str, line_number: int) -> object:
         return parsed
     if not value:
         raise ValueError(f"missing scalar value on line {line_number}")
-    return value
+    raise ValueError(f"unsupported scalar syntax on line {line_number}")
 
 
 def parse_openai_metadata(contents: str) -> dict[str, dict[str, object]]:
@@ -176,6 +182,8 @@ def parse_openai_metadata(contents: str) -> dict[str, dict[str, object]]:
             if match is None or section is None:
                 raise ValueError(f"invalid nested mapping on line {line_number}")
             key, raw_value = match.groups()
+            if key not in ALLOWED_METADATA_KEYS[section]:
+                raise ValueError(f"unsupported key {section}.{key}")
             if key in metadata[section]:
                 raise ValueError(f"duplicate key {section}.{key}")
             metadata[section][key] = parse_metadata_scalar(raw_value, line_number)
@@ -185,6 +193,8 @@ def parse_openai_metadata(contents: str) -> dict[str, dict[str, object]]:
         if match is None:
             raise ValueError(f"invalid top-level mapping on line {line_number}")
         section = match.group(1)
+        if section not in ALLOWED_METADATA_KEYS:
+            raise ValueError(f"unsupported top-level key {section}")
         if section in metadata:
             raise ValueError(f"duplicate top-level key {section}")
         metadata[section] = {}

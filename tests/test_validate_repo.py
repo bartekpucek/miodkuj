@@ -229,6 +229,56 @@ class ValidateRepoTests(unittest.TestCase):
                 "Codex policy.allow_implicit_invocation must be boolean true", errors
             )
 
+    def test_unknown_malformed_codex_metadata_key_is_reported(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            copy = self.copy_repository(Path(tmp))
+            metadata = copy / SKILL / "agents" / "openai.yaml"
+            metadata.write_text(
+                metadata.read_text(encoding="utf-8").replace(
+                    "policy:\n", "  malformed: [\npolicy:\n"
+                ),
+                encoding="utf-8",
+            )
+
+            errors = MODULE.validate_repo(copy)
+
+            self.assertIn(
+                "invalid Codex metadata: unsupported key interface.malformed", errors
+            )
+
+    def test_unsupported_codex_metadata_scalar_is_reported(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            copy = self.copy_repository(Path(tmp))
+            metadata = copy / SKILL / "agents" / "openai.yaml"
+            metadata.write_text(
+                metadata.read_text(encoding="utf-8").replace(
+                    'display_name: "Miodkuj"', "display_name: ["
+                ),
+                encoding="utf-8",
+            )
+
+            errors = MODULE.validate_repo(copy)
+
+            self.assertTrue(
+                any("unsupported scalar syntax" in error for error in errors), errors
+            )
+
+    def test_unknown_codex_metadata_section_is_reported(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            copy = self.copy_repository(Path(tmp))
+            metadata = copy / SKILL / "agents" / "openai.yaml"
+            metadata.write_text(
+                metadata.read_text(encoding="utf-8")
+                + 'unknown:\n  value: "not allowed"\n',
+                encoding="utf-8",
+            )
+
+            errors = MODULE.validate_repo(copy)
+
+            self.assertIn(
+                "invalid Codex metadata: unsupported top-level key unknown", errors
+            )
+
     def test_missing_bundle_is_reported(self):
         with tempfile.TemporaryDirectory() as tmp:
             copy = self.copy_repository(Path(tmp))
