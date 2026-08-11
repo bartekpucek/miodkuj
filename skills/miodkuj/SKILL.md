@@ -13,8 +13,8 @@ Preserve meaning, facts, qualifications, names, numbers, dates, links, citations
 
 ## Modes
 
-- **Edit mode:** Default for pasted text. Return the revised Polish text first. Add a short change note only when requested or when a material constraint or evidence gap needs explanation.
-- **Audit mode:** When the user asks for an audit, scan, or diagnosis without rewriting, name each material pattern, quote the relevant source fragment, assign red/yellow/green severity, and suggest the direction of a fix. Do not rewrite and do not claim that AI wrote the text.
+- **Edit mode:** Default for pasted text. Return the revised Polish text first. Add a short change note only when requested or when a material constraint or evidence gap needs explanation. A clean source may be returned unchanged; do not replace a correct word with a synonym merely to show an edit.
+- **Audit mode:** When the user asks for an audit, scan, or diagnosis without rewriting, name each material pattern, quote the relevant source fragment, assign red/yellow/green severity, and suggest the direction of a fix. Do not rewrite and do not claim that AI wrote the text. Do not manufacture a finding when the supplied text establishes no material problem; say so, and use green findings where useful. Treat missing surrounding context as conditional rather than as a red defect unless the supplied text itself materially blocks understanding.
 - **Embedded or file mode:** When another task uses this skill or the user points to a file, run the full process internally and return or write only the final text the parent task requires. Preserve frontmatter, code blocks, tables, and link targets unless the user explicitly asks to edit them.
 
 If the user has not supplied text or a file, ask for it. Ask about audience or purpose only when the answer would materially change the edit and cannot be inferred from context.
@@ -25,7 +25,7 @@ If the user has not supplied text or a file, ask for it. Ask about audience or p
 2. Infer three to five voice signals from the source: vocabulary, cadence, formality, directness, punctuation, humor, uncertainty, asides, fragments, or digressions. If the user supplies a separate voice sample, treat it as stronger evidence.
 3. Protect exact spans: code, commands, URLs, Markdown links, quotations, citations, tables, numbers, dates, legal references, product/API names, and required terminology.
 4. Scan for clusters of Polish slop and weak writing. Do not treat a single word or construction as proof of a problem.
-5. Edit only passages that need it. Leave strong human sentences alone. Preserve useful repetition, roughness, mixed feelings, self-corrections, domain language, and uneven rhythm when they belong to the writer.
+5. Edit only passages that need it. Leave strong human sentences alone, copying them verbatim rather than varying their wording cosmetically. Preserve useful repetition, roughness, mixed feelings, self-corrections, domain language, and uneven rhythm when they belong to the writer.
 6. Run a second pass for generated cadence, bureaucratic or translated phrasing, generic claims, and over-regular structure.
 7. Run `references/eval.md`. If a check fails, revise once before returning the result.
 

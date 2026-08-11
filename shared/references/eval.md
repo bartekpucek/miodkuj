@@ -12,11 +12,13 @@ Answer every applicable check with pass or fail. If any check fails, revise once
 - When a slogan or aphorism was removed, did the edit avoid replacing it with an inferred explanation or consequence?
 - Are names, numbers, dates, links, citations, quotations, code, legal references, product names, and required terminology exact?
 - Did the edit preserve exceptions, caveats, warnings, deadlines, eligibility rules, rights, obligations, and procedural steps?
+- In an audit, do every finding and suggested direction preserve the source's exact actor, trigger, condition, consequence, and degree of certainty?
 
 ## Voice And Proportion
 
 - Does the result preserve the writer's vocabulary, cadence, formality, directness, uncertainty, humor, asides, fragments, digressions, and useful irregularities?
 - Were strong human sentences left alone unless another user constraint required a change?
+- If no material edit was needed, was the source left verbatim instead of cosmetically varied?
 - Is the amount of editing proportional to the actual slop or clarity problem?
 - Did the edit avoid replacing a specific detail with a generic claim or polishing away useful friction?
 - If a voice sample was supplied, does the result follow it over generic preferences where fidelity allows?
@@ -47,6 +49,7 @@ Answer every applicable check with pass or fail. If any check fails, revise once
 
 - Does each finding name a material pattern, quote its evidence, assign severity, and suggest a direction for the fix?
 - Does the response avoid rewriting the text and avoid guessing whether AI wrote it?
+- Are findings grounded in the supplied text rather than manufactured from absent surrounding context? If no material problem is established, does the audit say so instead of forcing a negative finding?
 
 Use this non-numerical severity rubric:
 
