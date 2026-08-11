@@ -7,7 +7,8 @@ Miodkuj poprawia polski tekst, który brzmi jak z AI: sztywny, urzędowy, przega
 Skill działa jako jedna przenośna wersja z jednego repozytorium:
 
 - **Claude / Claude Code**: skill `/miodkuj` po instalacji folderu,
-- **Codex / ChatGPT**: skill `$miodkuj`.
+- **Codex**: skill `$miodkuj`,
+- **ChatGPT**: automatyczny wybór skilla albo prośba w naturalnym języku.
 
 Wszystkie środowiska korzystają z tych samych reguł, więc nie rozjeżdżają się w czasie.
 
@@ -48,7 +49,7 @@ Pobierz gotowy plik albo zbuduj go samodzielnie.
 
 > Tej ścieżki w claude.ai nie ma w oficjalnej dokumentacji Claude Code. Sprawdź u siebie, bo interfejs bywa aktualizowany.
 
-## Instalacja w Codex lub ChatGPT
+## Instalacja w Codex
 
 Skopiuj albo podlinkuj folder skilla do katalogu, z którego korzysta Twój Codex:
 
@@ -67,6 +68,10 @@ ln -s "$(pwd)/skills/miodkuj" ~/.agents/skills/miodkuj
 Po instalacji przeładuj środowisko, żeby zobaczyło nowy skill.
 
 > Tej ścieżki też nie ma w oficjalnej dokumentacji. Zweryfikuj ją w swojej wersji Codex.
+
+## Używanie w ChatGPT
+
+W ChatGPT nie używa się `$miodkuj`. Po wgraniu skilla wybierze go automatycznie, gdy prośba pasuje, albo możesz napisać zwykłym językiem, że ma użyć Miodkuj do poprawy tekstu.
 
 ## Jak używać
 
