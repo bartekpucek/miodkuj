@@ -89,6 +89,28 @@ class ValidateRepoTests(unittest.TestCase):
 
             self.assertIn("legacy display name in text: docs/identity.md", errors)
 
+    def test_ignored_review_artifact_is_not_scanned_without_git(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            copy = self.copy_repository(Path(tmp))
+            target = copy / "[REDACTED]" / "[REDACTED]" / "review.diff"
+            target.write_text(LEGACY_DISPLAY, encoding="utf-8")
+
+            errors = MODULE.validate_repo(copy)
+
+            self.assertNotIn(
+                "legacy display name in text: [REDACTED]/[REDACTED]/review.diff", errors
+            )
+
+    def test_utf8_decodable_binary_content_is_not_scanned(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            copy = self.copy_repository(Path(tmp))
+            target = copy / "docs" / "binary.dat"
+            target.write_bytes(b"\x00" + LEGACY_DISPLAY.encode("utf-8"))
+
+            errors = MODULE.validate_repo(copy)
+
+            self.assertNotIn("legacy display name in text: docs/binary.dat", errors)
+
     def test_missing_release_changelog_is_reported(self):
         with tempfile.TemporaryDirectory() as tmp:
             copy = self.copy_repository(Path(tmp))

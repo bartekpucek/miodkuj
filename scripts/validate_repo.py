@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Validate the Miodkuj repository, runtime, and release bundle contract."""
 
+import subprocess
 import sys
 import zipfile
 from pathlib import Path
@@ -16,16 +17,54 @@ OBSOLETE_MANIFESTS = (
 )
 LEGACY_SLUG = "-".join(("stop", "slop", "PL"))
 LEGACY_DISPLAY = " ".join(("Stop", "Slop", "PL"))
-SKIPPED_DIRECTORIES = {".git", "dist", "__pycache__"}
+SKIPPED_DIRECTORIES = {".git", "dist", "__pycache__", "[REDACTED]"}
+TEXT_CONTROL_BYTES = {9, 10, 13}
 
 
 def repository_files(root: Path) -> list[Path]:
-    """Return ordinary repository files, excluding generated and VCS content."""
+    """Return repository-relevant files, honoring Git ignore rules when possible."""
+    git_dir = root / ".git"
+    if git_dir.exists():
+        try:
+            result = subprocess.run(
+                ["git", "ls-files", "--cached", "--others", "--exclude-standard", "-z"],
+                cwd=root,
+                capture_output=True,
+                check=False,
+            )
+        except OSError:
+            result = None
+        if result is not None and result.returncode == 0:
+            paths = (
+                root / Path(relative)
+                for relative in result.stdout.decode(
+                    "utf-8", errors="surrogateescape"
+                ).split("\0")
+                if relative
+            )
+            return sorted(
+                path
+                for path in paths
+                if path.is_file()
+                and not any(
+                    part in SKIPPED_DIRECTORIES
+                    for part in path.relative_to(root).parts
+                )
+            )
+
     return sorted(
         path
         for path in root.rglob("*")
         if path.is_file()
         and not any(part in SKIPPED_DIRECTORIES for part in path.relative_to(root).parts)
+    )
+
+
+def is_binary(contents: bytes) -> bool:
+    """Return whether bytes contain NUL or non-text control characters."""
+    return any(
+        byte == 0 or byte == 127 or (byte < 32 and byte not in TEXT_CONTROL_BYTES)
+        for byte in contents
     )
 
 
@@ -45,8 +84,14 @@ def validate_identity(root: Path, errors: list[str]) -> None:
             errors.append(f"legacy identifier in path: {relative_text}")
 
         try:
-            contents = path.read_text(encoding="utf-8")
-        except (OSError, UnicodeDecodeError):
+            raw_contents = path.read_bytes()
+        except OSError:
+            continue
+        if is_binary(raw_contents):
+            continue
+        try:
+            contents = raw_contents.decode("utf-8")
+        except UnicodeDecodeError:
             continue
         if LEGACY_DISPLAY in contents:
             errors.append(f"legacy display name in text: {relative_text}")
