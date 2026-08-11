@@ -4,6 +4,28 @@ All notable changes to this project are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [1.1.0] - 2026-08-11
+
+### Changed
+
+- Replaced rewrite-first behavior with the minimum effective edit.
+- Inferred voice from every applicable draft and treated a supplied voice sample as stronger evidence.
+- Added explicit edit, audit, and embedded/file output modes.
+- Replaced the numerical quality score with a binary fidelity, voice, register, and mode evaluation.
+- Made audit mode quote named patterns without guessing AI authorship.
+
+### Added
+
+- Eight cluster-sensitive Polish pattern families with false-positive guards: faux insight, interpretive metadiscourse, colon reveals, negative listing, synonym cycling, fake-profound endings, formatting slop, and second-hand text protection.
+- Portability and specificity checks that ground edits in source material without inventing evidence.
+- Nineteen behavioral scenarios, including clean-text and intentional-rhetoric negative controls.
+- Repository-level validation for reference synchronization, metadata versions, Codex UI metadata, and the built skill bundle.
+
+### Removed
+
+- The uncalibrated 70-point quality score.
+- Research-source material from the runtime skill context; sources now live in `docs/sources.md`.
+
 ## [1.0.0] - 2026-06-04
 
 Initial public release.
@@ -23,4 +45,5 @@ Initial public release.
   (`README.md`, `docs/research-summary.md`, `docs/test-scenarios.md`).
 - CI workflow that validates both skill targets and guards against reference drift.
 
+[1.1.0]: https://github.com/bartekpucek/stop-slop-PL/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/bartekpucek/stop-slop-PL/releases/tag/v1.0.0

@@ -1,8 +1,8 @@
 # Stop Slop PL
 
-> **English:** Stop Slop PL is a Polish-language writing skill for Claude, Claude Code, and Codex. It rewrites AI-sounding, bureaucratic, or over-polished Polish into natural prose while keeping facts, numbers, and register intact. The rest of this README is in Polish, because that's the audience.
+> **English:** Stop Slop PL is a Polish-language writing skill for Claude, Claude Code, and Codex. It makes the minimum effective edit to AI-sounding, bureaucratic, or over-polished Polish while preserving facts, register, and the writer's voice. The rest of this README is in Polish, because that's the audience.
 
-Stop Slop PL poprawia polski tekst, który brzmi jak z AI: sztywny, urzędowy, przegadany albo tłumaczony z angielskiego. Skill przepisuje go na naturalny język i nie rusza faktów, liczb, cytatów ani rejestru.
+Stop Slop PL poprawia polski tekst, który brzmi jak z AI: sztywny, urzędowy, przegadany albo tłumaczony z angielskiego. Robi najmniejszą potrzebną redakcję i nie rusza faktów, liczb, cytatów, rejestru ani rozpoznawalnego głosu autora.
 
 Skill działa w dwóch wersjach z jednego repozytorium:
 
@@ -96,7 +96,8 @@ skills/
   claude/stop-slop-pl/   # wersja dla Claude / Claude Code
   codex/stop-slop-pl/    # wersja dla Codex / ChatGPT
 scripts/                # build.sh, validate.sh, validate_skill.py
-docs/                   # research-summary.md, test-scenarios.md
+tests/                  # testy synchronizacji i pakowania
+docs/                   # research, źródła i scenariusze zachowania
 ```
 
 ## Rozwój
@@ -105,10 +106,10 @@ Reguły po polsku trzymamy w jednym miejscu: `shared/references/`. Zmieniaj je t
 
 ```bash
 ./scripts/build.sh      # synchronizuje reguły i buduje dist/stop-slop-pl.skill
-./scripts/validate.sh   # sprawdza obie wersje skilla
+./scripts/validate.sh   # sprawdza skille, metadane, wersje, synchronizację i paczkę
 ```
 
-Ręczne testy są w [docs/test-scenarios.md](docs/test-scenarios.md).
+Końcowa kontrola `references/eval.md` działa bez punktów: każdy warunek wierności, głosu, rejestru i trybu musi przejść. Ręczne scenariusze, w tym testy tekstu, którego nie należy poprawiać, są w [docs/test-scenarios.md](docs/test-scenarios.md).
 
 ## Źródła
 

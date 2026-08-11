@@ -1,7 +1,7 @@
 {
   "name": "stop-slop-pl",
-  "version": "1.0.0",
-  "description": "Polish-language anti-slop writing skill. Rewrites AI-sounding, bureaucratic, generic, or over-polished Polish prose into natural, register-appropriate text while preserving facts, numbers, citations, and meaning.",
+  "version": "1.1.0",
+  "description": "Polish-language anti-slop writing skill. Makes the minimum effective edit while preserving facts, register, and the writer's recognizable voice.",
   "author": {
     "name": "Bartek Pucek",
     "email": "[REDACTED]",

@@ -1,18 +1,24 @@
 # Podsumowanie researchu
 
-Stop Slop PL nie tłumaczy angielskich list zakazanych słów. Zamiast tego dostosowuje wzorce anti-slop do polszczyzny.
+Stop Slop PL nie tłumaczy angielskich list zakazanych słów. Dostosowuje wzorce anti-slop do polszczyzny, ale traktuje je jako wskazówki redakcyjne, a nie dowód autorstwa.
 
 ## Co łączy zewnętrzne skille
 
 Najlepsze skille anti-slop (m.in. `hardikpandya/stop-slop`, `blader/humanizer`, `slopbuster`, `de-slop` i `deslopify`) zgadzają się co do kilku rzeczy:
 
-- Listy wzorców pomagają, ale tekst poprawia się na poziomie akapitu.
+- Listy wzorców pomagają, ale dobra redakcja zmienia tylko fragmenty, które rzeczywiście tego wymagają.
 - Sens, fakty, liczby, cytaty, linki i przytoczenia trzeba zachować.
 - Pojedyncze „zakazane" słowa to słaby sygnał. Liczy się ich nagromadzenie.
 - Głos i rejestr ważą więcej niż ogólna „humanizacja".
 - Druga tura audytu wyłapuje to, co zostało po pierwszym przejściu.
 - Wyjątki gatunkowe chronią przed przesadną korektą.
 - Nie obiecujemy obejścia wykrywaczy AI.
+
+## Wybrana architektura
+
+Wersja 1.1 pozostaje lekkim edytorem opartym na instrukcji i referencjach. Najpierw rozpoznaje zadanie, rejestr i kilka cech głosu autora. Potem robi najmniejszą skuteczną zmianę, a na końcu przechodzi binarną kontrolę wierności, głosu i trybu odpowiedzi.
+
+Nie dodajemy deterministycznego lintera do rdzenia. Taki linter pomaga przy pracy wsadowej, lecz sama lista dopasowań nie rozstrzyga kontekstu i nie chroni głosu autora. Pełny audyt gramatyki, terminologii i anglicyzmów również pozostaje poza zakresem tego skilla.
 
 ## Adaptacja do polszczyzny
 
@@ -35,3 +41,5 @@ PLLuM i Bielik pokazują, dlaczego instrukcje pod polszczyznę mają znaczenie. 
 ## Granica
 
 Stop Slop PL poprawia jasność, konkret, dopasowanie rejestru i głos. Nie obiecuje obejścia wykrywaczy AI ani „niewykrywalnego" tekstu.
+
+Audyt wskazuje nazwane wzorce i cytuje dowody z tekstu. Nie orzeka, czy tekst napisał człowiek, model ani konkretny system.
