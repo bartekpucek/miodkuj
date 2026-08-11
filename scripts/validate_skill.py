@@ -8,7 +8,7 @@ Checks the rules that matter for Claude / Claude Code skill loading:
   - every references/*.md mentioned in the body actually exists
 
 Stdlib only, no third-party deps. Usage:
-    python3 scripts/validate_skill.py skills/claude/stop-slop-pl
+    python3 scripts/validate_skill.py skills/miodkuj
 """
 import re
 import sys

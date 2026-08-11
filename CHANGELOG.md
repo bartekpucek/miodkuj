@@ -4,6 +4,17 @@ All notable changes to this project are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [2.0.0] - 2026-08-11
+
+### Changed
+
+- Consolidated the runtime into the portable `miodkuj` skill and release bundle.
+- Kept generated runtime references synchronized from `shared/references/`.
+
+### Removed
+
+- Platform-specific runtime copies and Claude plugin manifests.
+
 ## [1.1.0] - 2026-08-11
 
 ### Changed

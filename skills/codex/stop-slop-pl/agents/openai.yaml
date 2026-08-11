@@ -1,6 +1,0 @@
-interface:
-  display_name: "Stop Slop PL"
-  short_description: "Naturalna polszczyzna bez utraty głosu"
-  default_prompt: "Use $stop-slop-pl to make the minimum effective edit to this Polish text while preserving its facts, register, and voice."
-policy:
-  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Miodkuj"
+  short_description: "Polszczyzna bez sztucznego tonu"
+  default_prompt: "Use $miodkuj to make the minimum effective edit to this Polish text while preserving its facts, register, and voice."
+policy:
+  allow_implicit_invocation: true

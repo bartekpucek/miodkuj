@@ -1,141 +1,165 @@
 #!/usr/bin/env python3
-"""Validate repository-wide synchronization and packaging contracts."""
+"""Validate the Miodkuj repository, runtime, and release bundle contract."""
 
-import json
 import sys
 import zipfile
 from pathlib import Path
 
 
-TARGETS = (
-    Path("skills/codex/stop-slop-pl/references"),
-    Path("skills/claude/stop-slop-pl/references"),
+RUNTIME = Path("skills/miodkuj")
+REFERENCES = RUNTIME / "references"
+BUNDLE = Path("dist/miodkuj.skill")
+RELEASE_VERSION = "2.0.0"
+OBSOLETE_MANIFESTS = (
+    Path(".claude-plugin/plugin.json"),
+    Path(".claude-plugin/marketplace.json"),
 )
+LEGACY_SLUG = "-".join(("stop", "slop", "PL"))
+LEGACY_DISPLAY = " ".join(("Stop", "Slop", "PL"))
+SKIPPED_DIRECTORIES = {".git", "dist", "__pycache__"}
 
-PLUGIN_MANIFEST = Path(".claude-plugin/plugin.json")
-MARKETPLACE_MANIFEST = Path(".claude-plugin/marketplace.json")
+
+def repository_files(root: Path) -> list[Path]:
+    """Return ordinary repository files, excluding generated and VCS content."""
+    return sorted(
+        path
+        for path in root.rglob("*")
+        if path.is_file()
+        and not any(part in SKIPPED_DIRECTORIES for part in path.relative_to(root).parts)
+    )
 
 
 def files_by_name(folder: Path) -> dict[str, bytes]:
     """Return Markdown files keyed by basename for exact-content comparison."""
+    if not folder.is_dir():
+        return {}
     return {path.name: path.read_bytes() for path in sorted(folder.glob("*.md"))}
 
 
-def read_manifest(root: Path, relative: Path, errors: list[str]) -> dict | None:
-    """Read a JSON manifest or append one human-readable contract violation."""
-    path = root / relative
+def validate_identity(root: Path, errors: list[str]) -> None:
+    """Reject the old product identity in tracked-style paths and UTF-8 text."""
+    for path in repository_files(root):
+        relative = path.relative_to(root)
+        relative_text = relative.as_posix()
+        if LEGACY_SLUG in relative_text:
+            errors.append(f"legacy identifier in path: {relative_text}")
+
+        try:
+            contents = path.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError):
+            continue
+        if LEGACY_DISPLAY in contents:
+            errors.append(f"legacy display name in text: {relative_text}")
+        if LEGACY_SLUG in contents:
+            errors.append(f"legacy identifier in text: {relative_text}")
+
+
+def validate_layout(root: Path, errors: list[str]) -> None:
+    """Require one portable runtime and no platform-specific copies."""
+    runtime_root = root / RUNTIME
+    for required, predicate in (
+        (Path("SKILL.md"), Path.is_file),
+        (Path("agents/openai.yaml"), Path.is_file),
+        (Path("references"), Path.is_dir),
+    ):
+        target = runtime_root / required
+        if not predicate(target):
+            errors.append(f"missing runtime file: {RUNTIME / required}")
+
+    skills_root = root / "skills"
+    skill_files = sorted(skills_root.rglob("SKILL.md")) if skills_root.is_dir() else []
+    runtimes = {path.parent.relative_to(root) for path in skill_files}
+    if runtimes != {RUNTIME}:
+        for runtime in sorted(runtimes - {RUNTIME}):
+            errors.append(f"unexpected runtime folder: {runtime}")
+        if RUNTIME not in runtimes:
+            errors.append(f"missing runtime folder: {RUNTIME}")
+
+    for platform in ("claude", "codex"):
+        copy = skills_root / platform
+        if copy.exists():
+            errors.append(f"platform-specific runtime copy: skills/{platform}")
+
+    for manifest in OBSOLETE_MANIFESTS:
+        if (root / manifest).exists():
+            errors.append(f"obsolete plugin manifest: {manifest}")
+
+
+def validate_references(root: Path, errors: list[str]) -> None:
+    """Keep generated runtime references byte-for-byte aligned with their source."""
+    shared = files_by_name(root / "shared/references")
+    target = files_by_name(root / REFERENCES)
+    if target != shared:
+        errors.append(f"reference drift: {REFERENCES} differs from shared/references")
+
+
+def validate_metadata(root: Path, errors: list[str]) -> None:
+    """Check the portable runtime's Codex-facing metadata without a YAML parser."""
+    metadata_path = root / RUNTIME / "agents/openai.yaml"
     try:
-        contents = path.read_text(encoding="utf-8")
-    except FileNotFoundError:
-        errors.append(f"missing manifest: {relative}")
-        return None
+        metadata = metadata_path.read_text(encoding="utf-8")
     except OSError as error:
-        errors.append(f"unreadable manifest: {relative}: {error}")
-        return None
+        errors.append(f"unreadable Codex metadata: {RUNTIME / 'agents/openai.yaml'}: {error}")
+        return
 
+    if 'display_name: "Miodkuj"' not in metadata:
+        errors.append('Codex display_name must be "Miodkuj"')
+    if "$miodkuj" not in metadata:
+        errors.append("Codex default_prompt must mention $miodkuj")
+
+
+def validate_changelog(root: Path, errors: list[str]) -> None:
+    """Require a changelog entry for the portable-skill release."""
+    changelog_path = root / "CHANGELOG.md"
     try:
-        manifest = json.loads(contents)
-    except json.JSONDecodeError as error:
-        errors.append(
-            f"invalid JSON: {relative}: line {error.lineno}, column {error.colno}"
-        )
-        return None
+        changelog = changelog_path.read_text(encoding="utf-8")
+    except OSError as error:
+        errors.append(f"unreadable changelog: CHANGELOG.md: {error}")
+        return
+    if f"## [{RELEASE_VERSION}]" not in changelog:
+        errors.append(f"changelog missing version {RELEASE_VERSION}")
 
-    if not isinstance(manifest, dict):
-        errors.append(f"invalid manifest structure: {relative}")
-        return None
-    return manifest
+
+def validate_bundle(root: Path, errors: list[str]) -> None:
+    """Compare every archive entry and byte with the canonical runtime."""
+    archive = root / BUNDLE
+    if not archive.is_file():
+        errors.append(f"missing {BUNDLE}")
+        return
+
+    source_root = root / RUNTIME
+    expected = {
+        f"miodkuj/{path.relative_to(source_root).as_posix()}": path.read_bytes()
+        for path in sorted(source_root.rglob("*"))
+        if path.is_file() and path.name != ".DS_Store"
+    }
+    try:
+        with zipfile.ZipFile(archive) as bundle:
+            entries = bundle.infolist()
+            actual = {entry.filename: bundle.read(entry) for entry in entries}
+    except (OSError, RuntimeError, zipfile.BadZipFile) as error:
+        errors.append(f"invalid skill bundle: {BUNDLE}: {error}")
+        return
+
+    names = [entry.filename for entry in entries]
+    if (
+        len(names) != len(set(names))
+        or len(actual) != len(expected)
+        or set(actual) != set(expected)
+        or actual != expected
+    ):
+        errors.append(f"built skill artifact differs from {RUNTIME}")
 
 
 def validate_repo(root: Path) -> list[str]:
     """Return repository contract violations; an empty list means success."""
-    errors = []
-    shared = files_by_name(root / "shared/references")
-    for relative in TARGETS:
-        target = files_by_name(root / relative)
-        if target != shared:
-            errors.append(
-                f"reference drift: {relative} differs from shared/references"
-            )
-
-    plugin = read_manifest(root, PLUGIN_MANIFEST, errors)
-    marketplace = read_manifest(root, MARKETPLACE_MANIFEST, errors)
-    version_values = []
-
-    if plugin is not None:
-        plugin_version = plugin.get("version")
-        if isinstance(plugin_version, str) and plugin_version:
-            version_values.append(plugin_version)
-        else:
-            errors.append(f"invalid manifest structure: {PLUGIN_MANIFEST}")
-
-    if marketplace is not None:
-        try:
-            marketplace_versions = (
-                marketplace["metadata"]["version"],
-                marketplace["plugins"][0]["version"],
-            )
-        except (KeyError, IndexError, TypeError):
-            errors.append(f"invalid manifest structure: {MARKETPLACE_MANIFEST}")
-        else:
-            if all(
-                isinstance(version, str) and version
-                for version in marketplace_versions
-            ):
-                version_values.extend(marketplace_versions)
-            else:
-                errors.append(f"invalid manifest structure: {MARKETPLACE_MANIFEST}")
-
-    if len(version_values) == 3:
-        versions = set(version_values)
-        if len(versions) != 1:
-            errors.append(f"version mismatch: {sorted(versions)}")
-        else:
-            version = version_values[0]
-            changelog_path = root / "CHANGELOG.md"
-            try:
-                changelog = changelog_path.read_text(encoding="utf-8")
-            except OSError as error:
-                errors.append(f"unreadable changelog: CHANGELOG.md: {error}")
-            else:
-                if f"## [{version}]" not in changelog:
-                    errors.append(f"changelog missing version {version}")
-
-    metadata_path = root / "skills/codex/stop-slop-pl/agents/openai.yaml"
-    try:
-        metadata = metadata_path.read_text(encoding="utf-8")
-    except OSError as error:
-        errors.append(
-            "unreadable Codex metadata: "
-            f"skills/codex/stop-slop-pl/agents/openai.yaml: {error}"
-        )
-    else:
-        if "$stop-slop-pl" not in metadata:
-            errors.append("Codex default_prompt must mention $stop-slop-pl")
-
-    archive = root / "dist/stop-slop-pl.skill"
-    if not archive.is_file():
-        errors.append("missing dist/stop-slop-pl.skill")
-    else:
-        source_root = root / "skills/claude/stop-slop-pl"
-        expected = {
-            f"stop-slop-pl/{path.relative_to(source_root).as_posix()}": path.read_bytes()
-            for path in sorted(source_root.rglob("*"))
-            if path.is_file() and path.name != ".DS_Store"
-        }
-        try:
-            with zipfile.ZipFile(archive) as bundle:
-                actual = {
-                    name: bundle.read(name) for name in sorted(bundle.namelist())
-                }
-        except (OSError, RuntimeError, zipfile.BadZipFile) as error:
-            errors.append(f"invalid skill bundle: dist/stop-slop-pl.skill: {error}")
-        else:
-            if actual != expected:
-                errors.append(
-                    "built skill artifact differs from skills/claude/stop-slop-pl"
-                )
-
+    errors: list[str] = []
+    validate_identity(root, errors)
+    validate_layout(root, errors)
+    validate_references(root, errors)
+    validate_metadata(root, errors)
+    validate_changelog(root, errors)
+    validate_bundle(root, errors)
     return errors
 
 
@@ -146,4 +170,4 @@ if __name__ == "__main__":
         for failure in failures:
             print(f"FAIL  {failure}")
         sys.exit(1)
-    print("PASS  repository synchronization, metadata, and bundle")
+    print("PASS  Miodkuj identity, runtime, metadata, references, and bundle")

@@ -1,9 +1,9 @@
 ---
-name: stop-slop-pl
-description: Removes AI-sounding, bureaucratic, generic, or over-polished Polish prose with the minimum effective edit while preserving facts, meaning, numbers, citations, register, and recognizable voice. Use whenever Polish text sounds AI-generated, over-formal, or translated from English, or when the user asks to popraw styl, napisz po ludzku, napisz prościej, uprość, usuń slop, bez slopu, or says the text brzmi jak ChatGPT, brzmi sztucznie, or brzmi jak z AI. Also audits named patterns without rewriting or guessing authorship. Works on Polish text even when the request is in English.
+name: miodkuj
+description: Use when Polish prose sounds AI-generated, over-formal, generic, bureaucratic, or translated from English; also when asked to popraw styl, napisz po ludzku, napisz prościej, uprość, usuń slop, miodkuj, or when the text brzmi jak ChatGPT or brzmi sztucznie. Edits minimally, preserves the writer's voice and register, or audits named patterns without guessing authorship.
 ---
 
-# Stop Slop PL
+# Miodkuj
 
 ## Core Rule
 
@@ -78,7 +78,3 @@ Do not apply this test mechanically to definitions, legal formulas, standard war
 - Do not add examples, data, dates, sources, opinions, or claims the user did not provide.
 - Do not treat one use of `kluczowy`, a triad, a contrast, or an em dash as proof of slop. Judge function and clusters.
 - Do not use the em dash as a default connector. Preserve or use it only when the source or supplied voice supports it and it clearly works better than a comma, colon, full stop, or parentheses.
-
-## License
-
-MIT. See the repository documentation for research and upstream inspiration.
