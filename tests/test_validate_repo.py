@@ -144,6 +144,18 @@ class ValidateRepoTests(unittest.TestCase):
 
             self.assertIn("built skill artifact differs from skills/miodkuj", errors)
 
+    def test_bundle_with_drifted_content_is_reported(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            copy = self.copy_repository(Path(tmp))
+            bundle = copy / BUNDLE
+            bundle.parent.mkdir(parents=True, exist_ok=True)
+            with zipfile.ZipFile(bundle, "w") as archive:
+                archive.writestr("miodkuj/SKILL.md", "# Altered\n")
+
+            errors = MODULE.validate_repo(copy)
+
+            self.assertIn("built skill artifact differs from skills/miodkuj", errors)
+
 
 if __name__ == "__main__":
     unittest.main()
