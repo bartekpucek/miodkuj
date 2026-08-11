@@ -70,7 +70,7 @@ Pobierz `miodkuj.skill` z [najnowszego wydania](https://github.com/bartekpucek/m
 
 W ChatGPT Personal Skills (umiejętności osobiste) są ogólnie dostępne na kontach Business, Enterprise, Healthcare i Edu. Administratorzy kont Enterprise i Edu mogą najpierw musieć włączyć Skills oraz przesyłanie plików. Jeśli Twoje konto obsługuje Personal Skills, wgraj i zainstaluj skill. ChatGPT może wybrać go automatycznie. Możesz też napisać: `Użyj Miodkuj, aby…`. Nie używaj tutaj polecenia slash. Szczegóły znajdziesz w [dokumentacji Skills w ChatGPT](https://help.openai.com/en/articles/20001066-skills-in-chatgpt).
 
-W Claude.ai wgraj `miodkuj.skill`. Claude.ai może wybrać skill automatycznie. Możesz też zwykłym językiem poprosić o użycie Miodkuj. Nie zakładaj, że zadziała tam polecenie slash.
+W Claude.ai najpierw włącz wykonywanie kodu, zgodnie z [instrukcją korzystania ze skilli](https://support.claude.com/en/articles/12512180-use-skills-in-claude). Potem wgraj `miodkuj.skill`. Claude.ai może wybrać skill automatycznie. Możesz też zwykłym językiem poprosić o użycie Miodkuj. Nie zakładaj, że zadziała tam polecenie slash.
 
 ## Jak używać
 
