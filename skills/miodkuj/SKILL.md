@@ -1,6 +1,6 @@
 ---
 name: miodkuj
-description: Use when Polish prose sounds AI-generated, over-formal, generic, bureaucratic, or translated from English; also when asked to popraw styl, napisz po ludzku, napisz prościej, uprość, usuń slop, miodkuj, or when the text brzmi jak ChatGPT or brzmi sztucznie. Edits minimally, preserves the writer's voice and register, or audits named patterns without guessing authorship.
+description: Use when Polish prose sounds AI-generated, bureaucratic, translated, brzmi jak ChatGPT or brzmi sztucznie; popraw styl, napisz po ludzku, napisz prościej, usuń slop, miodkuj. Minimal edit/audit.
 ---
 
 # Miodkuj

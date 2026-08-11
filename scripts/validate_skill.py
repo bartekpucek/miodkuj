@@ -4,7 +4,7 @@
 Checks the rules that matter for Claude / Claude Code skill loading:
   - SKILL.md exists and has YAML-style frontmatter
   - name: lowercase kebab-case, <= 64 chars, no reserved words, matches folder
-  - description: non-empty, <= 1024 chars, no angle brackets
+  - description: non-empty, <= 200 chars, no angle brackets
   - every references/*.md mentioned in the body actually exists
 
 Stdlib only, no third-party deps. Usage:
@@ -15,6 +15,7 @@ import sys
 from pathlib import Path
 
 RESERVED = ("anthropic", "claude")
+MAX_DESCRIPTION_LENGTH = 200
 
 
 def fail(msgs, m):
@@ -68,10 +69,13 @@ def validate(skill_dir: Path) -> bool:
     if not desc:
         fail(msgs, "missing 'description'")
     else:
-        if len(desc) > 1024:
-            fail(msgs, f"description too long ({len(desc)} > 1024)")
+        if len(desc) > MAX_DESCRIPTION_LENGTH:
+            fail(
+                msgs,
+                f"description too long ({len(desc)} > {MAX_DESCRIPTION_LENGTH})",
+            )
         else:
-            ok(msgs, f"description length {len(desc)}/1024")
+            ok(msgs, f"description length {len(desc)}/{MAX_DESCRIPTION_LENGTH}")
         if "<" in desc or ">" in desc:
             fail(msgs, "description contains angle brackets (not allowed)")
         else:

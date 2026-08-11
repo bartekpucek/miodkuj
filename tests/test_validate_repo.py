@@ -1,5 +1,6 @@
 import importlib.util
 import shutil
+import subprocess
 import tempfile
 import unittest
 import zipfile
@@ -89,6 +90,42 @@ class ValidateRepoTests(unittest.TestCase):
 
             self.assertIn("legacy display name in text: docs/identity.md", errors)
 
+    def test_lowercase_legacy_identifier_in_path_and_text_is_reported(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            copy = self.copy_repository(Path(tmp))
+            lowercase_slug = LEGACY_SLUG.casefold()
+            target = copy / "docs" / f"{lowercase_slug}.md"
+            target.write_text(LEGACY_DISPLAY.casefold(), encoding="utf-8")
+
+            errors = MODULE.validate_repo(copy)
+
+            self.assertIn(
+                f"legacy identifier in path: docs/{lowercase_slug}.md", errors
+            )
+            self.assertIn(
+                f"legacy display name in text: docs/{lowercase_slug}.md", errors
+            )
+
+    def test_tracked_[REDACTED]_file_is_scanned(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            target = root / "[REDACTED]" / "tracked.md"
+            target.parent.mkdir(parents=True)
+            target.write_text(LEGACY_DISPLAY, encoding="utf-8")
+            subprocess.run(["git", "init", "-q"], cwd=root, check=True)
+            subprocess.run(
+                ["git", "add", target.relative_to(root).as_posix()],
+                cwd=root,
+                check=True,
+            )
+
+            errors = []
+            MODULE.validate_identity(root, errors)
+
+            self.assertIn(
+                "legacy display name in text: [REDACTED]/tracked.md", errors
+            )
+
     def test_ignored_review_artifact_is_not_scanned_without_git(self):
         with tempfile.TemporaryDirectory() as tmp:
             copy = self.copy_repository(Path(tmp))
@@ -132,7 +169,65 @@ class ValidateRepoTests(unittest.TestCase):
 
             errors = MODULE.validate_repo(copy)
 
-            self.assertIn("Codex default_prompt must mention $miodkuj", errors)
+            self.assertIn(
+                "Codex interface.default_prompt must exactly invoke $miodkuj with the approved prompt",
+                errors,
+            )
+
+    def test_misnested_codex_metadata_is_reported(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            copy = self.copy_repository(Path(tmp))
+            metadata = copy / SKILL / "agents" / "openai.yaml"
+            metadata.write_text(
+                'interface:\n  display_name: "Miodkuj"\n'
+                '  short_description: "Polszczyzna bez sztucznego tonu"\n'
+                'default_prompt: "Use $miodkuj"\n'
+                "policy:\n  allow_implicit_invocation: true\n",
+                encoding="utf-8",
+            )
+
+            errors = MODULE.validate_repo(copy)
+
+            self.assertTrue(
+                any("invalid Codex metadata" in error for error in errors), errors
+            )
+
+    def test_duplicate_codex_metadata_key_is_reported(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            copy = self.copy_repository(Path(tmp))
+            metadata = copy / SKILL / "agents" / "openai.yaml"
+            contents = metadata.read_text(encoding="utf-8")
+            metadata.write_text(
+                contents.replace(
+                    '  display_name: "Miodkuj"\n',
+                    '  display_name: "Miodkuj"\n  display_name: "Miodkuj"\n',
+                ),
+                encoding="utf-8",
+            )
+
+            errors = MODULE.validate_repo(copy)
+
+            self.assertIn(
+                "invalid Codex metadata: duplicate key interface.display_name", errors
+            )
+
+    def test_implicit_invocation_requires_boolean_true(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            copy = self.copy_repository(Path(tmp))
+            metadata = copy / SKILL / "agents" / "openai.yaml"
+            metadata.write_text(
+                metadata.read_text(encoding="utf-8").replace(
+                    "allow_implicit_invocation: true",
+                    'allow_implicit_invocation: "true"',
+                ),
+                encoding="utf-8",
+            )
+
+            errors = MODULE.validate_repo(copy)
+
+            self.assertIn(
+                "Codex policy.allow_implicit_invocation must be boolean true", errors
+            )
 
     def test_missing_bundle_is_reported(self):
         with tempfile.TemporaryDirectory() as tmp:

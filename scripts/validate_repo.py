@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Validate the Miodkuj repository, runtime, and release bundle contract."""
 
+import ast
+import re
 import subprocess
 import sys
 import zipfile
@@ -17,8 +19,14 @@ OBSOLETE_MANIFESTS = (
 )
 LEGACY_SLUG = "-".join(("stop", "slop", "PL"))
 LEGACY_DISPLAY = " ".join(("Stop", "Slop", "PL"))
-SKIPPED_DIRECTORIES = {".git", "dist", "__pycache__", "[REDACTED]"}
+SKIPPED_FALLBACK_DIRECTORIES = {".git", "dist", "__pycache__", "[REDACTED]"}
 TEXT_CONTROL_BYTES = {9, 10, 13}
+EXPECTED_DISPLAY_NAME = "Miodkuj"
+EXPECTED_SHORT_DESCRIPTION = "Polszczyzna bez sztucznego tonu"
+EXPECTED_DEFAULT_PROMPT = (
+    "Use $miodkuj to make the minimum effective edit to this Polish text while "
+    "preserving its facts, register, and voice."
+)
 
 
 def repository_files(root: Path) -> list[Path]:
@@ -27,7 +35,7 @@ def repository_files(root: Path) -> list[Path]:
     if git_dir.exists():
         try:
             result = subprocess.run(
-                ["git", "ls-files", "--cached", "--others", "--exclude-standard", "-z"],
+                ["git", "ls-files", "--cached", "-z"],
                 cwd=root,
                 capture_output=True,
                 check=False,
@@ -42,21 +50,16 @@ def repository_files(root: Path) -> list[Path]:
                 ).split("\0")
                 if relative
             )
-            return sorted(
-                path
-                for path in paths
-                if path.is_file()
-                and not any(
-                    part in SKIPPED_DIRECTORIES
-                    for part in path.relative_to(root).parts
-                )
-            )
+            return sorted(paths)
 
     return sorted(
         path
         for path in root.rglob("*")
         if path.is_file()
-        and not any(part in SKIPPED_DIRECTORIES for part in path.relative_to(root).parts)
+        and not any(
+            part in SKIPPED_FALLBACK_DIRECTORIES
+            for part in path.relative_to(root).parts
+        )
     )
 
 
@@ -77,10 +80,12 @@ def files_by_name(folder: Path) -> dict[str, bytes]:
 
 def validate_identity(root: Path, errors: list[str]) -> None:
     """Reject the old product identity in tracked-style paths and UTF-8 text."""
+    legacy_slug = LEGACY_SLUG.casefold()
+    legacy_display = LEGACY_DISPLAY.casefold()
     for path in repository_files(root):
         relative = path.relative_to(root)
         relative_text = relative.as_posix()
-        if LEGACY_SLUG in relative_text:
+        if legacy_slug in relative_text.casefold():
             errors.append(f"legacy identifier in path: {relative_text}")
 
         try:
@@ -93,9 +98,10 @@ def validate_identity(root: Path, errors: list[str]) -> None:
             contents = raw_contents.decode("utf-8")
         except UnicodeDecodeError:
             continue
-        if LEGACY_DISPLAY in contents:
+        normalized_contents = contents.casefold()
+        if legacy_display in normalized_contents:
             errors.append(f"legacy display name in text: {relative_text}")
-        if LEGACY_SLUG in contents:
+        if legacy_slug in normalized_contents:
             errors.append(f"legacy identifier in text: {relative_text}")
 
 
@@ -138,19 +144,84 @@ def validate_references(root: Path, errors: list[str]) -> None:
         errors.append(f"reference drift: {REFERENCES} differs from shared/references")
 
 
+def parse_metadata_scalar(value: str, line_number: int) -> object:
+    """Parse the scalar forms used by the repository's OpenAI metadata."""
+    if value in {"true", "false"}:
+        return value == "true"
+    if value.startswith(("\"", "'")):
+        try:
+            parsed = ast.literal_eval(value)
+        except (SyntaxError, ValueError) as error:
+            raise ValueError(f"invalid quoted scalar on line {line_number}") from error
+        if not isinstance(parsed, str):
+            raise ValueError(f"non-string quoted scalar on line {line_number}")
+        return parsed
+    if not value:
+        raise ValueError(f"missing scalar value on line {line_number}")
+    return value
+
+
+def parse_openai_metadata(contents: str) -> dict[str, dict[str, object]]:
+    """Parse the small two-level mapping supported by agents/openai.yaml."""
+    metadata: dict[str, dict[str, object]] = {}
+    section: str | None = None
+    for line_number, raw_line in enumerate(contents.splitlines(), start=1):
+        if not raw_line.strip() or raw_line.lstrip().startswith("#"):
+            continue
+        if "\t" in raw_line:
+            raise ValueError(f"tabs are not allowed on line {line_number}")
+
+        if raw_line.startswith(" "):
+            match = re.fullmatch(r"  ([a-z][a-z0-9_]*):\s*(.*?)\s*", raw_line)
+            if match is None or section is None:
+                raise ValueError(f"invalid nested mapping on line {line_number}")
+            key, raw_value = match.groups()
+            if key in metadata[section]:
+                raise ValueError(f"duplicate key {section}.{key}")
+            metadata[section][key] = parse_metadata_scalar(raw_value, line_number)
+            continue
+
+        match = re.fullmatch(r"([a-z][a-z0-9_]*):\s*", raw_line)
+        if match is None:
+            raise ValueError(f"invalid top-level mapping on line {line_number}")
+        section = match.group(1)
+        if section in metadata:
+            raise ValueError(f"duplicate top-level key {section}")
+        metadata[section] = {}
+    return metadata
+
+
 def validate_metadata(root: Path, errors: list[str]) -> None:
-    """Check the portable runtime's Codex-facing metadata without a YAML parser."""
+    """Structurally check the portable runtime's Codex-facing metadata."""
     metadata_path = root / RUNTIME / "agents/openai.yaml"
     try:
-        metadata = metadata_path.read_text(encoding="utf-8")
+        contents = metadata_path.read_text(encoding="utf-8")
     except OSError as error:
         errors.append(f"unreadable Codex metadata: {RUNTIME / 'agents/openai.yaml'}: {error}")
         return
 
-    if 'display_name: "Miodkuj"' not in metadata:
-        errors.append('Codex display_name must be "Miodkuj"')
-    if "$miodkuj" not in metadata:
-        errors.append("Codex default_prompt must mention $miodkuj")
+    try:
+        metadata = parse_openai_metadata(contents)
+    except ValueError as error:
+        errors.append(f"invalid Codex metadata: {error}")
+        return
+
+    interface = metadata.get("interface", {})
+    policy = metadata.get("policy", {})
+    if interface.get("display_name") != EXPECTED_DISPLAY_NAME:
+        errors.append(f'Codex interface.display_name must be "{EXPECTED_DISPLAY_NAME}"')
+    if interface.get("short_description") != EXPECTED_SHORT_DESCRIPTION:
+        errors.append(
+            "Codex interface.short_description must be "
+            f'"{EXPECTED_SHORT_DESCRIPTION}"'
+        )
+    if interface.get("default_prompt") != EXPECTED_DEFAULT_PROMPT:
+        errors.append(
+            "Codex interface.default_prompt must exactly invoke $miodkuj with the "
+            "approved prompt"
+        )
+    if policy.get("allow_implicit_invocation") is not True:
+        errors.append("Codex policy.allow_implicit_invocation must be boolean true")
 
 
 def validate_changelog(root: Path, errors: list[str]) -> None:
