@@ -20,6 +20,47 @@ INSTALLATION_MANIFESTS = (
     Path(".codex-plugin/plugin.json"),
     Path(".agents/plugins/marketplace.json"),
 )
+INSTALLATION_MANIFEST_CONTRACTS = {
+    Path(".claude-plugin/plugin.json"): (
+        ("name", ("name",), "miodkuj"),
+        ("version", ("version",), RELEASE_VERSION),
+        ("repository", ("repository",), "https://github.com/bartekpucek/miodkuj"),
+        ("skills", ("skills",), ["./skills/miodkuj"]),
+    ),
+    Path(".claude-plugin/marketplace.json"): (
+        ("name", ("name",), "miodkuj"),
+        ("plugins[0].name", ("plugins", 0, "name"), "miodkuj"),
+        ("plugins[0].source", ("plugins", 0, "source"), "./"),
+        ("plugins[0].version", ("plugins", 0, "version"), RELEASE_VERSION),
+    ),
+    Path(".codex-plugin/plugin.json"): (
+        ("name", ("name",), "miodkuj"),
+        ("version", ("version",), RELEASE_VERSION),
+        ("repository", ("repository",), "https://github.com/bartekpucek/miodkuj"),
+        ("skills", ("skills",), "./skills/"),
+        ("interface.displayName", ("interface", "displayName"), "Miodkuj"),
+    ),
+    Path(".agents/plugins/marketplace.json"): (
+        ("name", ("name",), "miodkuj"),
+        ("interface.displayName", ("interface", "displayName"), "Miodkuj"),
+        ("plugins[0].name", ("plugins", 0, "name"), "miodkuj"),
+        (
+            "plugins[0].source",
+            ("plugins", 0, "source"),
+            {"source": "local", "path": "./"},
+        ),
+        (
+            "plugins[0].policy",
+            ("plugins", 0, "policy"),
+            {"installation": "AVAILABLE", "authentication": "ON_INSTALL"},
+        ),
+        ("plugins[0].category", ("plugins", 0, "category"), "Writing"),
+    ),
+}
+MANIFEST_PLUGIN_COUNTS = {
+    Path(".claude-plugin/marketplace.json"): 1,
+    Path(".agents/plugins/marketplace.json"): 1,
+}
 LEGACY_SLUG = "-".join(("stop", "slop", "PL"))
 LEGACY_DISPLAY = " ".join(("Stop", "Slop", "PL"))
 SKIPPED_FALLBACK_DIRECTORIES = {".git", "dist", "__pycache__", "[REDACTED]"}
@@ -155,6 +196,41 @@ def read_json_object(path: Path, errors: list[str]) -> dict | None:
     return value
 
 
+def manifest_contract_value(value: dict, path: tuple[str | int, ...]) -> tuple[bool, object]:
+    """Return a nested manifest value without trusting its intermediate shape."""
+    current: object = value
+    for component in path:
+        if isinstance(component, str):
+            if not isinstance(current, dict) or component not in current:
+                return False, None
+            current = current[component]
+        elif not isinstance(current, list) or component >= len(current):
+            return False, None
+        else:
+            current = current[component]
+    return True, current
+
+
+def validate_installation_manifest_contract(
+    relative: Path, value: dict, errors: list[str]
+) -> None:
+    """Enforce the Task 1 Claude and Codex descriptor contract."""
+    plugin_count = MANIFEST_PLUGIN_COUNTS.get(relative)
+    if plugin_count is not None:
+        plugins = value.get("plugins")
+        if not isinstance(plugins, list) or len(plugins) != plugin_count:
+            errors.append(
+                f"installation manifest contract drift: {relative}: plugins"
+            )
+
+    for field, path, expected in INSTALLATION_MANIFEST_CONTRACTS[relative]:
+        found, actual = manifest_contract_value(value, path)
+        if not found or actual != expected:
+            errors.append(
+                f"installation manifest contract drift: {relative}: {field}"
+            )
+
+
 def validate_installation_manifests(root: Path, errors: list[str]) -> None:
     """Require the Claude and Codex marketplace manifests at one release version."""
     parsed: dict[Path, dict] = {}
@@ -166,6 +242,9 @@ def validate_installation_manifests(root: Path, errors: list[str]) -> None:
         value = read_json_object(path, errors)
         if value is not None:
             parsed[relative] = value
+
+    for relative, value in parsed.items():
+        validate_installation_manifest_contract(relative, value, errors)
 
     for relative in (
         Path(".claude-plugin/plugin.json"),

@@ -76,6 +76,84 @@ class ValidateRepoTests(unittest.TestCase):
                 errors,
             )
 
+    def test_claude_plugin_skill_path_drift_is_reported(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            copy = self.copy_repository(Path(tmp))
+            path = copy / ".claude-plugin" / "plugin.json"
+            manifest = json.loads(path.read_text(encoding="utf-8"))
+            manifest["skills"] = ["./skills/retired"]
+            path.write_text(json.dumps(manifest), encoding="utf-8")
+
+            errors = MODULE.validate_repo(copy)
+
+            self.assertIn(
+                "installation manifest contract drift: .claude-plugin/plugin.json: skills",
+                errors,
+            )
+
+    def test_claude_marketplace_source_drift_is_reported(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            copy = self.copy_repository(Path(tmp))
+            path = copy / ".claude-plugin" / "marketplace.json"
+            manifest = json.loads(path.read_text(encoding="utf-8"))
+            manifest["plugins"][0]["source"] = "./retired"
+            path.write_text(json.dumps(manifest), encoding="utf-8")
+
+            errors = MODULE.validate_repo(copy)
+
+            self.assertIn(
+                "installation manifest contract drift: .claude-plugin/marketplace.json: "
+                "plugins[0].source",
+                errors,
+            )
+
+    def test_codex_plugin_skill_path_drift_is_reported(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            copy = self.copy_repository(Path(tmp))
+            path = copy / ".codex-plugin" / "plugin.json"
+            manifest = json.loads(path.read_text(encoding="utf-8"))
+            manifest["skills"] = "./retired/"
+            path.write_text(json.dumps(manifest), encoding="utf-8")
+
+            errors = MODULE.validate_repo(copy)
+
+            self.assertIn(
+                "installation manifest contract drift: .codex-plugin/plugin.json: skills",
+                errors,
+            )
+
+    def test_codex_marketplace_source_drift_is_reported(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            copy = self.copy_repository(Path(tmp))
+            path = copy / ".agents" / "plugins" / "marketplace.json"
+            manifest = json.loads(path.read_text(encoding="utf-8"))
+            manifest["plugins"][0]["source"]["path"] = "./retired"
+            path.write_text(json.dumps(manifest), encoding="utf-8")
+
+            errors = MODULE.validate_repo(copy)
+
+            self.assertIn(
+                "installation manifest contract drift: .agents/plugins/marketplace.json: "
+                "plugins[0].source",
+                errors,
+            )
+
+    def test_codex_marketplace_policy_drift_is_reported(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            copy = self.copy_repository(Path(tmp))
+            path = copy / ".agents" / "plugins" / "marketplace.json"
+            manifest = json.loads(path.read_text(encoding="utf-8"))
+            manifest["plugins"][0]["policy"]["installation"] = "DISABLED"
+            path.write_text(json.dumps(manifest), encoding="utf-8")
+
+            errors = MODULE.validate_repo(copy)
+
+            self.assertIn(
+                "installation manifest contract drift: .agents/plugins/marketplace.json: "
+                "plugins[0].policy",
+                errors,
+            )
+
     def test_invalid_installation_manifest_is_reported(self):
         with tempfile.TemporaryDirectory() as tmp:
             copy = self.copy_repository(Path(tmp))
