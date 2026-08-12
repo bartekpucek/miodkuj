@@ -2,12 +2,22 @@
 """Validate the Miodkuj repository, runtime, and release bundle contract."""
 
 import ast
+import importlib.util
 import json
 import re
 import subprocess
 import sys
 import zipfile
 from pathlib import Path
+
+
+AUDIT_SPEC = importlib.util.spec_from_file_location(
+    "audit_public_repo", Path(__file__).with_name("audit_public_repo.py")
+)
+if AUDIT_SPEC is None or AUDIT_SPEC.loader is None:
+    raise RuntimeError("public repository audit module could not be loaded")
+PUBLIC_REPO_AUDIT = importlib.util.module_from_spec(AUDIT_SPEC)
+AUDIT_SPEC.loader.exec_module(PUBLIC_REPO_AUDIT)
 
 
 RUNTIME = Path("plugins/miodkuj/skills/miodkuj")
@@ -64,7 +74,7 @@ MANIFEST_PLUGIN_COUNTS = {
 }
 LEGACY_SLUG = "-".join(("stop", "slop", "PL"))
 LEGACY_DISPLAY = " ".join(("Stop", "Slop", "PL"))
-SKIPPED_FALLBACK_DIRECTORIES = {".git", "dist", "__pycache__", "[REDACTED]"}
+SKIPPED_FALLBACK_DIRECTORIES = {".git", "dist", "__pycache__"}
 TEXT_CONTROL_BYTES = {9, 10, 13}
 EXPECTED_DISPLAY_NAME = "Miodkuj"
 EXPECTED_SHORT_DESCRIPTION = "Polszczyzna bez sztucznego tonu"
@@ -408,6 +418,16 @@ def validate_distribution_directory(root: Path, errors: list[str]) -> None:
             errors.append(f"unexpected distribution artifact: dist/{path.name}")
 
 
+def validate_public_tree(root: Path, errors: list[str]) -> None:
+    """Surface shared privacy findings when validating a Git repository."""
+    if not (root / ".git").exists():
+        return
+    try:
+        errors.extend(PUBLIC_REPO_AUDIT.scan_tree(root))
+    except PUBLIC_REPO_AUDIT.AuditError:
+        errors.append("public repository tree audit could not complete safely")
+
+
 def validate_repo(root: Path) -> list[str]:
     """Return repository contract violations; an empty list means success."""
     errors: list[str] = []
@@ -419,6 +439,7 @@ def validate_repo(root: Path) -> list[str]:
     validate_changelog(root, errors)
     validate_bundle(root, errors)
     validate_distribution_directory(root, errors)
+    validate_public_tree(root, errors)
     return errors
 
 

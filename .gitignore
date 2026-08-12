@@ -10,3 +10,4 @@ build/
 .worktrees/
 __pycache__/
 *.pyc
+.claude/settings.local.json

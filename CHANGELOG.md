@@ -8,8 +8,14 @@ All notable changes to this project are documented here. The format is based on
 
 ### Added
 
-- Claude Code and Codex marketplace contracts that install the one canonical `plugins/miodkuj/skills/miodkuj/` runtime.
-- Repository validation for marketplace manifest presence, release-version alignment, and distribution-artifact integrity.
+- Claude Code and Codex marketplace installation from the public repository.
+- Step-by-step ChatGPT and Claude.ai installation instructions.
+- Public-repository privacy validation and history cleanup.
+
+### Changed
+
+- All distribution routes now use the one canonical runtime at `plugins/miodkuj/skills/miodkuj/`.
+- Documented the invocation difference between `/miodkuj:miodkuj` in Claude Code marketplace installs, `/miodkuj` in manual Claude Code installs, and `$miodkuj` in Codex.
 
 ## [2.0.0] - 2026-08-11
 

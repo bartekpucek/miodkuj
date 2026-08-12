@@ -179,7 +179,7 @@ def apply_tracked_worktree_snapshot(
             "-c",
             "user.name=Miodkuj Smoke Test",
             "-c",
-            "[REDACTED]",
+            "user.email=smoke" + "@" + "example.invalid",
             "commit",
             "-m",
             "test snapshot",

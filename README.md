@@ -27,7 +27,7 @@ Miodkuj nie obiecuje obchodzenia wykrywaczy AI, tekstu „nie do wykrycia”, po
 
 1. [Pobierz `miodkuj.skill`](https://github.com/bartekpucek/miodkuj/releases/latest/download/miodkuj.skill).
 2. W ChatGPT wybierz **Plugins** → **Skills** → **Create** → **Upload from your computer**. Możesz też otworzyć [chatgpt.com/skills](https://chatgpt.com/skills).
-3. Wskaż pobrany plik. ChatGPT sprawdzi plik, zanim udostępni skill.
+3. Wskaż pobrany plik. ChatGPT sprawdzi plik, zanim skill stanie się dostępny.
 4. Otwórz czat i napisz na przykład: `Użyj Miodkuj, aby poprawić ten tekst: …`
 
 ChatGPT może też wybrać Miodkuj automatycznie, gdy poprosisz o poprawę polskiego tekstu. Nie używaj tutaj polecenia slash.

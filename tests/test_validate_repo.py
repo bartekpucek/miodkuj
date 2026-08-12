@@ -30,6 +30,19 @@ class ValidateRepoTests(unittest.TestCase):
     def test_current_repository_passes(self):
         self.assertEqual(MODULE.validate_repo(ROOT), [])
 
+    def test_internal_planning_tree_is_reported(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            copy = self.copy_repository(Path(tmp))
+            internal = copy / "docs" / ("super" + "powers") / "plan.md"
+            internal.parent.mkdir(parents=True, exist_ok=True)
+            internal.write_text("internal\n", encoding="utf-8")
+            subprocess.run(["git", "init", "-q"], cwd=copy, check=True)
+            subprocess.run(["git", "add", "."], cwd=copy, check=True)
+
+            errors = MODULE.validate_repo(copy)
+
+            self.assertTrue(any("internal path" in error for error in errors), errors)
+
     def test_reference_drift_is_reported(self):
         with tempfile.TemporaryDirectory() as tmp:
             copy = self.copy_repository(Path(tmp))
@@ -229,10 +242,11 @@ class ValidateRepoTests(unittest.TestCase):
                 f"legacy display name in text: docs/{lowercase_slug}.md", errors
             )
 
-    def test_tracked_[REDACTED]_file_is_scanned(self):
+    def test_tracked_internal_planning_file_is_scanned(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp) / "repo"
-            target = root / "[REDACTED]" / "tracked.md"
+            internal_directory = "." + "super" + "powers"
+            target = root / internal_directory / "tracked.md"
             target.parent.mkdir(parents=True)
             target.write_text(LEGACY_DISPLAY, encoding="utf-8")
             subprocess.run(["git", "init", "-q"], cwd=root, check=True)
@@ -246,20 +260,24 @@ class ValidateRepoTests(unittest.TestCase):
             MODULE.validate_identity(root, errors)
 
             self.assertIn(
-                "legacy display name in text: [REDACTED]/tracked.md", errors
+                f"legacy display name in text: {internal_directory}/tracked.md", errors
             )
 
-    def test_ignored_review_artifact_is_not_scanned_without_git(self):
+    def test_internal_planning_artifact_is_scanned_without_git(self):
         with tempfile.TemporaryDirectory() as tmp:
             copy = self.copy_repository(Path(tmp))
-            target = copy / "[REDACTED]" / "[REDACTED]" / "review.diff"
+            internal_directory = "." + "super" + "powers"
+            workflow_directory = "s" + "dd"
+            target = copy / internal_directory / workflow_directory / "review.diff"
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text(LEGACY_DISPLAY, encoding="utf-8")
 
             errors = MODULE.validate_repo(copy)
 
-            self.assertNotIn(
-                "legacy display name in text: [REDACTED]/[REDACTED]/review.diff", errors
+            self.assertIn(
+                "legacy display name in text: "
+                f"{internal_directory}/{workflow_directory}/review.diff",
+                errors,
             )
 
     def test_utf8_decodable_binary_content_is_not_scanned(self):
