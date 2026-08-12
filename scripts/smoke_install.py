@@ -58,19 +58,43 @@ def codex_commands(repo: Path) -> list[list[str]]:
 
 
 def verify_bundle(bundle: Path, runtime: Path | None = None) -> None:
-    """Require the release archive's exact canonical entry set and contents."""
+    """Require exactly eight unique canonical file records and their contents."""
     with zipfile.ZipFile(bundle) as archive:
-        entries = {info.filename for info in archive.infolist() if not info.is_dir()}
-        if entries != EXPECTED_BUNDLE_ENTRIES:
+        records = archive.infolist()
+        directory_entries = sorted(
+            info.filename for info in records if info.is_dir()
+        )
+        if directory_entries:
             raise RuntimeError(
-                "skill bundle must contain exactly eight canonical entries; "
-                f"found {sorted(entries)}"
+                "skill bundle must not contain directory entries; "
+                f"found {directory_entries}"
+            )
+        names = [info.filename for info in records]
+        duplicate_names = sorted(
+            {name for name in names if names.count(name) > 1}
+        )
+        if duplicate_names:
+            raise RuntimeError(
+                "skill bundle must not contain a duplicate ZIP record; "
+                f"found {duplicate_names}"
+            )
+        if len(records) != len(EXPECTED_BUNDLE_ENTRIES):
+            raise RuntimeError(
+                "skill bundle must contain exactly eight ZIP records; "
+                f"found {len(records)}: {sorted(names)}"
+            )
+        if set(names) != EXPECTED_BUNDLE_ENTRIES:
+            raise RuntimeError(
+                "skill bundle must contain the exact canonical record names; "
+                f"found {sorted(names)}"
             )
         if runtime is not None:
-            for entry in sorted(entries):
-                relative = Path(entry).relative_to("miodkuj")
-                if archive.read(entry) != (runtime / relative).read_bytes():
-                    raise RuntimeError(f"skill bundle content differs: {entry}")
+            for record in records:
+                relative = Path(record.filename).relative_to("miodkuj")
+                if archive.read(record) != (runtime / relative).read_bytes():
+                    raise RuntimeError(
+                        f"skill bundle content differs: {record.filename}"
+                    )
 
 
 def verify_installed_cache(home: Path, platform: str) -> Path:

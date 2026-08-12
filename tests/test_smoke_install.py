@@ -4,6 +4,7 @@ import shutil
 import sys
 import tempfile
 import unittest
+import warnings
 import zipfile
 from pathlib import Path
 
@@ -15,6 +16,17 @@ SPEC = importlib.util.spec_from_file_location(
 )
 MODULE = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(MODULE)
+
+CANONICAL_BUNDLE_ENTRIES = (
+    "miodkuj/SKILL.md",
+    "miodkuj/agents/openai.yaml",
+    "miodkuj/references/eval.md",
+    "miodkuj/references/examples.md",
+    "miodkuj/references/plain-polish.md",
+    "miodkuj/references/polish-patterns.md",
+    "miodkuj/references/registers.md",
+    "miodkuj/references/voice-calibration.md",
+)
 
 
 class SmokeInstallTests(unittest.TestCase):
@@ -66,7 +78,30 @@ class SmokeInstallTests(unittest.TestCase):
                 for entry in entries:
                     archive.writestr(entry, b"fixture")
 
-            with self.assertRaisesRegex(RuntimeError, "exactly eight canonical entries"):
+            with self.assertRaisesRegex(RuntimeError, "exactly eight ZIP records"):
+                MODULE.verify_bundle(bundle)
+
+    def test_bundle_rejects_a_duplicate_canonical_record(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle = Path(tmp) / "miodkuj.skill"
+            with warnings.catch_warnings(), zipfile.ZipFile(bundle, "w") as archive:
+                warnings.simplefilter("ignore", UserWarning)
+                for entry in CANONICAL_BUNDLE_ENTRIES:
+                    archive.writestr(entry, b"fixture")
+                archive.writestr("miodkuj/SKILL.md", b"duplicate")
+
+            with self.assertRaisesRegex(RuntimeError, "duplicate ZIP record"):
+                MODULE.verify_bundle(bundle)
+
+    def test_bundle_rejects_a_directory_record(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            bundle = Path(tmp) / "miodkuj.skill"
+            with zipfile.ZipFile(bundle, "w") as archive:
+                for entry in CANONICAL_BUNDLE_ENTRIES:
+                    archive.writestr(entry, b"fixture")
+                archive.writestr("miodkuj/", b"")
+
+            with self.assertRaisesRegex(RuntimeError, "directory entries"):
                 MODULE.verify_bundle(bundle)
 
     def test_installed_cache_requires_one_named_skill(self):
