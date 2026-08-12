@@ -6,8 +6,9 @@ import sys
 import tempfile
 import unittest
 import zipfile
-from contextlib import redirect_stdout
+from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
+from unittest import mock
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -246,6 +247,46 @@ class PublicRepoAuditTests(unittest.TestCase):
             self.assertIn("dist/miodkuj.skill", rendered)
             self.assertNotIn(INTERNAL_ACRONYM, rendered)
 
+    def test_history_preserves_every_special_path_for_one_archive_blob(self):
+        """Catches quoted-path parsing and blob-only association deduplication."""
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.init_repo(root)
+            first = self.write_archive(
+                root, "zażółć [one].skill", INTERNAL_ACRONYM.encode()
+            )
+            second = root / "dist" / "zażółć [two].skill"
+            second.write_bytes(first.read_bytes())
+            self.commit_all(root, "private archive paths")
+            blob = subprocess.run(
+                ["git", "rev-parse", "HEAD:" + first.relative_to(root).as_posix()],
+                cwd=root,
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.strip()
+            first.unlink()
+            second.unlink()
+            subprocess.run(["git", "add", "-u"], cwd=root, check=True)
+            subprocess.run(
+                ["git", "commit", "-qm", "remove archive paths"],
+                cwd=root,
+                check=True,
+            )
+
+            findings = MODULE.scan_history(root)
+            matching = [
+                item
+                for item in findings
+                if "internal identifier" in item and blob in item
+            ]
+            rendered = "\n".join(matching)
+
+            self.assertIn(first.relative_to(root).as_posix(), rendered)
+            self.assertIn(second.relative_to(root).as_posix(), rendered)
+            self.assertEqual(len(matching), 2, matching)
+            self.assertNotIn(INTERNAL_ACRONYM, rendered)
+
     def test_tree_scan_rejects_unexpected_skill_artifact(self):
         """Catches archive allow lists that accept arbitrary dist bundles."""
         with tempfile.TemporaryDirectory() as tmp:
@@ -266,17 +307,91 @@ class PublicRepoAuditTests(unittest.TestCase):
             self.assertIn("unexpected skill artifact", rendered)
             self.assertIn(blob, rendered)
 
-    def test_tree_scan_fails_closed_on_unreadable_expected_archive(self):
-        """Catches malformed packages silently escaping member inspection."""
+    def test_tree_scan_fails_closed_when_expected_archive_cannot_be_read(self):
+        """Catches generated archive read errors being silently skipped."""
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             self.init_repo(root)
             archive = root / "dist" / "miodkuj.skill"
-            archive.parent.mkdir()
-            archive.write_bytes(INTERNAL_ACRONYM.encode())
+            archive.mkdir(parents=True)
 
             with self.assertRaises(MODULE.AuditError):
                 MODULE.scan_tree(root)
+
+    def test_history_scans_annotated_tag_identity_metadata_and_message(self):
+        """Catches history scans that discard reachable annotated tag objects."""
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.init_repo(root)
+            (root / "README.md").write_text("public\n", encoding="utf-8")
+            self.commit_all(root, "public fixture")
+            subprocess.run(
+                [
+                    "git",
+                    "-c",
+                    "user.name=" + INTERNAL_NAME,
+                    "-c",
+                    "user.email=" + PRIVATE_EMAIL,
+                    "tag",
+                    "-am",
+                    LOCAL_PATH,
+                    "private-tag",
+                ],
+                cwd=root,
+                check=True,
+            )
+            tag_object = subprocess.run(
+                ["git", "rev-parse", "private-tag^{tag}"],
+                cwd=root,
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.strip()
+
+            findings = MODULE.scan_history(root)
+            matching = [item for item in findings if tag_object in item]
+            rendered = "\n".join(matching)
+
+            self.assertIn("private email metadata", rendered)
+            self.assertIn("internal identifier", rendered)
+            self.assertIn("absolute home path", rendered)
+            self.assertNotIn(PRIVATE_EMAIL, rendered)
+            self.assertNotIn(INTERNAL_NAME, rendered)
+            self.assertNotIn(LOCAL_PATH, rendered)
+            self.assertNotIn(LOCAL_USER, rendered)
+
+    def test_cli_redacts_unexpected_archive_exception_without_traceback(self):
+        """Catches archive exceptions escaping the generic CLI error boundary."""
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.init_repo(root)
+            self.write_archive(root, "miodkuj.skill", b"public")
+            stdout = io.StringIO()
+            stderr = io.StringIO()
+
+            try:
+                with mock.patch.object(
+                    MODULE.zipfile,
+                    "ZipFile",
+                    side_effect=LookupError(LOCAL_PATH),
+                ):
+                    with redirect_stdout(stdout), redirect_stderr(stderr):
+                        result = MODULE.main(["--tree"], root=root)
+            except Exception as exc:
+                self.fail(type(exc).__name__ + " escaped the CLI boundary")
+
+            rendered = stdout.getvalue() + stderr.getvalue()
+
+            self.assertEqual(result, 2)
+            self.assertEqual(
+                stderr.getvalue(),
+                "error: repository audit could not complete safely\n",
+            )
+            self.assertEqual(stdout.getvalue(), "")
+            self.assertNotIn("Traceback", rendered)
+            self.assertNotIn(str(root), rendered)
+            self.assertNotIn(LOCAL_PATH, rendered)
+            self.assertNotIn(LOCAL_USER, rendered)
 
     def test_public_attribution_is_allowed(self):
         """Catches over-broad identity and email rules that block attribution."""

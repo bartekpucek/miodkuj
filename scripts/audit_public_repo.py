@@ -165,10 +165,12 @@ def _archive_sources(
                 label = archive_label + "!" + member.filename
                 try:
                     contents = archive.read(member)
-                except (OSError, RuntimeError, zipfile.BadZipFile) as exc:
+                except Exception as exc:
                     raise AuditError("skill archive member could not be read") from exc
                 yield label, contents, object_identifier
-    except (OSError, zipfile.BadZipFile) as exc:
+    except AuditError:
+        raise
+    except Exception as exc:
         raise AuditError("skill archive could not be inspected") from exc
 
 
@@ -180,8 +182,8 @@ def _dist_archive_sources(root: Path) -> Iterator[tuple[str, bytes, str]]:
         relative = archive.relative_to(root).as_posix()
         try:
             data = archive.read_bytes()
-        except OSError:
-            continue
+        except OSError as exc:
+            raise AuditError("skill archive could not be read") from exc
         object_identifier = _decode(
             _git(root, "hash-object", "--stdin", input_data=data)
         ).strip()
@@ -191,51 +193,112 @@ def _dist_archive_sources(root: Path) -> Iterator[tuple[str, bytes, str]]:
 def scan_tree(root: Path) -> list[str]:
     """Scan tracked paths and generated skill archives in the current tree."""
     root = root.resolve()
-    findings: list[str] = []
-    for label, data, object_identifier in _tracked_sources(root):
-        findings.extend(_scan_source(label, data, object_identifier))
+    try:
+        findings: list[str] = []
+        for label, data, object_identifier in _tracked_sources(root):
+            findings.extend(_scan_source(label, data, object_identifier))
 
-    dist = root / "dist"
-    if dist.is_dir():
-        for archive in sorted(dist.glob("*.skill")):
-            relative = archive.relative_to(root)
-            if relative != EXPECTED_SKILL_ARCHIVE:
-                try:
-                    data = archive.read_bytes()
-                except OSError as exc:
-                    raise AuditError("skill archive could not be read") from exc
-                object_identifier = _decode(
-                    _git(root, "hash-object", "--stdin", input_data=data)
-                ).strip()
-                findings.append(
-                    _finding(
-                        "unexpected skill artifact",
-                        object_identifier,
-                        relative.as_posix(),
+        dist = root / "dist"
+        if dist.is_dir():
+            for archive in sorted(dist.glob("*.skill")):
+                relative = archive.relative_to(root)
+                if relative != EXPECTED_SKILL_ARCHIVE:
+                    try:
+                        data = archive.read_bytes()
+                    except OSError as exc:
+                        raise AuditError("skill archive could not be read") from exc
+                    object_identifier = _decode(
+                        _git(root, "hash-object", "--stdin", input_data=data)
+                    ).strip()
+                    findings.append(
+                        _finding(
+                            "unexpected skill artifact",
+                            object_identifier,
+                            relative.as_posix(),
+                        )
                     )
-                )
 
-    for label, data, object_identifier in _dist_archive_sources(root):
-        findings.extend(_scan_source(label, data, object_identifier))
-    return sorted(set(findings))
+        for label, data, object_identifier in _dist_archive_sources(root):
+            findings.extend(_scan_source(label, data, object_identifier))
+        return sorted(set(findings))
+    except AuditError:
+        raise
+    except Exception as exc:
+        raise AuditError("tree scan could not complete") from exc
 
 
-def _reachable_blob_sources(root: Path) -> Iterator[tuple[str, bytes, str]]:
-    objects = _git(root, "rev-list", "--objects", "--all")
-    seen: set[str] = set()
-    for line in objects.splitlines():
-        raw_object, separator, raw_path = line.partition(b" ")
-        object_identifier = raw_object.decode("ascii", errors="ignore")
-        if not object_identifier or object_identifier in seen:
+def _reachable_objects(root: Path) -> dict[str, str]:
+    raw_objects = _git(
+        root,
+        "rev-list",
+        "--objects",
+        "--all",
+        "--no-object-names",
+    )
+    objects: dict[str, str] = {}
+    for raw_object in raw_objects.splitlines():
+        object_identifier = raw_object.decode("ascii", errors="ignore").strip()
+        if not object_identifier or object_identifier in objects:
             continue
-        seen.add(object_identifier)
-        if _git(root, "cat-file", "-t", object_identifier).strip() != b"blob":
+        object_type = _decode(
+            _git(root, "cat-file", "-t", object_identifier)
+        ).strip()
+        objects[object_identifier] = object_type
+    return objects
+
+
+def _historical_blob_paths(
+    root: Path, blob_identifiers: set[str]
+) -> dict[str, set[str]]:
+    paths: dict[str, set[str]] = {}
+    commits = dict.fromkeys(_git(root, "rev-list", "--all").splitlines())
+    for raw_commit in commits:
+        commit = raw_commit.decode("ascii", errors="ignore").strip()
+        if not commit:
             continue
-        path = _decode(raw_path) if separator else "<unknown>"
+        tree = _git(root, "ls-tree", "-r", "-z", "--full-tree", commit)
+        for entry in tree.split(b"\0"):
+            if not entry:
+                continue
+            header, separator, raw_path = entry.partition(b"\t")
+            fields = header.split()
+            if not separator or len(fields) != 3:
+                raise AuditError("unexpected git tree entry")
+            object_identifier = fields[2].decode("ascii", errors="ignore")
+            if fields[1] != b"blob" or object_identifier not in blob_identifiers:
+                continue
+            paths.setdefault(object_identifier, set()).add(_decode(raw_path))
+    return paths
+
+
+def _reachable_blob_sources(
+    root: Path, objects: dict[str, str] | None = None
+) -> Iterator[tuple[str, bytes, str]]:
+    reachable = objects if objects is not None else _reachable_objects(root)
+    blob_identifiers = {
+        object_identifier
+        for object_identifier, object_type in reachable.items()
+        if object_type == "blob"
+    }
+    paths = _historical_blob_paths(root, blob_identifiers)
+    for object_identifier in sorted(blob_identifiers):
         data = _git(root, "cat-file", "blob", object_identifier)
-        yield path, data, object_identifier
-        if path.casefold().endswith(".skill"):
-            yield from _archive_sources(path, data, object_identifier)
+        labels = paths.get(object_identifier) or {"<unknown>"}
+        for path in sorted(labels):
+            yield path, data, object_identifier
+            if path.casefold().endswith(".skill"):
+                yield from _archive_sources(path, data, object_identifier)
+
+
+def _reachable_tag_sources(
+    root: Path, objects: dict[str, str] | None = None
+) -> Iterator[tuple[str, bytes, str]]:
+    reachable = objects if objects is not None else _reachable_objects(root)
+    for object_identifier, object_type in sorted(reachable.items()):
+        if object_type != "tag":
+            continue
+        data = _git(root, "cat-file", "tag", object_identifier)
+        yield "<annotated-tag>", data, object_identifier
 
 
 def _metadata_sources(root: Path) -> Iterator[tuple[str, bytes, str]]:
@@ -250,14 +313,22 @@ def _metadata_sources(root: Path) -> Iterator[tuple[str, bytes, str]]:
 
 
 def scan_history(root: Path) -> list[str]:
-    """Scan unique reachable blobs plus author and committer email metadata."""
+    """Scan reachable blobs, annotated tags, and commit email metadata."""
     root = root.resolve()
-    findings: list[str] = []
-    for label, data, object_identifier in _reachable_blob_sources(root):
-        findings.extend(_scan_source(label, data, object_identifier))
-    for label, data, object_identifier in _metadata_sources(root):
-        findings.extend(_scan_source(label, data, object_identifier))
-    return sorted(set(findings))
+    try:
+        findings: list[str] = []
+        objects = _reachable_objects(root)
+        for label, data, object_identifier in _reachable_blob_sources(root, objects):
+            findings.extend(_scan_source(label, data, object_identifier))
+        for label, data, object_identifier in _reachable_tag_sources(root, objects):
+            findings.extend(_scan_source(label, data, object_identifier))
+        for label, data, object_identifier in _metadata_sources(root):
+            findings.extend(_scan_source(label, data, object_identifier))
+        return sorted(set(findings))
+    except AuditError:
+        raise
+    except Exception as exc:
+        raise AuditError("history scan could not complete") from exc
 
 
 def _replacement_literals(
@@ -283,7 +354,9 @@ def write_filter_repo_replacements(root: Path, output: Path) -> None:
 
     sources = list(_tracked_sources(root))
     sources.extend(_dist_archive_sources(root))
-    sources.extend(_reachable_blob_sources(root))
+    objects = _reachable_objects(root)
+    sources.extend(_reachable_blob_sources(root, objects))
+    sources.extend(_reachable_tag_sources(root, objects))
     sources.extend(_metadata_sources(root))
     literals = _replacement_literals(sources)
     lines = [f"literal:{literal}==>{REDACTION}\n" for literal in sorted(literals)]
@@ -337,7 +410,7 @@ def main(argv: list[str] | None = None, *, root: Path | None = None) -> int:
             findings.extend(scan_tree(repository))
         if arguments.history or arguments.all:
             findings.extend(scan_history(repository))
-    except (AuditError, OSError, ValueError):
+    except Exception:
         print("error: repository audit could not complete safely", file=sys.stderr)
         return 2
 
