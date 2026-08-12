@@ -1,0 +1,28 @@
+{
+  "name": "miodkuj",
+  "version": "2.1.0",
+  "description": "Naturalna polszczyzna bez slopu AI, urzędowego tonu i kalek z angielskiego.",
+  "author": {
+    "name": "Bartek Pucek",
+    "url": "https://github.com/bartekpucek"
+  },
+  "homepage": "https://github.com/bartekpucek/miodkuj",
+  "repository": "https://github.com/bartekpucek/miodkuj",
+  "license": "MIT",
+  "keywords": ["polish", "writing", "editing", "anti-slop", "plain-language"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Miodkuj",
+    "shortDescription": "Naturalna polszczyzna bez sztucznego tonu",
+    "longDescription": "Redaguje polskie teksty bez slopu AI, urzędowego tonu i kalek z angielskiego, zachowując fakty, rejestr i głos autora.",
+    "developerName": "Bartek Pucek",
+    "category": "Writing",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "websiteURL": "https://github.com/bartekpucek/miodkuj",
+    "defaultPrompt": [
+      "Popraw ten polski tekst bez zmiany faktów.",
+      "Napisz to po ludzku i zachowaj mój ton.",
+      "Zrób audyt stylu bez przepisywania tekstu."
+    ]
+  }
+}

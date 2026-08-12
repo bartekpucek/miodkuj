@@ -1,0 +1,20 @@
+{
+  "name": "miodkuj",
+  "owner": {
+    "name": "Bartek Pucek"
+  },
+  "metadata": {
+    "description": "Polskie narzędzia do redakcji tekstu bez sztucznego tonu.",
+    "version": "2.1.0"
+  },
+  "plugins": [
+    {
+      "name": "miodkuj",
+      "source": "./",
+      "description": "Naturalna polszczyzna bez slopu AI, urzędowego tonu i kalek z angielskiego.",
+      "version": "2.1.0",
+      "category": "writing",
+      "tags": ["polish", "writing", "editing", "anti-slop", "plain-language"]
+    }
+  ]
+}
