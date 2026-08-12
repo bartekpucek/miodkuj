@@ -360,6 +360,186 @@ class PublicRepoAuditTests(unittest.TestCase):
             self.assertNotIn(LOCAL_PATH, rendered)
             self.assertNotIn(LOCAL_USER, rendered)
 
+    def test_history_walks_standalone_tagged_tree_with_special_archive_path(self):
+        """Catches tagged trees being excluded from historical path discovery."""
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.init_repo(root)
+            (root / "README.md").write_text("public\n", encoding="utf-8")
+            self.commit_all(root, "public fixture")
+            archive = self.write_archive(
+                root, "zażółć [tagged tree].skill", INTERNAL_ACRONYM.encode()
+            )
+            subprocess.run(["git", "add", "."], cwd=root, check=True)
+            tree = subprocess.run(
+                ["git", "write-tree"],
+                cwd=root,
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.strip()
+            blob = subprocess.run(
+                ["git", "rev-parse", ":" + archive.relative_to(root).as_posix()],
+                cwd=root,
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.strip()
+            subprocess.run(
+                ["git", "tag", "-am", "public tag", "tree-target", tree],
+                cwd=root,
+                check=True,
+                capture_output=True,
+            )
+            subprocess.run(
+                ["git", "reset", "-q", "HEAD", "--", "."],
+                cwd=root,
+                check=True,
+            )
+            archive.unlink()
+
+            findings = MODULE.scan_history(root)
+            matching = [
+                item
+                for item in findings
+                if "internal identifier" in item and blob in item
+            ]
+            rendered = "\n".join(matching)
+
+            self.assertIn(archive.relative_to(root).as_posix(), rendered)
+            self.assertIn("!miodkuj/references/private.md", rendered)
+            self.assertNotIn(INTERNAL_ACRONYM, rendered)
+
+    def test_history_unpacks_archive_blob_targeted_directly_by_tag(self):
+        """Catches direct tagged archives depending on a missing filename suffix."""
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.init_repo(root)
+            (root / "README.md").write_text("public\n", encoding="utf-8")
+            self.commit_all(root, "public fixture")
+            archive = self.write_archive(
+                root, "temporary.skill", INTERNAL_ACRONYM.encode()
+            )
+            blob = subprocess.run(
+                ["git", "hash-object", "-w", str(archive)],
+                cwd=root,
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.strip()
+            subprocess.run(
+                ["git", "tag", "-am", "public tag", "blob-target", blob],
+                cwd=root,
+                check=True,
+                capture_output=True,
+            )
+            archive.unlink()
+
+            findings = MODULE.scan_history(root)
+            matching = [
+                item
+                for item in findings
+                if "internal identifier" in item and blob in item
+            ]
+            rendered = "\n".join(matching)
+
+            self.assertIn("<annotated-tag-target:", rendered)
+            self.assertIn("!miodkuj/references/private.md", rendered)
+            self.assertNotIn(INTERNAL_ACRONYM, rendered)
+
+    def test_history_walks_nested_tags_and_terminal_tree(self):
+        """Catches nested tags stopping before tag metadata or terminal trees."""
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.init_repo(root)
+            (root / "README.md").write_text("public\n", encoding="utf-8")
+            self.commit_all(root, "public fixture")
+            archive = self.write_archive(
+                root, "zażółć [nested].skill", INTERNAL_ACRONYM.encode()
+            )
+            subprocess.run(["git", "add", "."], cwd=root, check=True)
+            tree = subprocess.run(
+                ["git", "write-tree"],
+                cwd=root,
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.strip()
+            blob = subprocess.run(
+                ["git", "rev-parse", ":" + archive.relative_to(root).as_posix()],
+                cwd=root,
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.strip()
+            subprocess.run(
+                [
+                    "git",
+                    "-c",
+                    "user.email=" + PRIVATE_EMAIL,
+                    "tag",
+                    "-am",
+                    "public inner tag",
+                    "inner-tag",
+                    tree,
+                ],
+                cwd=root,
+                check=True,
+                capture_output=True,
+            )
+            inner = subprocess.run(
+                ["git", "rev-parse", "inner-tag^{tag}"],
+                cwd=root,
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.strip()
+            subprocess.run(
+                [
+                    "git",
+                    "-c",
+                    "user.name=" + INTERNAL_NAME,
+                    "tag",
+                    "-am",
+                    LOCAL_PATH,
+                    "outer-tag",
+                    inner,
+                ],
+                cwd=root,
+                check=True,
+                capture_output=True,
+            )
+            outer = subprocess.run(
+                ["git", "rev-parse", "outer-tag^{tag}"],
+                cwd=root,
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.strip()
+            subprocess.run(
+                ["git", "reset", "-q", "HEAD", "--", "."],
+                cwd=root,
+                check=True,
+            )
+            archive.unlink()
+
+            findings = MODULE.scan_history(root)
+            inner_findings = "\n".join(item for item in findings if inner in item)
+            outer_findings = "\n".join(item for item in findings if outer in item)
+            blob_findings = "\n".join(item for item in findings if blob in item)
+
+            self.assertIn("private email metadata", inner_findings)
+            self.assertIn("internal identifier", outer_findings)
+            self.assertIn("absolute home path", outer_findings)
+            self.assertIn(archive.relative_to(root).as_posix(), blob_findings)
+            self.assertIn("internal identifier", blob_findings)
+            rendered = inner_findings + outer_findings + blob_findings
+            self.assertNotIn(PRIVATE_EMAIL, rendered)
+            self.assertNotIn(INTERNAL_NAME, rendered)
+            self.assertNotIn(LOCAL_PATH, rendered)
+            self.assertNotIn(LOCAL_USER, rendered)
+            self.assertNotIn(INTERNAL_ACRONYM, rendered)
+
     def test_cli_redacts_unexpected_archive_exception_without_traceback(self):
         """Catches archive exceptions escaping the generic CLI error boundary."""
         with tempfile.TemporaryDirectory() as tmp:

@@ -247,28 +247,107 @@ def _reachable_objects(root: Path) -> dict[str, str]:
     return objects
 
 
-def _historical_blob_paths(
-    root: Path, blob_identifiers: set[str]
-) -> dict[str, set[str]]:
-    paths: dict[str, set[str]] = {}
-    commits = dict.fromkeys(_git(root, "rev-list", "--all").splitlines())
-    for raw_commit in commits:
-        commit = raw_commit.decode("ascii", errors="ignore").strip()
-        if not commit:
+def _tag_target(root: Path, tag_identifier: str) -> tuple[str, str]:
+    data = _git(root, "cat-file", "tag", tag_identifier)
+    headers = data.partition(b"\n\n")[0].splitlines()
+    target = next(
+        (
+            line.removeprefix(b"object ")
+            for line in headers
+            if line.startswith(b"object ")
+        ),
+        None,
+    )
+    declared_type = next(
+        (
+            line.removeprefix(b"type ")
+            for line in headers
+            if line.startswith(b"type ")
+        ),
+        None,
+    )
+    if target is None or declared_type is None:
+        raise AuditError("annotated tag target metadata is incomplete")
+    object_identifier = target.decode("ascii", errors="ignore").strip()
+    object_type = _decode(
+        _git(root, "cat-file", "-t", object_identifier)
+    ).strip()
+    if object_type != declared_type.decode("ascii", errors="ignore").strip():
+        raise AuditError("annotated tag target type does not match")
+    if object_type not in {"blob", "commit", "tag", "tree"}:
+        raise AuditError("annotated tag target type is unsupported")
+    return object_identifier, object_type
+
+
+def _peeled_tag_targets(
+    root: Path, objects: dict[str, str]
+) -> Iterator[tuple[str, str, str]]:
+    for start, object_type in sorted(objects.items()):
+        if object_type != "tag":
             continue
-        tree = _git(root, "ls-tree", "-r", "-z", "--full-tree", commit)
-        for entry in tree.split(b"\0"):
-            if not entry:
+        current = start
+        seen: set[str] = set()
+        while True:
+            if current in seen:
+                raise AuditError("annotated tag chain contains a cycle")
+            seen.add(current)
+            target, target_type = _tag_target(root, current)
+            if target_type == "tag":
+                current = target
                 continue
-            header, separator, raw_path = entry.partition(b"\t")
-            fields = header.split()
-            if not separator or len(fields) != 3:
-                raise AuditError("unexpected git tree entry")
-            object_identifier = fields[2].decode("ascii", errors="ignore")
-            if fields[1] != b"blob" or object_identifier not in blob_identifiers:
-                continue
-            paths.setdefault(object_identifier, set()).add(_decode(raw_path))
-    return paths
+            yield start, target, target_type
+            break
+
+
+def _add_tree_blob_paths(
+    root: Path,
+    treeish: str,
+    blob_identifiers: set[str],
+    paths: dict[str, set[str]],
+) -> None:
+    tree = _git(root, "ls-tree", "-r", "-z", "--full-tree", treeish)
+    for entry in tree.split(b"\0"):
+        if not entry:
+            continue
+        header, separator, raw_path = entry.partition(b"\t")
+        fields = header.split()
+        if not separator or len(fields) != 3:
+            raise AuditError("unexpected git tree entry")
+        object_identifier = fields[2].decode("ascii", errors="ignore")
+        if fields[1] != b"blob" or object_identifier not in blob_identifiers:
+            continue
+        paths.setdefault(object_identifier, set()).add(_decode(raw_path))
+
+
+def _historical_blob_paths(
+    root: Path,
+    blob_identifiers: set[str],
+    objects: dict[str, str],
+) -> tuple[dict[str, set[str]], dict[str, set[str]]]:
+    paths: dict[str, set[str]] = {}
+    direct_tag_contexts: dict[str, set[str]] = {}
+    for object_identifier, object_type in sorted(objects.items()):
+        if object_type != "commit":
+            continue
+        _add_tree_blob_paths(root, object_identifier, blob_identifiers, paths)
+
+    walked_trees: set[str] = set()
+    for tag_identifier, target, target_type in _peeled_tag_targets(root, objects):
+        if target_type == "tree" and target not in walked_trees:
+            _add_tree_blob_paths(root, target, blob_identifiers, paths)
+            walked_trees.add(target)
+        elif target_type == "blob" and target in blob_identifiers:
+            label = f"<annotated-tag-target:{tag_identifier}>"
+            paths.setdefault(target, set()).add(label)
+            direct_tag_contexts.setdefault(target, set()).add(label)
+    return paths, direct_tag_contexts
+
+
+def _is_zip_archive(data: bytes) -> bool:
+    try:
+        return zipfile.is_zipfile(io.BytesIO(data))
+    except Exception as exc:
+        raise AuditError("tagged blob archive type could not be inspected") from exc
 
 
 def _reachable_blob_sources(
@@ -280,13 +359,19 @@ def _reachable_blob_sources(
         for object_identifier, object_type in reachable.items()
         if object_type == "blob"
     }
-    paths = _historical_blob_paths(root, blob_identifiers)
+    paths, direct_tag_contexts = _historical_blob_paths(
+        root, blob_identifiers, reachable
+    )
     for object_identifier in sorted(blob_identifiers):
         data = _git(root, "cat-file", "blob", object_identifier)
         labels = paths.get(object_identifier) or {"<unknown>"}
+        direct_labels = direct_tag_contexts.get(object_identifier, set())
+        tagged_archive = bool(direct_labels) and _is_zip_archive(data)
         for path in sorted(labels):
             yield path, data, object_identifier
-            if path.casefold().endswith(".skill"):
+            if path.casefold().endswith(".skill") or (
+                path in direct_labels and tagged_archive
+            ):
                 yield from _archive_sources(path, data, object_identifier)
 
 
