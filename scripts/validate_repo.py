@@ -2,6 +2,7 @@
 """Validate the Miodkuj repository, runtime, and release bundle contract."""
 
 import ast
+import json
 import re
 import subprocess
 import sys
@@ -12,10 +13,12 @@ from pathlib import Path
 RUNTIME = Path("skills/miodkuj")
 REFERENCES = RUNTIME / "references"
 BUNDLE = Path("dist/miodkuj.skill")
-RELEASE_VERSION = "2.0.0"
-OBSOLETE_MANIFESTS = (
+RELEASE_VERSION = "2.1.0"
+INSTALLATION_MANIFESTS = (
     Path(".claude-plugin/plugin.json"),
     Path(".claude-plugin/marketplace.json"),
+    Path(".codex-plugin/plugin.json"),
+    Path(".agents/plugins/marketplace.json"),
 )
 LEGACY_SLUG = "-".join(("stop", "slop", "PL"))
 LEGACY_DISPLAY = " ".join(("Stop", "Slop", "PL"))
@@ -137,9 +140,47 @@ def validate_layout(root: Path, errors: list[str]) -> None:
         if copy.exists():
             errors.append(f"platform-specific runtime copy: skills/{platform}")
 
-    for manifest in OBSOLETE_MANIFESTS:
-        if (root / manifest).exists():
-            errors.append(f"obsolete plugin manifest: {manifest}")
+
+
+def read_json_object(path: Path, errors: list[str]) -> dict | None:
+    """Read an installation manifest and require a JSON object."""
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+        errors.append(f"invalid installation manifest: {path}: {exc}")
+        return None
+    if not isinstance(value, dict):
+        errors.append(f"installation manifest must be an object: {path}")
+        return None
+    return value
+
+
+def validate_installation_manifests(root: Path, errors: list[str]) -> None:
+    """Require the Claude and Codex marketplace manifests at one release version."""
+    parsed: dict[Path, dict] = {}
+    for relative in INSTALLATION_MANIFESTS:
+        path = root / relative
+        if not path.is_file():
+            errors.append(f"missing installation manifest: {relative}")
+            continue
+        value = read_json_object(path, errors)
+        if value is not None:
+            parsed[relative] = value
+
+    for relative in (
+        Path(".claude-plugin/plugin.json"),
+        Path(".claude-plugin/marketplace.json"),
+        Path(".codex-plugin/plugin.json"),
+    ):
+        value = parsed.get(relative)
+        if value is None:
+            continue
+        metadata = value.get("metadata")
+        version = value.get("version")
+        if version is None and isinstance(metadata, dict):
+            version = metadata.get("version")
+        if version != RELEASE_VERSION:
+            errors.append(f"installation manifest version drift: {relative}")
 
 
 def validate_references(root: Path, errors: list[str]) -> None:
@@ -277,15 +318,27 @@ def validate_bundle(root: Path, errors: list[str]) -> None:
         errors.append(f"built skill artifact differs from {RUNTIME}")
 
 
+def validate_distribution_directory(root: Path, errors: list[str]) -> None:
+    """Reject retired skill bundles alongside the canonical distribution artifact."""
+    dist = root / "dist"
+    if not dist.is_dir():
+        return
+    for path in sorted(dist.glob("*.skill")):
+        if path.name != "miodkuj.skill":
+            errors.append(f"unexpected distribution artifact: dist/{path.name}")
+
+
 def validate_repo(root: Path) -> list[str]:
     """Return repository contract violations; an empty list means success."""
     errors: list[str] = []
     validate_identity(root, errors)
     validate_layout(root, errors)
+    validate_installation_manifests(root, errors)
     validate_references(root, errors)
     validate_metadata(root, errors)
     validate_changelog(root, errors)
     validate_bundle(root, errors)
+    validate_distribution_directory(root, errors)
     return errors
 
 

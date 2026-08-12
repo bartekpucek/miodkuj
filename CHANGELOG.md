@@ -4,6 +4,13 @@ All notable changes to this project are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [2.1.0] - 2026-08-12
+
+### Added
+
+- Claude Code and Codex marketplace contracts that install the one canonical `skills/miodkuj/` runtime.
+- Repository validation for marketplace manifest presence, release-version alignment, and distribution-artifact integrity.
+
 ## [2.0.0] - 2026-08-11
 
 ### Changed
@@ -58,6 +65,7 @@ Initial public release.
   (`README.md`, `docs/research-summary.md`, `docs/test-scenarios.md`).
 - CI workflow that validates the pre-2.0 targets and guards against reference drift.
 
+[2.1.0]: https://github.com/bartekpucek/miodkuj/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/bartekpucek/miodkuj/compare/v1.1.0...v2.0.0
 [1.1.0]: https://github.com/bartekpucek/miodkuj/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/bartekpucek/miodkuj/releases/tag/v1.0.0

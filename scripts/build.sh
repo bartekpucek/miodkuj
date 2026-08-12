@@ -28,6 +28,7 @@ sync_refs "$ROOT/skills/miodkuj/references"
 # folder). Uses Python's zipfile so no external `zip` binary is required.
 DIST="$ROOT/dist"
 mkdir -p "$DIST"
+find "$DIST" -maxdepth 1 -type f -name '*.skill' -delete
 python3 - "$ROOT/skills" "$DIST/miodkuj.skill" <<'PY'
 import sys, zipfile, pathlib
 base = pathlib.Path(sys.argv[1])

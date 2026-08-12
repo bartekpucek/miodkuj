@@ -1,4 +1,5 @@
 import importlib.util
+import json
 import shutil
 import subprocess
 import tempfile
@@ -48,16 +49,59 @@ class ValidateRepoTests(unittest.TestCase):
 
             self.assertIn(f"missing runtime file: {SKILL / 'SKILL.md'}", errors)
 
-    def test_obsolete_plugin_manifest_is_reported(self):
+    def test_missing_claude_marketplace_is_reported(self):
         with tempfile.TemporaryDirectory() as tmp:
             copy = self.copy_repository(Path(tmp))
-            manifest = copy / ".claude-plugin" / "plugin.json"
-            manifest.parent.mkdir(parents=True, exist_ok=True)
-            manifest.write_text("{}", encoding="utf-8")
+            (copy / ".claude-plugin" / "marketplace.json").unlink()
 
             errors = MODULE.validate_repo(copy)
 
-            self.assertIn("obsolete plugin manifest: .claude-plugin/plugin.json", errors)
+            self.assertIn(
+                "missing installation manifest: .claude-plugin/marketplace.json",
+                errors,
+            )
+
+    def test_manifest_version_drift_is_reported(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            copy = self.copy_repository(Path(tmp))
+            path = copy / ".codex-plugin" / "plugin.json"
+            manifest = json.loads(path.read_text(encoding="utf-8"))
+            manifest["version"] = "9.9.9"
+            path.write_text(json.dumps(manifest), encoding="utf-8")
+
+            errors = MODULE.validate_repo(copy)
+
+            self.assertIn(
+                "installation manifest version drift: .codex-plugin/plugin.json",
+                errors,
+            )
+
+    def test_invalid_installation_manifest_is_reported(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            copy = self.copy_repository(Path(tmp))
+            path = copy / ".codex-plugin" / "plugin.json"
+            path.write_text("not JSON", encoding="utf-8")
+
+            errors = MODULE.validate_repo(copy)
+
+            self.assertTrue(
+                any(
+                    error.startswith("invalid installation manifest: ")
+                    and ".codex-plugin/plugin.json:" in error
+                    for error in errors
+                ),
+                errors,
+            )
+
+    def test_unexpected_skill_bundle_is_reported(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            copy = self.copy_repository(Path(tmp))
+            extra = copy / "dist" / "retired.skill"
+            extra.write_bytes(b"obsolete")
+
+            errors = MODULE.validate_repo(copy)
+
+            self.assertIn("unexpected distribution artifact: dist/retired.skill", errors)
 
     def test_platform_specific_runtime_copy_is_reported(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -156,7 +200,7 @@ class ValidateRepoTests(unittest.TestCase):
 
             errors = MODULE.validate_repo(copy)
 
-            self.assertIn("changelog missing version 2.0.0", errors)
+            self.assertIn("changelog missing version 2.1.0", errors)
 
     def test_invalid_codex_metadata_is_reported(self):
         with tempfile.TemporaryDirectory() as tmp:
