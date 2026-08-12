@@ -10,5 +10,5 @@
   "repository": "https://github.com/bartekpucek/miodkuj",
   "license": "MIT",
   "keywords": ["polish", "writing", "editing", "anti-slop", "plain-language"],
-  "skills": ["./skills/miodkuj"]
+  "skills": ["./plugins/miodkuj/skills/miodkuj"]
 }

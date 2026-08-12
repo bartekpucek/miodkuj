@@ -8,7 +8,7 @@
       "name": "miodkuj",
       "source": {
         "source": "local",
-        "path": "./"
+        "path": "./plugins/miodkuj"
       },
       "policy": {
         "installation": "AVAILABLE",

@@ -64,11 +64,11 @@ Jeśli wolisz krótkie `/miodkuj`, wybierz instalację ręczną. Potrzebujesz pr
 miodkuj_tmp="$(mktemp -d)"
 git clone --depth 1 https://github.com/bartekpucek/miodkuj.git "$miodkuj_tmp"
 mkdir -p ~/.claude/skills
-cp -R "$miodkuj_tmp/skills/miodkuj" ~/.claude/skills/miodkuj
+cp -R "$miodkuj_tmp/plugins/miodkuj/skills/miodkuj" ~/.claude/skills/miodkuj
 rm -rf "$miodkuj_tmp"
 ```
 
-Pierwsza linia tworzy osobny katalog tymczasowy i zapisuje jego dokładną ścieżkę. Następne linie pobierają repozytorium i kopiują z niego tylko folder `skills/miodkuj`. Ostatnia linia usuwa ten sam katalog tymczasowy. Po instalacji użyj `/miodkuj`. Zobacz też [dokumentację poleceń slash w Claude Code](https://code.claude.com/docs/en/slash-commands).
+Pierwsza linia tworzy osobny katalog tymczasowy i zapisuje jego dokładną ścieżkę. Następne linie pobierają repozytorium i kopiują z niego tylko folder `plugins/miodkuj/skills/miodkuj`. Ostatnia linia usuwa ten sam katalog tymczasowy. Po instalacji użyj `/miodkuj`. Zobacz też [dokumentację poleceń slash w Claude Code](https://code.claude.com/docs/en/slash-commands).
 
 ## Codex
 
@@ -106,8 +106,9 @@ Miodkuj najpierw zwraca tekst po minimalnej redakcji. Uwagi dodaje tylko na pro�
 
 ```text
 shared/references/      # główny zestaw polskich reguł
-skills/
-  miodkuj/              # skill używany na wszystkich platformach
+plugins/
+  miodkuj/
+    skills/miodkuj/     # jeden skill używany na wszystkich platformach
 scripts/                # budowanie, synchronizacja i sprawdzanie
 tests/                  # testy repozytorium i paczki
 docs/                   # źródła, opis badań i scenariusze zachowania
@@ -115,7 +116,7 @@ docs/                   # źródła, opis badań i scenariusze zachowania
 
 ## Rozwój
 
-Reguły znajdziesz w `shared/references/`. Po zmianie uruchom dwa polecenia:
+Reguły źródłowe znajdziesz w `shared/references/`, a gotowy skill w `plugins/miodkuj/skills/miodkuj/`. Po zmianie uruchom dwa polecenia:
 
 ```bash
 ./scripts/build.sh      # synchronizuje reguły i buduje dist/miodkuj.skill

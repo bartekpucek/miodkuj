@@ -56,9 +56,9 @@ class ValidateSkillTests(unittest.TestCase):
             self.assertFalse(self.validate_silently(skill))
 
     def test_current_description_keeps_every_discovery_trigger(self):
-        skill_md = (ROOT / "skills" / "miodkuj" / "SKILL.md").read_text(
-            encoding="utf-8"
-        )
+        skill_md = (
+            ROOT / "plugins" / "miodkuj" / "skills" / "miodkuj" / "SKILL.md"
+        ).read_text(encoding="utf-8")
         description = next(
             line.removeprefix("description: ")
             for line in skill_md.splitlines()

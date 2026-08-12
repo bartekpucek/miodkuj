@@ -113,12 +113,16 @@ class ReadmeInstallationTests(unittest.TestCase):
                 "git clone --depth 1 https://github.com/bartekpucek/miodkuj.git "
                 '"$miodkuj_tmp"',
                 "mkdir -p ~/.claude/skills",
-                'cp -R "$miodkuj_tmp/skills/miodkuj" ~/.claude/skills/miodkuj',
+                'cp -R "$miodkuj_tmp/plugins/miodkuj/skills/miodkuj" '
+                "~/.claude/skills/miodkuj",
                 'rm -rf "$miodkuj_tmp"',
             ),
         )
         self.assertEqual(commands[-1], 'rm -rf "$miodkuj_tmp"')
-        self.assertIn("kopiują z niego tylko folder `skills/miodkuj`", CLAUDE_MANUAL)
+        self.assertIn(
+            "kopiują z niego tylko folder `plugins/miodkuj/skills/miodkuj`",
+            CLAUDE_MANUAL,
+        )
         self.assertIn("Po instalacji użyj `/miodkuj`", CLAUDE_MANUAL)
         self.assertIn("https://code.claude.com/docs/en/slash-commands", CLAUDE_MANUAL)
 

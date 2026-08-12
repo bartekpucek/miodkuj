@@ -10,14 +10,15 @@ import zipfile
 from pathlib import Path
 
 
-RUNTIME = Path("skills/miodkuj")
+RUNTIME = Path("plugins/miodkuj/skills/miodkuj")
 REFERENCES = RUNTIME / "references"
 BUNDLE = Path("dist/miodkuj.skill")
 RELEASE_VERSION = "2.1.0"
+CODEX_PLUGIN_MANIFEST = Path("plugins/miodkuj/.codex-plugin/plugin.json")
 INSTALLATION_MANIFESTS = (
     Path(".claude-plugin/plugin.json"),
     Path(".claude-plugin/marketplace.json"),
-    Path(".codex-plugin/plugin.json"),
+    CODEX_PLUGIN_MANIFEST,
     Path(".agents/plugins/marketplace.json"),
 )
 INSTALLATION_MANIFEST_CONTRACTS = {
@@ -25,7 +26,7 @@ INSTALLATION_MANIFEST_CONTRACTS = {
         ("name", ("name",), "miodkuj"),
         ("version", ("version",), RELEASE_VERSION),
         ("repository", ("repository",), "https://github.com/bartekpucek/miodkuj"),
-        ("skills", ("skills",), ["./skills/miodkuj"]),
+        ("skills", ("skills",), ["./plugins/miodkuj/skills/miodkuj"]),
     ),
     Path(".claude-plugin/marketplace.json"): (
         ("name", ("name",), "miodkuj"),
@@ -33,7 +34,7 @@ INSTALLATION_MANIFEST_CONTRACTS = {
         ("plugins[0].source", ("plugins", 0, "source"), "./"),
         ("plugins[0].version", ("plugins", 0, "version"), RELEASE_VERSION),
     ),
-    Path(".codex-plugin/plugin.json"): (
+    CODEX_PLUGIN_MANIFEST: (
         ("name", ("name",), "miodkuj"),
         ("version", ("version",), RELEASE_VERSION),
         ("repository", ("repository",), "https://github.com/bartekpucek/miodkuj"),
@@ -47,7 +48,7 @@ INSTALLATION_MANIFEST_CONTRACTS = {
         (
             "plugins[0].source",
             ("plugins", 0, "source"),
-            {"source": "local", "path": "./"},
+            {"source": "local", "path": "./plugins/miodkuj"},
         ),
         (
             "plugins[0].policy",
@@ -167,20 +168,20 @@ def validate_layout(root: Path, errors: list[str]) -> None:
         if not predicate(target):
             errors.append(f"missing runtime file: {RUNTIME / required}")
 
-    skills_root = root / "skills"
-    skill_files = sorted(skills_root.rglob("SKILL.md")) if skills_root.is_dir() else []
+    skill_files = sorted(
+        path
+        for path in root.rglob("SKILL.md")
+        if not any(
+            part in SKIPPED_FALLBACK_DIRECTORIES
+            for part in path.relative_to(root).parts
+        )
+    )
     runtimes = {path.parent.relative_to(root) for path in skill_files}
     if runtimes != {RUNTIME}:
         for runtime in sorted(runtimes - {RUNTIME}):
             errors.append(f"unexpected runtime folder: {runtime}")
         if RUNTIME not in runtimes:
             errors.append(f"missing runtime folder: {RUNTIME}")
-
-    for platform in ("claude", "codex"):
-        copy = skills_root / platform
-        if copy.exists():
-            errors.append(f"platform-specific runtime copy: skills/{platform}")
-
 
 
 def read_json_object(path: Path, errors: list[str]) -> dict | None:
@@ -249,7 +250,7 @@ def validate_installation_manifests(root: Path, errors: list[str]) -> None:
     for relative in (
         Path(".claude-plugin/plugin.json"),
         Path(".claude-plugin/marketplace.json"),
-        Path(".codex-plugin/plugin.json"),
+        CODEX_PLUGIN_MANIFEST,
     ):
         value = parsed.get(relative)
         if value is None:

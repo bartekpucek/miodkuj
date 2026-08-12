@@ -22,14 +22,14 @@ sync_refs() {
 }
 
 echo "Syncing references from shared/references ..."
-sync_refs "$ROOT/skills/miodkuj/references"
+sync_refs "$ROOT/plugins/miodkuj/skills/miodkuj/references"
 
 # Package the portable skill as a .skill bundle (a zip whose root is the skill
 # folder). Uses Python's zipfile so no external `zip` binary is required.
 DIST="$ROOT/dist"
 mkdir -p "$DIST"
 find "$DIST" -maxdepth 1 -type f -name '*.skill' -delete
-python3 - "$ROOT/skills" "$DIST/miodkuj.skill" <<'PY'
+python3 - "$ROOT/plugins/miodkuj/skills" "$DIST/miodkuj.skill" <<'PY'
 import sys, zipfile, pathlib
 base = pathlib.Path(sys.argv[1])
 out = sys.argv[2]

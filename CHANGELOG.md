@@ -8,7 +8,7 @@ All notable changes to this project are documented here. The format is based on
 
 ### Added
 
-- Claude Code and Codex marketplace contracts that install the one canonical `skills/miodkuj/` runtime.
+- Claude Code and Codex marketplace contracts that install the one canonical `plugins/miodkuj/skills/miodkuj/` runtime.
 - Repository validation for marketplace manifest presence, release-version alignment, and distribution-artifact integrity.
 
 ## [2.0.0] - 2026-08-11

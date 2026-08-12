@@ -9,7 +9,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL = Path("skills/miodkuj")
+SKILL = Path("plugins/miodkuj/skills/miodkuj")
+CODEX_PLUGIN = Path("plugins/miodkuj/.codex-plugin/plugin.json")
 BUNDLE = Path("dist/miodkuj.skill")
 LEGACY_SLUG = "-".join(("stop", "slop", "PL"))
 LEGACY_DISPLAY = " ".join(("Stop", "Slop", "PL"))
@@ -64,7 +65,7 @@ class ValidateRepoTests(unittest.TestCase):
     def test_manifest_version_drift_is_reported(self):
         with tempfile.TemporaryDirectory() as tmp:
             copy = self.copy_repository(Path(tmp))
-            path = copy / ".codex-plugin" / "plugin.json"
+            path = copy / CODEX_PLUGIN
             manifest = json.loads(path.read_text(encoding="utf-8"))
             manifest["version"] = "9.9.9"
             path.write_text(json.dumps(manifest), encoding="utf-8")
@@ -72,7 +73,7 @@ class ValidateRepoTests(unittest.TestCase):
             errors = MODULE.validate_repo(copy)
 
             self.assertIn(
-                "installation manifest version drift: .codex-plugin/plugin.json",
+                f"installation manifest version drift: {CODEX_PLUGIN}",
                 errors,
             )
 
@@ -110,7 +111,7 @@ class ValidateRepoTests(unittest.TestCase):
     def test_codex_plugin_skill_path_drift_is_reported(self):
         with tempfile.TemporaryDirectory() as tmp:
             copy = self.copy_repository(Path(tmp))
-            path = copy / ".codex-plugin" / "plugin.json"
+            path = copy / CODEX_PLUGIN
             manifest = json.loads(path.read_text(encoding="utf-8"))
             manifest["skills"] = "./retired/"
             path.write_text(json.dumps(manifest), encoding="utf-8")
@@ -118,7 +119,7 @@ class ValidateRepoTests(unittest.TestCase):
             errors = MODULE.validate_repo(copy)
 
             self.assertIn(
-                "installation manifest contract drift: .codex-plugin/plugin.json: skills",
+                f"installation manifest contract drift: {CODEX_PLUGIN}: skills",
                 errors,
             )
 
@@ -157,7 +158,7 @@ class ValidateRepoTests(unittest.TestCase):
     def test_invalid_installation_manifest_is_reported(self):
         with tempfile.TemporaryDirectory() as tmp:
             copy = self.copy_repository(Path(tmp))
-            path = copy / ".codex-plugin" / "plugin.json"
+            path = copy / CODEX_PLUGIN
             path.write_text("not JSON", encoding="utf-8")
 
             errors = MODULE.validate_repo(copy)
@@ -165,7 +166,7 @@ class ValidateRepoTests(unittest.TestCase):
             self.assertTrue(
                 any(
                     error.startswith("invalid installation manifest: ")
-                    and ".codex-plugin/plugin.json:" in error
+                    and f"{CODEX_PLUGIN}:" in error
                     for error in errors
                 ),
                 errors,
@@ -184,13 +185,13 @@ class ValidateRepoTests(unittest.TestCase):
     def test_platform_specific_runtime_copy_is_reported(self):
         with tempfile.TemporaryDirectory() as tmp:
             copy = self.copy_repository(Path(tmp))
-            duplicate = copy / "skills" / "claude" / "miodkuj" / "SKILL.md"
+            duplicate = copy / "skills" / "miodkuj" / "SKILL.md"
             duplicate.parent.mkdir(parents=True, exist_ok=True)
             duplicate.write_text("# Miodkuj\n", encoding="utf-8")
 
             errors = MODULE.validate_repo(copy)
 
-            self.assertIn("platform-specific runtime copy: skills/claude", errors)
+            self.assertIn("unexpected runtime folder: skills/miodkuj", errors)
 
     def test_legacy_identifier_in_path_is_reported(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -432,7 +433,7 @@ class ValidateRepoTests(unittest.TestCase):
 
             errors = MODULE.validate_repo(copy)
 
-            self.assertIn("built skill artifact differs from skills/miodkuj", errors)
+            self.assertIn(f"built skill artifact differs from {SKILL}", errors)
 
     def test_bundle_with_drifted_content_is_reported(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -444,7 +445,7 @@ class ValidateRepoTests(unittest.TestCase):
 
             errors = MODULE.validate_repo(copy)
 
-            self.assertIn("built skill artifact differs from skills/miodkuj", errors)
+            self.assertIn(f"built skill artifact differs from {SKILL}", errors)
 
 
 if __name__ == "__main__":
