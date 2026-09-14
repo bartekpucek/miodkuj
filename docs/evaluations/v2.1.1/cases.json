@@ -1,0 +1,54 @@
+[
+  {
+    "id": "travel_polish",
+    "prompt": "Popraw fragment praktycznego planu podróży:\nŚrodek ciężkości to Edynburg. Poza miastem plan obejmuje tylko miejsca dostępne bez auta."
+  },
+  {
+    "id": "travel_bilingual",
+    "prompt": "Popraw polską wersję praktycznego planu podróży. Angielski oryginał jest źródłem znaczenia i ograniczeń; nie redaguj go.\n\nOryginał:\nThe centre of the trip is Edinburgh; rural day trips are limited to places that are genuinely manageable without driving.\n\nPolska wersja:\nŚrodek ciężkości to Edynburg; wyjazdy poza miasto ograniczone do miejsc, do których naprawdę da się dojechać bez samochodu."
+  },
+  {
+    "id": "preserve_physics",
+    "prompt": "Popraw tylko rzeczywisty problem w opisie technicznym:\nObniżenie środka ciężkości poprawia stabilność pojazdu."
+  },
+  {
+    "id": "preserve_figurative",
+    "prompt": "Popraw tylko rzeczywisty problem w omówieniu artykułu naukowego:\nW drugiej części artykułu środek ciężkości analizy przesuwa się z kosztów na jakość usług."
+  },
+  {
+    "id": "audit_context",
+    "prompt": "Tylko audyt, bez przepisywania. Oceń dwa niezależne fragmenty w ich kontekście.\n\nPraktyczny plan podróży:\nŚrodek ciężkości to Edynburg.\n\nOmówienie artykułu naukowego:\nW drugiej części artykułu środek ciężkości analizy przesuwa się z kosztów na jakość usług."
+  },
+  {
+    "id": "temporary_stay",
+    "prompt": "Popraw polską poradę dotyczącą noclegu podczas weekendowej wycieczki. Angielski oryginał jest źródłem znaczenia.\n\nOryginał:\nStay near the station for the weekend.\n\nPolska wersja:\nZamieszkaj blisko dworca na weekend."
+  },
+  {
+    "id": "preserve_residence",
+    "prompt": "Popraw tylko rzeczywisty problem w poradzie dotyczącej przeprowadzki na stałe:\nZamieszkaj blisko pracy, jeśli chcesz skrócić codzienne dojazdy."
+  },
+  {
+    "id": "stay_remaining",
+    "prompt": "Popraw polską wersję instrukcji. Angielski oryginał jest źródłem znaczenia.\n\nOryginał:\nStay at the station until Anna arrives.\n\nPolska wersja:\nZatrzymaj się na dworcu do przyjazdu Anny."
+  },
+  {
+    "id": "generic_fidelity",
+    "prompt": "Usuń slop bez dopisywania faktów:\nW dzisiejszym dynamicznie zmieniającym się świecie sztuczna inteligencja odgrywa coraz ważniejszą rolę w wielu obszarach życia."
+  },
+  {
+    "id": "analysis_fidelity",
+    "prompt": "Popraw styl bez zmiany znaczenia:\nPrzeprowadzenie analizy danych umożliwiło identyfikację kluczowych obszarów wymagających optymalizacji."
+  },
+  {
+    "id": "unsupported_synthesis",
+    "prompt": "Usuń slop bez dodawania ustaleń badania:\nWyniki badania pokazują, jak ważne jest holistyczne podejście do transformacji cyfrowej."
+  },
+  {
+    "id": "preserve_opinions",
+    "prompt": "Popraw tylko styl bez dopisywania sposobu zebrania opinii:\nDecyzja została podjęta po uwzględnieniu opinii użytkowników."
+  },
+  {
+    "id": "voice_implementation",
+    "prompt": "Dopasuj głos do próbki.\n\nPróbka:\nPiszę krótko. Bez ozdobników. Jeśli coś działa, mówię dlaczego. Jeśli nie działa, też mówię.\n\nTekst:\nWarto zauważyć, że wdrożenie narzędzia może stanowić istotny krok w kierunku zwiększenia efektywności procesów biznesowych."
+  }
+]

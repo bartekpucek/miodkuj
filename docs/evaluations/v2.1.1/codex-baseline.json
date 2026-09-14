@@ -1,0 +1,66 @@
+{
+  "skill_version": "2.1.0",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "high",
+  "execution": "fresh Codex subagent; one 12-case batch",
+  "runtime_sha256": {
+    "SKILL.md": "343dab32bc6c635ff77a793252cc6b0ded1904faa89aeab2c31c0ece7200190c",
+    "agents/openai.yaml": "651fdab36de0bcbdc00e202f1160f3f7e1bab8021efdf2a1a0862acbf984899a",
+    "references/eval.md": "11bfd23b60317844746fd0db318e98ce6fcc27b90a122c6c30d06f5419f95e31",
+    "references/examples.md": "9b3116b5396ae702b803e3338cbf9844d6d01424d2c1938d559370da114cf358",
+    "references/plain-polish.md": "08bd5ea6d4348fbc951f7777199c6e9430e6bc41ee69312bff6c28316e5e66e8",
+    "references/polish-patterns.md": "b11cf461462f80d7809b4ae3c9e713c7ca310ed61e659f07cd2f24bc383752eb",
+    "references/registers.md": "5f1279f7127149edcd1cce47d9d9e4a2912278e13da8b14028118a08553ee1e6",
+    "references/voice-calibration.md": "9d65ec7024226867d4a98fe1953fc72e6bfb8b9b155a73880d223ea138592581"
+  },
+  "responses": [
+    {
+      "id": "travel_polish",
+      "response": "Bazą wypadu jest Edynburg. Poza miastem plan obejmuje tylko miejsca dostępne bez auta."
+    },
+    {
+      "id": "travel_bilingual",
+      "response": "Bazą wypadu jest Edynburg; wyjazdy poza miasto ograniczają się do miejsc, do których naprawdę da się dotrzeć bez samochodu."
+    },
+    {
+      "id": "preserve_physics",
+      "response": "Obniżenie środka ciężkości poprawia stabilność pojazdu."
+    },
+    {
+      "id": "preserve_figurative",
+      "response": "W drugiej części artykułu środek ciężkości analizy przesuwa się z kosztów na jakość usług."
+    },
+    {
+      "id": "audit_context",
+      "response": "Praktyczny plan podróży — żółty. „Środek ciężkości to Edynburg” brzmi w tym kontekście jak kalka i nie mówi naturalnie, że Edynburg jest głównym punktem wyjazdu. Kierunek poprawy: nazwać Edynburg bazą wypadu lub głównym miejscem pobytu.\n\nOmówienie artykułu naukowego — zielony. „Środek ciężkości analizy przesuwa się z kosztów na jakość usług” to uzasadniona i czytelna metafora zmiany głównego tematu analizy. Kierunek: zachować bez zmian."
+    },
+    {
+      "id": "temporary_stay",
+      "response": "Na weekend zatrzymaj się blisko dworca."
+    },
+    {
+      "id": "preserve_residence",
+      "response": "Zamieszkaj blisko pracy, jeśli chcesz skrócić codzienne dojazdy."
+    },
+    {
+      "id": "stay_remaining",
+      "response": "Zostań na dworcu do przyjazdu Anny."
+    },
+    {
+      "id": "generic_fidelity",
+      "response": "Sztuczna inteligencja odgrywa coraz większą rolę w wielu obszarach życia."
+    },
+    {
+      "id": "analysis_fidelity",
+      "response": "Analiza danych pozwoliła wskazać kluczowe obszary wymagające optymalizacji."
+    },
+    {
+      "id": "unsupported_synthesis",
+      "response": "Wyniki badania wskazują na znaczenie całościowego podejścia do transformacji cyfrowej."
+    },
+    {
+      "id": "preserve_opinions",
+      "response": "Decyzję podjęto po uwzględnieniu opinii użytkowników."
+    }
+  ]
+}

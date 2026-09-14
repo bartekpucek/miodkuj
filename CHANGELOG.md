@@ -4,6 +4,19 @@ All notable changes to this project are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [2.1.1] - 2026-09-14
+
+### Added
+
+- Contextual guidance for translated word choices, with Edinburgh and accommodation examples and preservation of appropriate technical, figurative, and residence uses ([#2](https://github.com/bartekpucek/miodkuj/issues/2), [#3](https://github.com/bartekpucek/miodkuj/issues/3)).
+- Seven manual behavioral scenarios covering Polish-only editing, comparison with an English original, appropriate uses, audit mode, temporary accommodation, residence, and remaining in place.
+
+### Fixed
+
+- Older before/after examples that added unsupported actors, findings, product features, performance claims, or conditions.
+- Translation guidance now distinguishes a trip's main focus from an accommodation base, preserves day-trip constraints, and does not equate travelling without driving with excluding car passengers.
+- Edit mode returns already-clear text without an unsolicited confirmation note.
+
 ## [2.1.0] - 2026-08-12
 
 ### Added
@@ -71,6 +84,7 @@ Initial public release.
   (`README.md`, `docs/research-summary.md`, `docs/test-scenarios.md`).
 - CI workflow that validates the pre-2.0 targets and guards against reference drift.
 
+[2.1.1]: https://github.com/bartekpucek/miodkuj/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/bartekpucek/miodkuj/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/bartekpucek/miodkuj/compare/v1.1.0...v2.0.0
 [1.1.0]: https://github.com/bartekpucek/miodkuj/compare/v1.0.0...v1.1.0

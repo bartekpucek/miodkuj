@@ -5,6 +5,7 @@
 - Officialese, generic introductions, nominalizations, and passive forms
 - Fake synthesis and unsupported marketing claims
 - Voice matching and protected spans
+- A bookish metaphor in a travel itinerary and contextual senses of `stay`
 - Portability, synonym cycling, fake-profound endings, and second-hand phrases
 
 ## Officialese
@@ -25,7 +26,9 @@ Before:
 
 After:
 
-> Coraz więcej firm używa AI do obsługi klientów, analizy dokumentów i pisania kodu.
+> Sztuczna inteligencja odgrywa coraz ważniejszą rolę w wielu obszarach życia.
+
+The claim remains general because the source is general. Do not add companies, applications, or evidence that the source does not identify.
 
 ## Nominalization
 
@@ -35,11 +38,9 @@ Before:
 
 After:
 
-> Po analizie danych znaleźliśmy trzy miejsca, w których system traci najwięcej czasu.
+> Analiza danych pozwoliła wskazać kluczowe obszary wymagające optymalizacji.
 
-Only use a specific result if the source text gives it. If facts are missing:
-
-> Analiza danych pokazała, gdzie system działa najwolniej.
+The source gives no number of areas, actor, system, or performance measure. Simplifying the nouns does not supply those facts.
 
 ## Passive
 
@@ -47,13 +48,11 @@ Before:
 
 > Decyzja została podjęta po uwzględnieniu opinii użytkowników.
 
-After, actor known:
+After:
 
-> Zespół zdecydował po rozmowach z użytkownikami.
+> Decyzję podjęto po uwzględnieniu opinii użytkowników.
 
-After, actor unknown or irrelevant:
-
-> Decyzję podjęto po konsultacjach z użytkownikami.
+Opinions need not come from conversations or consultations. Preserve the stated input to the decision without inventing how it was collected or who decided.
 
 ## Fake Synthesis
 
@@ -61,13 +60,11 @@ Before:
 
 > Wyniki badania pokazują, jak ważne jest holistyczne podejście do transformacji cyfrowej.
 
-After, fact known:
+After:
 
-> Firmy, które najpierw uporządkowały dane, wdrażały nowe narzędzia średnio dwa miesiące szybciej.
+> Wyniki badania wskazują, że w transformacji cyfrowej ważne jest całościowe podejście.
 
-After, fact not known:
-
-> Badanie nie wskazuje jednego narzędzia. Pokazuje raczej, że firmy najpierw muszą uporządkować dane.
+This is still a general attributed claim. If a concrete conclusion is needed, ask what the study found; do not invent findings about data, tools, implementation time, or companies.
 
 ## Marketing Claim Without Proof
 
@@ -77,11 +74,9 @@ Before:
 
 After:
 
-> Nasze narzędzie porządkuje dane, automatyzuje raporty i pokazuje zespołowi, gdzie projekt traci czas.
+> Nasze rozwiązanie wspiera transformację cyfrową.
 
-If those functions are not stated in the source, do not invent them:
-
-> Nasze narzędzie ma wspierać transformację cyfrową. Tekst potrzebuje konkretu: co dokładnie robi i dla kogo?
+The source does not describe what the solution does. If the missing detail prevents useful copy, add a short note asking for its function and audience; do not supply features yourself.
 
 ## Voice Match
 
@@ -95,7 +90,9 @@ Before:
 
 After:
 
-> To narzędzie może przyspieszyć pracę. Ale tylko jeśli wiemy, który proces ma naprawić.
+> Wdrożenie tego narzędzia może pomóc usprawnić procesy biznesowe.
+
+Keep the possibility, not a promise. Do not turn unspecified efficiency into a speed claim or add a condition the source does not state.
 
 ## Protected Spans
 
@@ -105,7 +102,53 @@ Before:
 
 After:
 
-> Endpoint `POST /v1/search` obsługuje ten proces. Dokumentacja: https://example.com/docs. Cytat: "Model zwrócił 42 wyniki".
+> Endpoint `POST /v1/search` jest częścią procesu. Dokumentacja: https://example.com/docs. Cytat: "Model zwrócił 42 wyniki".
+
+## A Bookish Metaphor In A Travel Itinerary
+
+Context: A plain-language travel itinerary.
+
+Before:
+
+> Środek ciężkości to Edynburg.
+
+After:
+
+> Głównym punktem wycieczki jest Edynburg.
+
+The edit names the relationship directly. `Środek ciężkości` is an established Polish expression, but its bookish tone is unnecessary here. A main focus does not establish a base, accommodation, or time allocation. Choose wording that fits the supplied context; this is not a fixed translation rule for `centre`.
+
+Leave appropriate uses unchanged:
+
+> Nisko położony środek ciężkości zwiększa stabilność pojazdu.
+
+> W drugiej części artykułu środek ciężkości analizy przesuwa się z kosztów na jakość usług.
+
+When the English original is also supplied, retain any limits on day trips and practical travel without driving. When only the Polish draft is supplied, do not add a same-day return, accommodation, transport mode, or travel time that it does not state.
+
+## Contextual Senses Of Stay
+
+Context: Accommodation advice for a weekend visit. The supplied original says `Stay near the station for the weekend.`
+
+Before:
+
+> Zamieszkaj blisko dworca na weekend.
+
+After:
+
+> Zatrzymaj się blisko dworca na weekend.
+
+The temporary-accommodation sense guides this choice. Preserve the weekend and proximity; add no hotel, station name, reservation, or transport mode. `Zamieszkać` can also refer to temporary accommodation, so the edit improves fit without declaring the word incorrect.
+
+For a residence context, leave this clear advice unchanged:
+
+> Zamieszkaj blisko pracy, jeśli chcesz skrócić codzienne dojazdy.
+
+For an instruction to remain in place, `Stay at the station until Anna arrives.` means:
+
+> Zostań na dworcu do przyjazdu Anny.
+
+These examples supply their own complete contexts. A truncated source does not establish a station, a short visit, or a move on its own.
 
 ## Portability Test
 

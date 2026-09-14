@@ -107,7 +107,7 @@ class SmokeInstallTests(unittest.TestCase):
     def test_installed_cache_requires_one_named_skill(self):
         with tempfile.TemporaryDirectory() as tmp:
             cache = Path(tmp) / ".claude" / "plugins" / "cache"
-            skill = cache / "miodkuj" / "miodkuj" / "2.1.0" / "skills" / "miodkuj" / "SKILL.md"
+            skill = cache / "miodkuj" / "miodkuj" / "2.1.1" / "skills" / "miodkuj" / "SKILL.md"
             skill.parent.mkdir(parents=True)
             skill.write_text("---\nname: miodkuj\ndescription: Fixture\n---\n", encoding="utf-8")
 

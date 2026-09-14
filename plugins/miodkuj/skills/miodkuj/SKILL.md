@@ -13,7 +13,7 @@ Preserve meaning, facts, qualifications, names, numbers, dates, links, citations
 
 ## Modes
 
-- **Edit mode:** Default for pasted text. Return the revised Polish text first. Add a short change note only when requested or when a material constraint or evidence gap needs explanation. If the source already passes the quality gate, return it unchanged; do not replace correct wording merely to show an edit.
+- **Edit mode:** Default for pasted text. Return the revised Polish text first. Add a short change note only when requested or when a material constraint or evidence gap needs explanation. If the source already passes the quality gate, return it verbatim without a "no changes needed" note; do not replace correct wording merely to show an edit.
 - **Audit mode:** When the user asks for an audit, scan, or diagnosis without rewriting, name each material pattern, quote the relevant source fragment, assign red/yellow/green severity, and suggest the direction of a fix. Do not rewrite and do not claim that AI wrote the text. Do not manufacture a finding when the supplied text establishes no material problem; say so, and use green findings where useful. Treat missing surrounding context as conditional rather than as a red defect unless the supplied text itself materially blocks understanding.
 - **Embedded or file mode:** When another task uses this skill or the user points to a file, run the full process internally and return or write only the final text the parent task requires. Preserve frontmatter, code blocks, tables, and link targets unless the user explicitly asks to edit them.
 
@@ -23,7 +23,7 @@ If the user has not supplied text or a file, ask for it. Ask about audience or p
 
 1. Read the complete source before editing. Identify its job, audience, and register.
 2. Infer three to five voice signals from the source: vocabulary, cadence, formality, directness, punctuation, humor, uncertainty, asides, fragments, or digressions. If the user supplies a separate voice sample, treat it as stronger evidence.
-3. Protect exact spans: code, commands, URLs, Markdown links, quotations, citations, tables, numbers, dates, legal references, product/API names, and required terminology.
+3. Protect exact spans: code, commands, URLs, Markdown links, quotations, citations, tables, numbers, dates, legal references, product/API names, and required terminology. When the user supplies an original for checking a translation, use that original to verify the edited translation's meaning and qualifications.
 4. Scan for clusters of Polish slop and weak writing. Do not treat a single word or construction as proof of a problem.
 5. Before changing a passage, identify the material defect internally. If there is none, copy the passage verbatim. Preserve useful repetition, roughness, mixed feelings, self-corrections, domain language, and uneven rhythm when they belong to the writer.
 6. Run a second pass for generated cadence, bureaucratic or translated phrasing, generic claims, and over-regular structure.
@@ -53,7 +53,7 @@ Do not apply this test mechanically to definitions, legal formulas, standard war
 - For genre-specific behavior and exceptions, read `references/registers.md`.
 - For public-facing, instructional, civic, UX, or broad-audience text, read `references/plain-polish.md`.
 - For every personal, marketing, newsletter, or opinion edit, read `references/voice-calibration.md`.
-- For ambiguous transformations or useful Polish before/after models, read `references/examples.md`.
+- For ambiguous transformations, translated word choices, or useful Polish before/after models, read `references/examples.md`.
 
 ## Quick Decisions
 

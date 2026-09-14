@@ -297,7 +297,7 @@ class ValidateRepoTests(unittest.TestCase):
 
             errors = MODULE.validate_repo(copy)
 
-            self.assertIn("changelog missing version 2.1.0", errors)
+            self.assertIn("changelog missing version 2.1.1", errors)
 
     def test_invalid_codex_metadata_is_reported(self):
         with tempfile.TemporaryDirectory() as tmp:

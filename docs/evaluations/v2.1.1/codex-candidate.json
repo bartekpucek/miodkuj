@@ -1,0 +1,70 @@
+{
+  "skill_version": "2.1.1",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "high",
+  "execution": "fresh Codex subagent; one 13-case batch",
+  "runtime_sha256": {
+    "SKILL.md": "58e33b1200633c65d27bf8d41d780dab4ddb36033a2c080d67c69645eb9fbb9d",
+    "agents/openai.yaml": "651fdab36de0bcbdc00e202f1160f3f7e1bab8021efdf2a1a0862acbf984899a",
+    "references/eval.md": "11bfd23b60317844746fd0db318e98ce6fcc27b90a122c6c30d06f5419f95e31",
+    "references/examples.md": "1db955b501b9c67b68e05aa891a1d2d91924069a025023491c5b927953ca895a",
+    "references/plain-polish.md": "08bd5ea6d4348fbc951f7777199c6e9430e6bc41ee69312bff6c28316e5e66e8",
+    "references/polish-patterns.md": "20e17c29010b9e3f24d60c6913625aa79541db2c0ca8022dc6c65694d1245313",
+    "references/registers.md": "5f1279f7127149edcd1cce47d9d9e4a2912278e13da8b14028118a08553ee1e6",
+    "references/voice-calibration.md": "9d65ec7024226867d4a98fe1953fc72e6bfb8b9b155a73880d223ea138592581"
+  },
+  "responses": [
+    {
+      "id": "travel_polish",
+      "response": "Głównym punktem wycieczki jest Edynburg. Poza miastem plan obejmuje tylko miejsca, do których można dotrzeć bez auta."
+    },
+    {
+      "id": "travel_bilingual",
+      "response": "Głównym punktem podróży jest Edynburg. Jednodniowe wycieczki w tereny wiejskie obejmują tylko miejsca, które rzeczywiście da się odwiedzić bez prowadzenia samochodu."
+    },
+    {
+      "id": "preserve_physics",
+      "response": "Obniżenie środka ciężkości poprawia stabilność pojazdu."
+    },
+    {
+      "id": "preserve_figurative",
+      "response": "W drugiej części artykułu środek ciężkości analizy przesuwa się z kosztów na jakość usług."
+    },
+    {
+      "id": "audit_context",
+      "response": "- **Żółty:** W praktycznym planie podróży „Środek ciężkości to Edynburg” brzmi książkowo i niepotrzebnie abstrakcyjnie. Warto nazwać Edynburg bezpośrednio jako główny punkt podróży, bez dopisywania, że jest bazą lub miejscem noclegu.\n\n- **Zielony:** W omówieniu artykułu „środek ciężkości analizy przesuwa się z kosztów na jakość usług” jest utrwalonym i precyzyjnym użyciem przenośnym, które pasuje do akademickiego kontekstu. Ten fragment warto zachować."
+    },
+    {
+      "id": "temporary_stay",
+      "response": "Zatrzymaj się blisko dworca na weekend."
+    },
+    {
+      "id": "preserve_residence",
+      "response": "Zamieszkaj blisko pracy, jeśli chcesz skrócić codzienne dojazdy."
+    },
+    {
+      "id": "stay_remaining",
+      "response": "Zostań na dworcu do przyjazdu Anny."
+    },
+    {
+      "id": "generic_fidelity",
+      "response": "Sztuczna inteligencja odgrywa coraz ważniejszą rolę w wielu obszarach życia."
+    },
+    {
+      "id": "analysis_fidelity",
+      "response": "Analiza danych pozwoliła wskazać kluczowe obszary wymagające optymalizacji."
+    },
+    {
+      "id": "unsupported_synthesis",
+      "response": "Wyniki badania wskazują, że w transformacji cyfrowej ważne jest całościowe podejście."
+    },
+    {
+      "id": "preserve_opinions",
+      "response": "Decyzję podjęto po uwzględnieniu opinii użytkowników."
+    },
+    {
+      "id": "voice_implementation",
+      "response": "Wdrożenie tego narzędzia może pomóc usprawnić procesy biznesowe."
+    }
+  ]
+}

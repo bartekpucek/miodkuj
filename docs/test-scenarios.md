@@ -393,3 +393,167 @@ Expected behavior:
 
 - Usuń ogólnikowe otwarcie i zakończenie, nie gubiąc żadnego twierdzenia.
 - Możesz połączyć lub podzielić akapity, jeśli pełne pokrycie informacji i kolejność zdarzeń pozostają czytelne.
+
+## 20. Metafora w planie podróży, tylko polski tekst
+
+Prompt:
+
+```text
+Use $miodkuj. Popraw fragment praktycznego planu podróży:
+Środek ciężkości to Edynburg. Poza miastem plan obejmuje tylko miejsca dostępne bez auta.
+```
+
+Protected invariants:
+
+- Edynburg pozostaje głównym punktem wycieczki, a miejsca poza miastem muszą być dostępne bez auta.
+- Tekst nie określa czasu wyjazdów, miejsca noclegu ani środka transportu.
+- Nie dopisuj powrotu tego samego dnia, bazy noclegowej, pociągu, autobusu ani czasu dojazdu.
+
+Expected behavior:
+
+- Zastąp książkową metaforę bezpośrednim określeniem roli Edynburga w planie.
+- Zachowaj jasne drugie zdanie bez kosmetycznych zmian.
+- Nie uznawaj samego wyrażenia za błąd językowy ani dowód autorstwa AI.
+
+## 21. Plan podróży z angielskim oryginałem
+
+Prompt:
+
+```text
+Use $miodkuj. Popraw polską wersję praktycznego planu podróży. Angielski oryginał jest źródłem znaczenia i ograniczeń; nie redaguj go.
+
+Oryginał:
+The centre of the trip is Edinburgh; rural day trips are limited to places that are genuinely manageable without driving.
+
+Polska wersja:
+Środek ciężkości to Edynburg; wyjazdy poza miasto ograniczone do miejsc, do których naprawdę da się dojechać bez samochodu.
+```
+
+Protected invariants:
+
+- Zachowaj główną rolę Edynburga i wyjazdy w wiejskie okolice, wskazane w oryginale.
+- Zachowaj jednodniowy charakter wyjazdów i ich praktyczną wykonalność bez konieczności prowadzenia auta, podane w oryginale.
+- Nie utożsamiaj `without driving` z zakazem podróży samochodem w roli pasażera; nie dopisuj też konkretnego sposobu dojazdu.
+- Nie dopisuj noclegów, konkretnych miejsc, środka transportu ani rozkładu jazdy.
+
+Expected behavior:
+
+- Popraw metaforę stosownie do praktycznego planu podróży.
+- Przywróć ograniczenia pominięte w polskiej wersji, korzystając wyłącznie z dostarczonego oryginału.
+- Nie sprowadzaj praktycznej wykonalności jednodniowego wyjazdu do samej możliwości dotarcia na miejsce.
+- Zwróć poprawiony polski tekst jako pierwszy; nie przepisuj angielskiego oryginału.
+
+## 22. Poprawne użycia dosłowne i przenośne
+
+Prompt:
+
+```text
+Use $miodkuj. Sprawdź dwa niezależne fragmenty. Popraw tylko rzeczywisty problem, zachowaj rejestr każdego tekstu.
+
+Opis techniczny:
+Obniżenie środka ciężkości poprawia stabilność pojazdu.
+
+Omówienie artykułu naukowego:
+W drugiej części artykułu środek ciężkości analizy przesuwa się z kosztów na jakość usług.
+```
+
+Protected invariants:
+
+- Zachowaj znaczenie terminu fizycznego i kierunek przesunięcia tematu analizy.
+- Nie zmieniaj przedmiotu analizy, rodzaju pojazdu ani siły twierdzeń.
+
+Expected behavior:
+
+- Zwróć oba fragmenty bez zmian: termin techniczny jest precyzyjny, a utrwalona metafora pasuje do rejestru omówienia.
+- Nie stosuj mechanicznej zamiany na `główny punkt` ani globalnego zakazu wyrażenia.
+
+## 23. Audyt metafory z uwzględnieniem rejestru
+
+Prompt:
+
+```text
+Use $miodkuj. Tylko audyt, bez przepisywania. Oceń dwa niezależne fragmenty w ich kontekście.
+
+Praktyczny plan podróży:
+Środek ciężkości to Edynburg.
+
+Omówienie artykułu naukowego:
+W drugiej części artykułu środek ciężkości analizy przesuwa się z kosztów na jakość usług.
+```
+
+Protected invariants:
+
+- Nie zwracaj przepisanych wersji zdań ani nie oceniaj autorstwa.
+- Oceniaj każdy fragment w podanym kontekście.
+
+Expected behavior:
+
+- W planie podróży wskaż lokalną, żółtą niezręczność rejestru i kierunek uproszczenia, cytując dowód.
+- W omówieniu artykułu zachowaj poprawne użycie przenośne; dopuszczalna jest zielona ocena z krótkim uzasadnieniem.
+- Nie przedstawiaj wyrażenia jako błędnej kalki w każdym kontekście.
+
+## 24. Krótki pobyt w tłumaczonej poradzie noclegowej
+
+Prompt:
+
+```text
+Use $miodkuj. Popraw polską poradę dotyczącą noclegu podczas weekendowej wycieczki. Angielski oryginał jest źródłem znaczenia.
+
+Oryginał:
+Stay near the station for the weekend.
+
+Polska wersja:
+Zamieszkaj blisko dworca na weekend.
+```
+
+Protected invariants:
+
+- Zachowaj weekendowy pobyt i lokalizację blisko dworca.
+- Nie dopisuj nazwy dworca, hotelu, rezerwacji ani środka transportu.
+
+Expected behavior:
+
+- Użyj określenia naturalnego dla krótkiego pobytu, np. `zatrzymaj się`.
+- Nie uznawaj czasownika `zamieszkać` za zawsze błędny ani za dowód stałej przeprowadzki.
+
+## 25. Zamieszkanie na stałe
+
+Prompt:
+
+```text
+Use $miodkuj. Popraw tylko rzeczywisty problem w poradzie dotyczącej przeprowadzki na stałe:
+Zamieszkaj blisko pracy, jeśli chcesz skrócić codzienne dojazdy.
+```
+
+Protected invariants:
+
+- Zachowaj zamieszkanie blisko pracy i warunek dotyczący codziennych dojazdów.
+
+Expected behavior:
+
+- Zwróć zdanie bez zmian; `zamieszkaj` pasuje do podanego kontekstu.
+- Nie zamieniaj przeprowadzki na krótki pobyt.
+
+## 26. Pozostanie w miejscu
+
+Prompt:
+
+```text
+Use $miodkuj. Popraw polską wersję instrukcji. Angielski oryginał jest źródłem znaczenia.
+
+Oryginał:
+Stay at the station until Anna arrives.
+
+Polska wersja:
+Zatrzymaj się na dworcu do przyjazdu Anny.
+```
+
+Protected invariants:
+
+- Zachowaj dworzec, Annę i czas oczekiwania do jej przyjazdu.
+- Nie dopisuj noclegu ani zmiany miejsca zamieszkania.
+
+Expected behavior:
+
+- Oddaj znaczenie pozostania na miejscu, np. przez `zostań`.
+- Nie traktuj `stay` jako stałego odpowiednika `zatrzymaj się`.

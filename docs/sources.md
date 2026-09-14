@@ -30,6 +30,14 @@ Ten plik dokumentuje materiały wykorzystane przy projektowaniu Miodkuj. Nie jes
 - Gov.pl, Prosty język, Ministerstwo Cyfryzacji: https://www.gov.pl/web/cyfryzacja/prosty-jezyk
 - Podręcznik Jasnopisu: https://jasnopis.pl/manual/
 
+## Dobór słów i rejestr w przekładzie
+
+- [Zgłoszenie #2: centre -> Środek ciężkości](https://github.com/bartekpucek/miodkuj/issues/2) zainspirowało przykład z Edynburgiem i scenariusze 20–23. Scenariusze rozwijają przypadek redakcyjny; nie dokumentują odtworzonego błędu konkretnego modelu lub wersji skilla.
+- [WSJP PAN: środek ciężkości, znaczenie przenośne](https://wsjp.pl/haslo/podglad/38155/srodek-ciezkosci/4714234/polityki) odnotowuje utrwalone użycie książkowe. To podstawa oceny rejestru zamiast zakazu wyrażenia.
+- [WSJP PAN: środek ciężkości, znaczenie fizyczne](https://wsjp.pl/haslo/podglad/38155/srodek-ciezkosci/4714233/ciala) dokumentuje termin techniczny, który należy zachować.
+- [Zgłoszenie #3: Stay -> Zamieszkaj](https://github.com/bartekpucek/miodkuj/issues/3) zainspirowało przykład krótkiego pobytu i scenariusze 24–26. Pełne zdania w scenariuszach są syntetyczne; nie odtwarzają brakującego kontekstu urwanego zgłoszenia.
+- [WSJP PAN: zamieszkać](https://wsjp.pl/index.php/haslo/podglad/3172/zamieszkac/2428781/w-domu) potwierdza użycia dotyczące także hotelu i tymczasowego zamieszkania. Dobór `zatrzymaj się` w poradzie na krótki wyjazd jest decyzją kontekstową, a nie zakazem czasownika `zamieszkać`.
+
 ## Polska stylometria i teksty AI
 
 - Humanistyka.dev, rodziny cech tekstów AI: https://blog.humanistyka.dev/2026/02/rozpoznawanie-tekstow-ai-piec-grup-cech-zamiast-jednego-wskaznika

@@ -23,7 +23,7 @@ AUDIT_SPEC.loader.exec_module(PUBLIC_REPO_AUDIT)
 RUNTIME = Path("plugins/miodkuj/skills/miodkuj")
 REFERENCES = RUNTIME / "references"
 BUNDLE = Path("dist/miodkuj.skill")
-RELEASE_VERSION = "2.1.0"
+RELEASE_VERSION = "2.1.1"
 CODEX_PLUGIN_MANIFEST = Path("plugins/miodkuj/.codex-plugin/plugin.json")
 INSTALLATION_MANIFESTS = (
     Path(".claude-plugin/plugin.json"),

@@ -6,6 +6,7 @@ Use these as cluster-sensitive signals. Most items are not absolute bans.
 
 - Chatbot residue, throat-clearing, and inflated importance
 - Officialese, nominalizations, passive fog, genitive chains, and participial heaviness
+- Translated word choices, metaphors, and register
 - Formulaic structures, faux insight, metadiscourse, colon reveals, and negative listing
 - Synonym cycling, fake-profound endings, formatting slop, and second-hand text
 - Em dashes, generic endings, and generic specificity
@@ -121,10 +122,9 @@ Signals:
 
 Fix:
 
-- Prefer actor plus finite verb:
-  - `przeprowadzenie analizy danych` -> `zespół przeanalizował dane`
-  - `podjęcie decyzji nastąpiło` -> `rada zdecydowała`
-  - `realizacja działań` -> `robimy`, `zrobiliśmy`, `urząd zrobi`
+- Prefer a finite verb. Name the actor only if supplied; otherwise keep an impersonal form:
+  - `przeprowadzenie analizy danych` -> `przeanalizowano dane`
+  - `podjęcie decyzji nastąpiło` -> `podjęto decyzję`
 
 Keep:
 
@@ -151,9 +151,9 @@ Watchlist:
 
 Fix:
 
-- Name the actor when useful:
-  - `zostało opracowane narzędzie` -> `zespół opracował narzędzie`
-  - `dokonano zmiany` -> `zmieniliśmy`
+- Name the actor when supplied and useful; otherwise simplify without inventing one:
+  - `zostało opracowane narzędzie` -> `opracowano narzędzie`
+  - `dokonano zmiany` -> `zmieniono`
   - `należy złożyć wniosek` -> `złóż wniosek`
 
 Keep:
@@ -175,7 +175,6 @@ Fix:
 
 - Convert the chain into a clause:
   - `w przypadku braku możliwości uruchomienia pojazdu` -> `jeśli nie możesz uruchomić pojazdu`
-  - `analiza wyników badania satysfakcji klientów` -> `przeanalizowaliśmy, jak klienci ocenili usługę`
 
 ## Participial Heaviness
 
@@ -196,6 +195,27 @@ Fix:
 
 - Convert to shorter clauses.
 - Put the action in a finite verb.
+
+## Translated Word Choices And Register
+
+Watch for:
+
+- a translated metaphor that makes a practical statement sound abstract or bookish,
+- a translation that selects the wrong sense of a word for the supplied situation,
+- a grammatically correct Polish expression whose register does not fit the text's job or the writer's voice.
+
+Problem:
+
+- An established Polish expression can still be an awkward choice in context. In a plain travel itinerary, `środek ciężkości` can obscure the trip's main focus. In accommodation advice for a short visit, `zatrzymaj się` usually fits `stay` better than `zamieszkaj`. These are contextual editing decisions, not proof that either Polish expression is incorrect or that AI wrote the text.
+
+Fix:
+
+- Express the intended relationship in Polish appropriate to the situation. Do not replace every instance of an English word or Polish phrase with one fixed equivalent.
+- If the source identifies only a trip's main focus, name that focus directly. Calling it a base, a place to sleep, or the place where most days are spent adds logistics the source has not supplied. This also applies to suggested fixes in audit mode.
+- When an original and a translation are supplied for comparison, preserve the original's constraints as well as its main point. Practical feasibility is stronger than theoretical reachability; a day trip is not an unrestricted excursion. `Without driving` does not exclude travelling as a passenger.
+- If only the Polish draft is supplied, or the original is truncated, do not reconstruct missing context or add itinerary details. See `examples.md` for the Edinburgh and accommodation cases.
+
+False-positive guard: Preserve literal technical meanings, established figurative uses that fit the register, deliberate metaphors supported by the writer's voice, and protected quotations. `Środek ciężkości` is legitimate in both physics and figurative Polish. `Zamieszkać` can describe residence or temporary accommodation; it does not always imply permanence. For `stay` meaning remain in place, use the corresponding sense, such as `zostań`, rather than accommodation wording.
 
 ## Formulaic AI Structures
 
