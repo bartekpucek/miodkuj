@@ -274,11 +274,13 @@ def validate_installation_manifests(root: Path, errors: list[str]) -> None:
 
 
 def validate_references(root: Path, errors: list[str]) -> None:
-    """Keep generated runtime references byte-for-byte aligned with their source."""
-    shared = files_by_name(root / "shared/references")
-    target = files_by_name(root / REFERENCES)
-    if target != shared:
-        errors.append(f"reference drift: {REFERENCES} differs from shared/references")
+    """Keep one copy of the references: the one inside the skill folder."""
+    if (root / "shared").exists():
+        errors.append(
+            f"duplicate reference copy: remove shared/ and edit {REFERENCES} directly"
+        )
+    if not files_by_name(root / REFERENCES):
+        errors.append(f"missing references: {REFERENCES}")
 
 
 def parse_metadata_scalar(value: str, line_number: int) -> object:

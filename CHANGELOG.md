@@ -8,8 +8,8 @@ All notable changes to this project are documented here. The format is based on
 
 ### Added
 
-- `scripts/behavior_eval.py` and `tests/behavior/cases.json`: 30 fixed inputs sent to the Claude Code CLI with the skill loaded, with automatic checks for verbatim text, protected strings, and removed slop. The suite stays in the repository and is not part of the skill bundle.
-- Four manual behavioral scenarios (27–30) for clean sentences next to slop, Polish dash usage, an impersonal sentence with no named actor, and a factual contrast after a cut sentence.
+- `scripts/behavior_eval.py` and `tests/behavior/cases.json`: 41 fixed inputs sent to the Claude Code CLI with the skill loaded, with automatic checks for verbatim text, protected strings, and removed slop. The suite stays in the repository and is not part of the skill bundle.
+- Five manual behavioral scenarios (27–31) for clean sentences next to slop, Polish dash usage, an impersonal sentence with no named actor, a factual contrast after a cut sentence, and business wording that stays.
 
 ### Changed
 
@@ -17,10 +17,14 @@ All notable changes to this project are documented here. The format is based on
 - Dash guidance follows Polish usage: a source dash that marks an omitted element, stands for `jest` or `są` before `to`, or sets off an insertion or dialogue stays; clusters and connector dashes are still replaced.
 - The second-person rewrite of `należy` + infinitive no longer appears in the general pattern list, where it pulled statements of legal duty towards direct address; direct address remains in the plain-Polish guide.
 
+- Business and IT working vocabulary stays as written, including borrowed words (`deploy`, `onboarding`), Polish words in a business sense taken from English (`dedykowany`, `adresować problem`) and set phrases (`na koniec dnia`). The 2.1.1 release replaced such wording in every measured run. The README no longer promises to remove calques in general, nor impersonal sentences as such.
+- The pattern file no longer carries a contents list or the three before/after pairs that `examples.md` repeats. The skill is 2.0% larger than 2.1.1 overall, and the files read on nearly every use are 2.7% larger.
+- The references live only in the skill folder. `shared/references` and the sync step in `scripts/build.sh` are gone; validation now rejects a second copy. The bundle's contents are unchanged by this.
+
 ### Fixed
 
 - Guidance that a clean sentence containing a watched phrase stays verbatim when neighbouring sentences are edited.
-- Guidance that an actor named in one sentence is not evidence for a neighbouring impersonal sentence.
+- Guidance that an actor named in one sentence is not evidence for a neighbouring impersonal sentence, and that an impersonal reporting verb is not given a subject.
 - Legal register: a request to simplify or explain a duty for the obligated party no longer reads as a request to address that party as `ty`. Scenario 15 passed 14 of 16 runs before this change and 16 of 16 after.
 
 ## [2.1.1] - 2026-09-14

@@ -1,28 +1,11 @@
 #!/usr/bin/env bash
-# Sync the single source of truth (shared/references) into the portable skill,
-# then package it as an installable .skill bundle.
+# Package the portable skill as an installable .skill bundle. The skill folder
+# under plugins/ is the single source of truth; there is nothing to sync.
 #
 # Usage: ./scripts/build.sh
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SRC="$ROOT/shared/references"
-
-if [ ! -d "$SRC" ]; then
-  echo "error: $SRC not found" >&2
-  exit 1
-fi
-
-sync_refs() {
-  local dest="$1"
-  mkdir -p "$dest"
-  rm -f "$dest"/*.md
-  cp "$SRC"/*.md "$dest"/
-  echo "  synced -> ${dest#$ROOT/}"
-}
-
-echo "Syncing references from shared/references ..."
-sync_refs "$ROOT/plugins/miodkuj/skills/miodkuj/references"
 
 # Package the portable skill as a .skill bundle (a zip whose root is the skill
 # folder). Uses Python's zipfile so no external `zip` binary is required.

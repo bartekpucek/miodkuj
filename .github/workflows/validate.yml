@@ -19,11 +19,3 @@ jobs:
 
       - name: Check installation contracts without host CLIs
         run: python3 scripts/smoke_install.py --structural-only --platform all
-
-      - name: Check canonical references are in sync with shared/ (no drift)
-        run: |
-          if ! git diff --quiet -- plugins/miodkuj/skills/miodkuj/references/; then
-            echo "::error::plugins/miodkuj/skills/miodkuj/references is out of sync with shared/references. Run ./scripts/build.sh and commit the result."
-            git --no-pager diff --stat -- plugins/miodkuj/skills/miodkuj/references/
-            exit 1
-          fi

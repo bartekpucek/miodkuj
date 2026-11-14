@@ -636,3 +636,23 @@ Expected behavior:
 - Usuń pierwsze zdanie albo zostaw z niego samo `narzędzie`.
 - Jeśli pierwsze zdanie znika, przenieś podmiot `narzędzie` do drugiego zdania i niczego więcej w nim nie zmieniaj.
 - Zostaw trzecie zdanie bez zmian.
+
+## 31. Słownictwo biznesowe zostaje
+
+Prompt:
+
+```text
+Use $miodkuj. Popraw styl:
+Rozwiązanie dedykowane dla firm z sektora MŚP adresuje problem ręcznego raportowania. Zespół robi deploy w każdy piątek, po code review.
+```
+
+Protected invariants:
+
+- Zachowaj `dedykowane dla firm`, `adresuje problem`, `deploy` i `code review`.
+- Zachowaj sektor MŚP, ręczne raportowanie i piątkowy termin.
+
+Expected behavior:
+
+- Dopuszczalny jest tekst bez zmian.
+- Nie zastępuj słownictwa biznesowego ani informatycznego „czystszym” polskim odpowiednikiem. `Przeznaczone` albo `zajmuje się` to preferencja stylistyczna, a `wyznaczony zespół` zamiast `dedykowany zespół` zmienia sens.
+

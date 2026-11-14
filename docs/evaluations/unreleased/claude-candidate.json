@@ -10,7 +10,7 @@
       "references/eval.md": "11bfd23b60317844746fd0db318e98ce6fcc27b90a122c6c30d06f5419f95e31",
       "references/examples.md": "1db955b501b9c67b68e05aa891a1d2d91924069a025023491c5b927953ca895a",
       "references/plain-polish.md": "08bd5ea6d4348fbc951f7777199c6e9430e6bc41ee69312bff6c28316e5e66e8",
-      "references/polish-patterns.md": "760492cb36c2e356a410dd4506026e802265723b4ca3744fb875fda9537af47d",
+      "references/polish-patterns.md": "e36035daa0bdd11b0394332a353f37ee08728072d7a380a846d6721b0cf4a165",
       "references/registers.md": "560c36586ee87917ff1cf3393ab691493151df6deebdf1db79c973c9e89d67e0",
       "references/voice-calibration.md": "9d65ec7024226867d4a98fe1953fc72e6bfb8b9b155a73880d223ea138592581"
     }
@@ -22,20 +22,20 @@
         {
           "response": "Skuteczny lek to taki, który w badaniu działa lepiej niż placebo. W przypadku tego preparatu różnica wyniosła 12 punktów procentowych.",
           "usage": {
-            "input": 19613,
-            "output": 117
+            "input": 19324,
+            "output": 218
           },
-          "cost_usd": 0.0770518,
+          "cost_usd": 0.0769058,
           "verdict": "PASS",
           "reasons": []
         },
         {
           "response": "Skuteczny lek to taki, który w badaniu działa lepiej niż placebo. W przypadku tego preparatu różnica wyniosła 12 punktów procentowych.",
           "usage": {
-            "input": 19615,
-            "output": 187
+            "input": 19326,
+            "output": 112
           },
-          "cost_usd": 0.0777598,
+          "cost_usd": 0.0758538,
           "verdict": "PASS",
           "reasons": []
         }
@@ -47,20 +47,20 @@
         {
           "response": "Ustalono, że awarię spowodował błąd w konfiguracji. Przyjęto nowy harmonogram wdrożeń.",
           "usage": {
-            "input": 19592,
-            "output": 169
+            "input": 19305,
+            "output": 133
           },
-          "cost_usd": 0.07748780000000001,
+          "cost_usd": 0.0759798,
           "verdict": "PASS",
           "reasons": []
         },
         {
           "response": "Ustalono, że awarię spowodował błąd w konfiguracji. Przyjęto nowy harmonogram wdrożeń.",
           "usage": {
-            "input": 19601,
-            "output": 173
+            "input": 19310,
+            "output": 163
           },
-          "cost_usd": 0.0775638,
+          "cost_usd": 0.0762998,
           "verdict": "PASS",
           "reasons": []
         }
@@ -72,20 +72,20 @@
         {
           "response": "Jedni wolą pracować z domu, drudzy — z biura. Nam jest wszystko jedno, byle praca była zrobiona.",
           "usage": {
-            "input": 19603,
-            "output": 117
+            "input": 19322,
+            "output": 103
           },
-          "cost_usd": 0.0770118,
+          "cost_usd": 0.0757478,
           "verdict": "PASS",
           "reasons": []
         },
         {
           "response": "Jedni wolą pracować z domu, drudzy — z biura. Nam jest wszystko jedno, byle praca była zrobiona.",
           "usage": {
-            "input": 19605,
-            "output": 96
+            "input": 19320,
+            "output": 101
           },
-          "cost_usd": 0.0768098,
+          "cost_usd": 0.0757198,
           "verdict": "PASS",
           "reasons": []
         }
@@ -97,20 +97,20 @@
         {
           "response": "W ramach umowy serwisowej producent wymienia baterię raz w roku. Gwarancja nie obejmuje uszkodzeń mechanicznych.",
           "usage": {
-            "input": 19601,
+            "input": 19323,
             "output": 56
           },
-          "cost_usd": 0.0763938,
+          "cost_usd": 0.0752818,
           "verdict": "PASS",
           "reasons": []
         },
         {
           "response": "W ramach umowy serwisowej producent wymienia baterię raz w roku. Gwarancja nie obejmuje uszkodzeń mechanicznych.",
           "usage": {
-            "input": 19610,
+            "input": 19326,
             "output": 56
           },
-          "cost_usd": 0.0764298,
+          "cost_usd": 0.0752938,
           "verdict": "PASS",
           "reasons": []
         }
@@ -122,20 +122,95 @@
         {
           "response": "Zarówno kierowca, jak i pasażerowie muszą zapiąć pasy. Od tej zasady są dwa wyjątki opisane w regulaminie.",
           "usage": {
-            "input": 19598,
-            "output": 194
+            "input": 19321,
+            "output": 134
           },
-          "cost_usd": 0.0777618,
+          "cost_usd": 0.0760538,
           "verdict": "PASS",
           "reasons": []
         },
         {
           "response": "Zarówno kierowca, jak i pasażerowie muszą zapiąć pasy. Od tej zasady są dwa wyjątki opisane w regulaminie.",
           "usage": {
-            "input": 19605,
-            "output": 59
+            "input": 19330,
+            "output": 131
           },
-          "cost_usd": 0.0764398,
+          "cost_usd": 0.0760598,
+          "verdict": "PASS",
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "id": "clean-business-wording",
+      "runs": [
+        {
+          "response": "Rozwiązanie dedykowane dla firm z sektora MŚP adresuje problem ręcznego raportowania. Zespół robi deploy w każdy piątek, po code review.",
+          "usage": {
+            "input": 19328,
+            "output": 183
+          },
+          "cost_usd": 0.0765718,
+          "verdict": "PASS",
+          "reasons": []
+        },
+        {
+          "response": "Rozwiązanie dedykowane dla firm z sektora MŚP adresuje problem ręcznego raportowania. Zespół robi deploy w każdy piątek, po code review.",
+          "usage": {
+            "input": 19328,
+            "output": 121
+          },
+          "cost_usd": 0.0759518,
+          "verdict": "PASS",
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "id": "clean-business-calques",
+      "runs": [
+        {
+          "response": "Dedykowany zespół adresuje każde zgłoszenie w ciągu godziny, bo na koniec dnia klient ocenia nas po czasie reakcji.",
+          "usage": {
+            "input": 19329,
+            "output": 248
+          },
+          "cost_usd": 0.07722580000000001,
+          "verdict": "PASS",
+          "reasons": []
+        },
+        {
+          "response": "Dedykowany zespół adresuje każde zgłoszenie w ciągu godziny, bo na koniec dnia klient ocenia nas po czasie reakcji.",
+          "usage": {
+            "input": 19328,
+            "output": 234
+          },
+          "cost_usd": 0.0770818,
+          "verdict": "PASS",
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "id": "clean-business-unnamed",
+      "runs": [
+        {
+          "response": "Finalnie zaaplikowało 40 osób, a 12 przeszło do drugiego etapu. Benefity opisaliśmy w ogłoszeniu, a opóźnienia eskalujemy do managera.",
+          "usage": {
+            "input": 19340,
+            "output": 360
+          },
+          "cost_usd": 0.0783898,
+          "verdict": "PASS",
+          "reasons": []
+        },
+        {
+          "response": "Finalnie zaaplikowało 40 osób, a 12 przeszło do drugiego etapu. Benefity opisaliśmy w ogłoszeniu, a opóźnienia eskalujemy do managera.",
+          "usage": {
+            "input": 19341,
+            "output": 250
+          },
+          "cost_usd": 0.0772938,
           "verdict": "PASS",
           "reasons": []
         }
@@ -147,20 +222,20 @@
         {
           "response": "W piątek znowu próbowałem skrócić ten raport. Nie wyszło. Za każdym razem usuwałem zdanie, a potem odkrywałem, że bez niego następne nie ma sensu. Może problemem nie jest długość, tylko to, że nadal nie wiem, komu ten raport ma pomóc.",
           "usage": {
-            "input": 19679,
-            "output": 113
+            "input": 19397,
+            "output": 128
           },
-          "cost_usd": 0.0772758,
+          "cost_usd": 0.0762978,
           "verdict": "PASS",
           "reasons": []
         },
         {
           "response": "W piątek znowu próbowałem skrócić ten raport. Nie wyszło. Za każdym razem usuwałem zdanie, a potem odkrywałem, że bez niego następne nie ma sensu. Może problemem nie jest długość, tylko to, że nadal nie wiem, komu ten raport ma pomóc.",
           "usage": {
-            "input": 19679,
-            "output": 131
+            "input": 19392,
+            "output": 175
           },
-          "cost_usd": 0.0774558,
+          "cost_usd": 0.07674779999999999,
           "verdict": "PASS",
           "reasons": []
         }
@@ -172,20 +247,20 @@
         {
           "response": "No dobra, dowieźliśmy. Trochę późno, trochę bokiem, ale działa. I serio nie mam dziś ochoty udawać, że od początku taki był plan :)",
           "usage": {
-            "input": 19619,
-            "output": 86
+            "input": 19336,
+            "output": 65
           },
-          "cost_usd": 0.0767658,
+          "cost_usd": 0.07542380000000001,
           "verdict": "PASS",
           "reasons": []
         },
         {
           "response": "No dobra, dowieźliśmy. Trochę późno, trochę bokiem, ale działa. I serio nie mam dziś ochoty udawać, że od początku taki był plan :)",
           "usage": {
-            "input": 19624,
+            "input": 19334,
             "output": 65
           },
-          "cost_usd": 0.07657580000000001,
+          "cost_usd": 0.0754158,
           "verdict": "PASS",
           "reasons": []
         }
@@ -197,22 +272,24 @@
         {
           "response": "Bezpieczeństwo danych jest kluczowe. W przypadku wycieku należy zgłosić incydent do UODO w ciągu 72 godzin. Ustalono, że w 2025 r. firma zgłosiła dwa takie incydenty.",
           "usage": {
-            "input": 19657,
-            "output": 653
+            "input": 19378,
+            "output": 471
           },
-          "cost_usd": 0.0825878,
+          "cost_usd": 0.0796518,
           "verdict": "PASS",
           "reasons": []
         },
         {
-          "response": "Bezpieczeństwo danych jest kluczowe. W przypadku wycieku należy zgłosić incydent do UODO w ciągu 72 godzin. Ustalono, że w 2025 r. firma zgłosiła dwa takie incydenty.",
+          "response": "W razie wycieku należy zgłosić incydent do UODO w ciągu 72 godzin. Ustalono, że w 2025 r. firma zgłosiła dwa takie incydenty.",
           "usage": {
-            "input": 19654,
-            "output": 500
+            "input": 19372,
+            "output": 683
           },
-          "cost_usd": 0.0810458,
-          "verdict": "PASS",
-          "reasons": []
+          "cost_usd": 0.0817478,
+          "verdict": "FAIL",
+          "reasons": [
+            "missing: W przypadku wycieku należy zgłosić incydent do UODO w ciągu 72 godzin."
+          ]
         }
       ]
     },
@@ -222,20 +299,20 @@
         {
           "response": "Praca zdalna odgrywa coraz większą rolę. U nas wygląda to prosto: jedni pracują z domu, drudzy — z biura. Decyzja — to sprawa zespołu, nie zarządu.",
           "usage": {
-            "input": 19643,
-            "output": 396
+            "input": 19366,
+            "output": 326
           },
-          "cost_usd": 0.0799618,
+          "cost_usd": 0.0781538,
           "verdict": "PASS",
           "reasons": []
         },
         {
           "response": "Praca zdalna odgrywa coraz większą rolę. U nas wygląda to prosto: jedni pracują z domu, drudzy — z biura. Decyzja — to sprawa zespołu, nie zarządu.",
           "usage": {
-            "input": 19644,
-            "output": 468
+            "input": 19362,
+            "output": 416
           },
-          "cost_usd": 0.0806858,
+          "cost_usd": 0.0790378,
           "verdict": "PASS",
           "reasons": []
         }
@@ -247,20 +324,20 @@
         {
           "response": "Informujemy, że 3 marca przeprowadzono przegląd instalacji. Przegląd wykonała firma Elektro-Serwis. W ramach przeglądu wymieniono dwa bezpieczniki.",
           "usage": {
-            "input": 19630,
-            "output": 535
+            "input": 19354,
+            "output": 612
           },
-          "cost_usd": 0.0812998,
+          "cost_usd": 0.08096579999999999,
           "verdict": "PASS",
           "reasons": []
         },
         {
-          "response": "Informujemy, że 3 marca firma Elektro-Serwis przeprowadziła przegląd instalacji. W ramach przeglądu wymieniono dwa bezpieczniki.",
+          "response": "Informujemy, że 3 marca przeprowadzono przegląd instalacji. Przegląd wykonała firma Elektro-Serwis. W ramach przeglądu wymieniono dwa bezpieczniki.",
           "usage": {
-            "input": 19640,
-            "output": 569
+            "input": 19359,
+            "output": 562
           },
-          "cost_usd": 0.0816798,
+          "cost_usd": 0.0804858,
           "verdict": "PASS",
           "reasons": []
         }
@@ -270,22 +347,22 @@
       "id": "s30-real-contrast",
       "runs": [
         {
-          "response": "Narzędzie z jednej strony skraca raportowanie z 3 dni do 4 godzin, z drugiej strony wymaga ręcznego importu danych co tydzień. Użytkownicy z działu finansów zgłosili to jako główną wadę.",
+          "response": "Z jednej strony narzędzie skraca raportowanie z 3 dni do 4 godzin, z drugiej strony wymaga ręcznego importu danych co tydzień. Użytkownicy z działu finansów zgłosili to jako główną wadę.",
           "usage": {
-            "input": 19663,
-            "output": 417
+            "input": 19378,
+            "output": 520
           },
-          "cost_usd": 0.0802518,
+          "cost_usd": 0.0801418,
           "verdict": "PASS",
           "reasons": []
         },
         {
           "response": "Z jednej strony narzędzie skraca raportowanie z 3 dni do 4 godzin, z drugiej strony wymaga ręcznego importu danych co tydzień. Użytkownicy z działu finansów zgłosili to jako główną wadę.",
           "usage": {
-            "input": 19654,
-            "output": 570
+            "input": 19386,
+            "output": 410
           },
-          "cost_usd": 0.08174580000000001,
+          "cost_usd": 0.0790738,
           "verdict": "PASS",
           "reasons": []
         }
@@ -297,20 +374,20 @@
         {
           "response": "Filtr jest skuteczny wobec 99,9% bakterii według testu PZH z 2024 r. Wymieniasz go raz na pół roku.",
           "usage": {
-            "input": 19640,
-            "output": 447
+            "input": 19357,
+            "output": 54
           },
-          "cost_usd": 0.0804598,
+          "cost_usd": 0.07539779999999999,
           "verdict": "PASS",
           "reasons": []
         },
         {
-          "response": "Filtr jest skuteczny wobec 99,9% bakterii według testu PZH z 2024 r. Wymieniasz go raz na pół roku.\n\nWycięłam pierwsze zdanie, bo nie zawierało żadnej informacji.",
+          "response": "Filtr jest skuteczny wobec 99,9% bakterii według testu PZH z 2024 r. Wymieniasz go raz na pół roku.\n\nUsunąłem pierwsze zdanie, bo było sloganem bez treści i nie mówiło, co robi produkt. Jeśli chcesz zostawić otwarcie, podaj, do czego służy filtr i dla kogo. Wtedy napiszę je na nowo.",
           "usage": {
-            "input": 19650,
-            "output": 459
+            "input": 19363,
+            "output": 476
           },
-          "cost_usd": 0.0806198,
+          "cost_usd": 0.0796418,
           "verdict": "PASS",
           "reasons": []
         }
@@ -320,22 +397,76 @@
       "id": "mixed-reporting-verb",
       "runs": [
         {
-          "response": "Nasza nowa platforma obsługi klienta odpowiada na zgłoszenia w 4 minuty zamiast 2 godzin. Założono, że do końca roku obsłuży 60% zgłoszeń.",
+          "response": "Nasza nowa platforma obsługi klienta odpowiada na zgłoszenia w 4 minuty zamiast 2 godzin. Założono, że do końca roku platforma obsłuży 60% zgłoszeń.",
           "usage": {
-            "input": 19641,
-            "output": 693
+            "input": 19358,
+            "output": 980
           },
-          "cost_usd": 0.0829238,
+          "cost_usd": 0.0846618,
+          "verdict": "FAIL",
+          "reasons": [
+            "missing: Założono, że do końca roku obsłuży 60% zgłoszeń."
+          ]
+        },
+        {
+          "response": "Nasza nowa platforma obsługi klienta odpowiada na zgłoszenia w 4 minuty zamiast 2 godzin. Plan zakłada, że do końca roku obsłuży 60% zgłoszeń.",
+          "usage": {
+            "input": 19360,
+            "output": 527
+          },
+          "cost_usd": 0.08013980000000001,
+          "verdict": "FAIL",
+          "reasons": [
+            "missing: Założono, że do końca roku obsłuży 60% zgłoszeń."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mixed-business-wording",
+      "runs": [
+        {
+          "response": "Nasz onboarding trwa 5 dni i ma dedykowanego opiekuna. Feedback zbieramy po pierwszym sprincie.",
+          "usage": {
+            "input": 19352,
+            "output": 380
+          },
+          "cost_usd": 0.07863780000000001,
           "verdict": "PASS",
           "reasons": []
         },
         {
-          "response": "Nasza nowa platforma do obsługi klienta odpowiada na zgłoszenia w 4 minuty zamiast 2 godzin. Założono, że do końca roku obsłuży 60% zgłoszeń.",
+          "response": "Onboarding jest kluczowy. Nasz onboarding trwa 5 dni i ma dedykowanego opiekuna. Feedback zbieramy po pierwszym sprincie.",
           "usage": {
-            "input": 19649,
-            "output": 507
+            "input": 19348,
+            "output": 317
           },
-          "cost_usd": 0.0810958,
+          "cost_usd": 0.0779918,
+          "verdict": "PASS",
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "id": "mixed-long-form",
+      "runs": [
+        {
+          "response": "W 2025 r. nasz zespół odpowiedział na 18 400 zgłoszeń, a średni czas odpowiedzi wyniósł 3 godziny 40 minut.\n\nUstalono, że 62% zgłoszeń dotyczyło faktur. W przypadku reklamacji klient dostaje odpowiedź w ciągu 14 dni. Z jednej strony skróciliśmy kolejkę o połowę, z drugiej strony liczba ponownych kontaktów wzrosła z 9% do 12%.\n\nW ramach budżetu na 2026 r. zatrudnimy dwie osoby do działu faktur.",
+          "usage": {
+            "input": 19540,
+            "output": 776
+          },
+          "cost_usd": 0.0833498,
+          "verdict": "PASS",
+          "reasons": []
+        },
+        {
+          "response": "W 2025 r. nasz zespół odpowiedział na 18 400 zgłoszeń, a średni czas odpowiedzi wyniósł 3 godziny 40 minut.\n\nUstalono, że 62% zgłoszeń dotyczyło faktur. W przypadku reklamacji klient dostaje odpowiedź w ciągu 14 dni. Z jednej strony skróciliśmy kolejkę o połowę, z drugiej strony liczba ponownych kontaktów wzrosła z 9% do 12%.\n\nW ramach budżetu na 2026 r. zatrudnimy dwie osoby do działu faktur.",
+          "usage": {
+            "input": 19542,
+            "output": 908
+          },
+          "cost_usd": 0.0846778,
           "verdict": "PASS",
           "reasons": []
         }
@@ -347,20 +478,20 @@
         {
           "response": "Na podstawie art. 15 ust. 2 ustawy z dnia 6 marca 2018 r. przedsiębiorca składa oświadczenie w terminie 14 dni od doręczenia wezwania.",
           "usage": {
-            "input": 19669,
+            "input": 19381,
             "output": 74
           },
-          "cost_usd": 0.0768458,
+          "cost_usd": 0.0756938,
           "verdict": "PASS",
           "reasons": []
         },
         {
-          "response": "Na podstawie art. 15 ust. 2 ustawy z dnia 6 marca 2018 r. przedsiębiorca składa oświadczenie w terminie 14 dni od doręczenia wezwania.",
+          "response": "Na podstawie art. 15 ust. 2 ustawy z dnia 6 marca 2018 r. przedsiębiorca musi złożyć oświadczenie w terminie 14 dni od doręczenia wezwania.",
           "usage": {
-            "input": 19663,
-            "output": 74
+            "input": 19378,
+            "output": 490
           },
-          "cost_usd": 0.0768218,
+          "cost_usd": 0.07984179999999999,
           "verdict": "PASS",
           "reasons": []
         }
@@ -370,22 +501,22 @@
       "id": "s15-legal-duty",
       "runs": [
         {
-          "response": "Przedsiębiorca składa oświadczenie w terminie 14 dni od doręczenia wezwania. Jeśli go nie złoży, wniosek zostanie pozostawiony bez rozpoznania.",
+          "response": "Przedsiębiorca składa oświadczenie w ciągu 14 dni od doręczenia wezwania. Jeśli go nie złoży, wniosek zostanie pozostawiony bez rozpoznania.",
           "usage": {
-            "input": 19642,
-            "output": 264
+            "input": 19360,
+            "output": 486
           },
-          "cost_usd": 0.0786378,
+          "cost_usd": 0.0797298,
           "verdict": "PASS",
           "reasons": []
         },
         {
-          "response": "Przedsiębiorca składa oświadczenie w ciągu 14 dni od doręczenia wezwania. Jeśli tego nie zrobi, urząd zostawi wniosek bez rozpoznania.",
+          "response": "Przedsiębiorca składa oświadczenie w ciągu 14 dni od doręczenia wezwania. Jeśli przedsiębiorca tego nie zrobi, wniosek zostanie pozostawiony bez rozpoznania.",
           "usage": {
-            "input": 19637,
-            "output": 74
+            "input": 19357,
+            "output": 406
           },
-          "cost_usd": 0.0767178,
+          "cost_usd": 0.0789178,
           "verdict": "PASS",
           "reasons": []
         }
@@ -397,20 +528,20 @@
         {
           "response": "W badaniu zaobserwowano istotny statystycznie wzrost dokładności klasyfikacji z 81,2% do 84,7% (p = 0,03), co może sugerować, że zastosowana metoda poprawia stabilność modelu.",
           "usage": {
-            "input": 19643,
-            "output": 494
+            "input": 19363,
+            "output": 238
           },
-          "cost_usd": 0.0809418,
+          "cost_usd": 0.0772618,
           "verdict": "PASS",
           "reasons": []
         },
         {
           "response": "W badaniu zaobserwowano istotny statystycznie wzrost dokładności klasyfikacji z 81,2% do 84,7% (p = 0,03), co może sugerować, że zastosowana metoda poprawia stabilność modelu.",
           "usage": {
-            "input": 19650,
-            "output": 279
+            "input": 19367,
+            "output": 233
           },
-          "cost_usd": 0.0788198,
+          "cost_usd": 0.0772278,
           "verdict": "PASS",
           "reasons": []
         }
@@ -422,20 +553,20 @@
         {
           "response": "Zaobserwowana korelacja (r = 0,42; 95% CI: 0,18–0,61) może wynikać ze sposobu doboru próby. Wynik nie pozwala stwierdzić, że interwencja spowodowała zmianę zachowania.",
           "usage": {
-            "input": 19646,
-            "output": 109
+            "input": 19359,
+            "output": 110
           },
-          "cost_usd": 0.0771038,
+          "cost_usd": 0.0759658,
           "verdict": "PASS",
           "reasons": []
         },
         {
           "response": "Zaobserwowana korelacja (r = 0,42; 95% CI: 0,18–0,61) może wynikać ze sposobu doboru próby. Wynik nie pozwala stwierdzić, że interwencja spowodowała zmianę zachowania.",
           "usage": {
-            "input": 19642,
-            "output": 109
+            "input": 19357,
+            "output": 108
           },
-          "cost_usd": 0.0770878,
+          "cost_usd": 0.0759378,
           "verdict": "PASS",
           "reasons": []
         }
@@ -447,20 +578,20 @@
         {
           "response": "Endpoint `POST /v1/search` jest częścią procesu. Dokumentacja: https://example.com/docs. Cytat: \"Model zwrócił 42 wyniki\". Wynik wzrósł z 12,4% do 15,1%.",
           "usage": {
-            "input": 19655,
+            "input": 19376,
             "output": 85
           },
-          "cost_usd": 0.0768998,
+          "cost_usd": 0.0757838,
           "verdict": "PASS",
           "reasons": []
         },
         {
           "response": "Endpoint `POST /v1/search` jest częścią procesu. Dokumentacja: https://example.com/docs. Cytat: \"Model zwrócił 42 wyniki\". Wynik wzrósł z 12,4% do 15,1%.",
           "usage": {
-            "input": 19659,
+            "input": 19374,
             "output": 85
           },
-          "cost_usd": 0.07691579999999999,
+          "cost_usd": 0.0757758,
           "verdict": "PASS",
           "reasons": []
         }
@@ -472,20 +603,20 @@
         {
           "response": "Autor zaczyna od zdania „Warto podkreślić, że transformacja ma kluczowe znaczenie”, ale nie podaje żadnego przykładu.",
           "usage": {
-            "input": 19624,
-            "output": 59
+            "input": 19341,
+            "output": 357
           },
-          "cost_usd": 0.07651580000000001,
+          "cost_usd": 0.0783638,
           "verdict": "PASS",
           "reasons": []
         },
         {
-          "response": "Autor zaczyna od zdania „Warto podkreślić, że transformacja ma kluczowe znaczenie\", ale nie przedstawia żadnego przykładu.",
+          "response": "Autor zaczyna od zdania „Warto podkreślić, że transformacja ma kluczowe znaczenie\", ale nie podaje żadnego przykładu.",
           "usage": {
-            "input": 19621,
-            "output": 60
+            "input": 19335,
+            "output": 157
           },
-          "cost_usd": 0.07651379999999999,
+          "cost_usd": 0.0763398,
           "verdict": "PASS",
           "reasons": []
         }
@@ -497,20 +628,20 @@
         {
           "response": "Endpoint `POST /v1/search` waliduje pole `query`, a następnie Search Worker publikuje zdarzenie `search.requested` do kolejki `search-jobs`. Retry policy pozostaje bez zmian w wersji 2.4.1.",
           "usage": {
-            "input": 19666,
+            "input": 19381,
             "output": 90
           },
-          "cost_usd": 0.0769938,
+          "cost_usd": 0.07585380000000001,
           "verdict": "PASS",
           "reasons": []
         },
         {
-          "response": "Endpoint `POST /v1/search` waliduje pole `query`, po czym Search Worker publikuje zdarzenie `search.requested` do kolejki `search-jobs`. Retry policy pozostaje bez zmian w wersji 2.4.1.",
+          "response": "Endpoint `POST /v1/search` wykonuje walidację pola `query`, po czym Search Worker publikuje zdarzenie `search.requested` do kolejki `search-jobs`. Retry policy pozostaje bez zmian w wersji 2.4.1.",
           "usage": {
-            "input": 19665,
-            "output": 451
+            "input": 19382,
+            "output": 93
           },
-          "cost_usd": 0.0805998,
+          "cost_usd": 0.07588779999999999,
           "verdict": "PASS",
           "reasons": []
         }
@@ -520,22 +651,22 @@
       "id": "s11-voice-sample-dash",
       "runs": [
         {
-          "response": "Nowy plan może przynieść istotne korzyści — na razie jednak nie mamy danych potwierdzających jego skuteczność.",
+          "response": "Nowy plan może przynieść istotne korzyści — na razie nie mamy jednak danych, które potwierdzałyby jego skuteczność.",
           "usage": {
-            "input": 19704,
-            "output": 785
+            "input": 19412,
+            "output": 540
           },
-          "cost_usd": 0.0840958,
+          "cost_usd": 0.0804778,
           "verdict": "PASS",
           "reasons": []
         },
         {
-          "response": "Nowy plan może przynieść korzyści — na razie nie mamy danych potwierdzających jego skuteczność.",
+          "response": "Nowy plan może przynieść istotne korzyści — ale na obecnym etapie nie mamy danych, które potwierdzałyby jego skuteczność.",
           "usage": {
-            "input": 19700,
-            "output": 647
+            "input": 19421,
+            "output": 514
           },
-          "cost_usd": 0.0826998,
+          "cost_usd": 0.0802538,
           "verdict": "PASS",
           "reasons": []
         }
@@ -547,20 +678,145 @@
         {
           "response": "Projekt rozpoczął się 3 marca 2026 r. Zespół miał sześć tygodni i budżet 180 000 zł. Kluczowym wyzwaniem okazała się integracja danych.\n\nPierwszy test objął 42 konsultantów. Średni czas odpowiedzi spadł z 18 do 11 minut, ale liczba ponownych kontaktów nie zmieniła się. Wynik może zależeć od tego, że test trwał tylko 14 dni.\n\nZarząd zdecyduje o drugim teście 30 kwietnia 2026 r.",
           "usage": {
-            "input": 19810,
-            "output": 637
+            "input": 19515,
+            "output": 514
           },
-          "cost_usd": 0.0830398,
+          "cost_usd": 0.0806298,
           "verdict": "PASS",
           "reasons": []
         },
         {
           "response": "Projekt rozpoczął się 3 marca 2026 r. Zespół miał sześć tygodni i budżet 180 000 zł. Kluczowym wyzwaniem okazała się integracja danych.\n\nPierwszy test objął 42 konsultantów. Średni czas odpowiedzi spadł z 18 do 11 minut, ale liczba ponownych kontaktów nie zmieniła się. Wynik może zależeć od tego, że test trwał tylko 14 dni.\n\nZarząd zdecyduje o drugim teście 30 kwietnia 2026 r.",
           "usage": {
-            "input": 19801,
-            "output": 478
+            "input": 19521,
+            "output": 547
           },
-          "cost_usd": 0.0814138,
+          "cost_usd": 0.0809838,
+          "verdict": "PASS",
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "id": "s20-travel-metaphor",
+      "runs": [
+        {
+          "response": "Głównym punktem wycieczki jest Edynburg. Poza miastem plan obejmuje tylko miejsca dostępne bez auta.",
+          "usage": {
+            "input": 19315,
+            "output": 51
+          },
+          "cost_usd": 0.07519980000000001,
+          "verdict": "PASS",
+          "reasons": []
+        },
+        {
+          "response": "Głównym punktem wycieczki jest Edynburg. Poza miastem plan obejmuje tylko miejsca dostępne bez auta.",
+          "usage": {
+            "input": 19313,
+            "output": 51
+          },
+          "cost_usd": 0.0751918,
+          "verdict": "PASS",
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "id": "s22-literal-term",
+      "runs": [
+        {
+          "response": "Obniżenie środka ciężkości poprawia stabilność pojazdu.",
+          "usage": {
+            "input": 19305,
+            "output": 29
+          },
+          "cost_usd": 0.07493979999999999,
+          "verdict": "PASS",
+          "reasons": []
+        },
+        {
+          "response": "Obniżenie środka ciężkości poprawia stabilność pojazdu.",
+          "usage": {
+            "input": 19305,
+            "output": 29
+          },
+          "cost_usd": 0.07493979999999999,
+          "verdict": "PASS",
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "id": "s22-figurative-use",
+      "runs": [
+        {
+          "response": "W drugiej części artykułu środek ciężkości analizy przesuwa się z kosztów na jakość usług.",
+          "usage": {
+            "input": 19328,
+            "output": 40
+          },
+          "cost_usd": 0.07514180000000001,
+          "verdict": "PASS",
+          "reasons": []
+        },
+        {
+          "response": "W drugiej części artykułu środek ciężkości analizy przesuwa się z kosztów na jakość usług.",
+          "usage": {
+            "input": 19327,
+            "output": 40
+          },
+          "cost_usd": 0.0751378,
+          "verdict": "PASS",
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "id": "s24-temporary-stay",
+      "runs": [
+        {
+          "response": "Zatrzymaj się blisko dworca na weekend.",
+          "usage": {
+            "input": 19364,
+            "output": 22
+          },
+          "cost_usd": 0.0751058,
+          "verdict": "PASS",
+          "reasons": []
+        },
+        {
+          "response": "Zatrzymaj się blisko dworca na weekend.",
+          "usage": {
+            "input": 19363,
+            "output": 22
+          },
+          "cost_usd": 0.07510180000000001,
+          "verdict": "PASS",
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "id": "s26-remain-in-place",
+      "runs": [
+        {
+          "response": "Zostań na dworcu do przyjazdu Anny.",
+          "usage": {
+            "input": 19342,
+            "output": 22
+          },
+          "cost_usd": 0.07501780000000001,
+          "verdict": "PASS",
+          "reasons": []
+        },
+        {
+          "response": "Zostań na dworcu do przyjazdu Anny.",
+          "usage": {
+            "input": 19353,
+            "output": 22
+          },
+          "cost_usd": 0.07506180000000001,
           "verdict": "PASS",
           "reasons": []
         }
@@ -572,20 +828,20 @@
         {
           "response": "Wypełnij ten formularz, żeby zgłosić sprawę.",
           "usage": {
-            "input": 19584,
+            "input": 19291,
             "output": 27
           },
-          "cost_usd": 0.0760358,
+          "cost_usd": 0.07486380000000001,
           "verdict": "PASS",
           "reasons": []
         },
         {
           "response": "Wypełnij ten formularz, żeby zgłosić sprawę.",
           "usage": {
-            "input": 19586,
+            "input": 19295,
             "output": 27
           },
-          "cost_usd": 0.0760438,
+          "cost_usd": 0.0748798,
           "verdict": "PASS",
           "reasons": []
         }
@@ -595,22 +851,22 @@
       "id": "s01-officialese",
       "runs": [
         {
-          "response": "Aby dokonać zgłoszenia, wypełnij ten formularz i przekaż go do właściwej komórki organizacyjnej w ciągu 7 dni od zdarzenia.",
+          "response": "Aby złożyć zgłoszenie, należy wypełnić ten formularz i przekazać go do właściwej komórki organizacyjnej w ciągu 7 dni od dnia zdarzenia.",
           "usage": {
-            "input": 19639,
-            "output": 66
+            "input": 19347,
+            "output": 839
           },
-          "cost_usd": 0.0766458,
+          "cost_usd": 0.0832078,
           "verdict": "PASS",
           "reasons": []
         },
         {
-          "response": "Aby zgłosić zdarzenie, wypełnij ten formularz i przekaż go do właściwej komórki organizacyjnej w ciągu 7 dni od dnia zdarzenia.",
+          "response": "Aby dokonać zgłoszenia, wypełnij ten formularz i przekaż go do właściwej komórki organizacyjnej w ciągu 7 dni od zdarzenia.",
           "usage": {
-            "input": 19636,
-            "output": 832
+            "input": 19346,
+            "output": 66
           },
-          "cost_usd": 0.0842938,
+          "cost_usd": 0.07547380000000001,
           "verdict": "PASS",
           "reasons": []
         }
@@ -620,22 +876,22 @@
       "id": "x-servers",
       "runs": [
         {
-          "response": "Dzisiaj kupiono trzy serwery. To element strategii.",
+          "response": "Dzisiaj kupiono trzy serwery. Ten zakup jest elementem strategii.",
           "usage": {
-            "input": 19619,
-            "output": 310
+            "input": 19337,
+            "output": 412
           },
-          "cost_usd": 0.0790058,
+          "cost_usd": 0.07889779999999999,
           "verdict": "PASS",
           "reasons": []
         },
         {
-          "response": "Dziś kupiono trzy serwery. To część strategii.",
+          "response": "Dzisiaj kupiono trzy serwery. To element strategii.",
           "usage": {
-            "input": 19613,
-            "output": 23
+            "input": 19337,
+            "output": 347
           },
-          "cost_usd": 0.07611180000000001,
+          "cost_usd": 0.07824779999999999,
           "verdict": "PASS",
           "reasons": []
         }
@@ -645,22 +901,22 @@
       "id": "x-dash-cluster",
       "runs": [
         {
-          "response": "Nasz mały, ale doświadczony zespół wdrożył system w sześć tygodni bez przestojów i zmieścił się w budżecie.",
+          "response": "Nasz zespół, mały, ale doświadczony, wdrożył system w sześć tygodni, bez przestojów, i zmieścił się w budżecie.",
           "usage": {
-            "input": 19601,
-            "output": 348
+            "input": 19316,
+            "output": 56
           },
-          "cost_usd": 0.0793138,
+          "cost_usd": 0.0752538,
           "verdict": "PASS",
           "reasons": []
         },
         {
-          "response": "Nasz zespół, mały, ale doświadczony, wdrożył system w sześć tygodni bez przestojów i zmieścił się w budżecie.",
+          "response": "Nasz mały, ale doświadczony zespół wdrożył system w sześć tygodni bez przestojów i zmieścił się w budżecie.",
           "usage": {
-            "input": 19610,
-            "output": 296
+            "input": 19314,
+            "output": 478
           },
-          "cost_usd": 0.0788298,
+          "cost_usd": 0.0794658,
           "verdict": "PASS",
           "reasons": []
         }
@@ -670,22 +926,22 @@
       "id": "s02-marketing-slop",
       "runs": [
         {
-          "response": "Nasze rozwiązanie wspiera transformację cyfrową i pozwala firmom lepiej wykorzystać dane.\n\nUwaga: tekst nie mówi, co rozwiązanie faktycznie robi, więc nie dopisywałem funkcji ani efektów. Jeśli podasz, co robi, dla kogo i z jakim skutkiem, zastąpię to ogólne zdanie konkretem.",
+          "response": "Nasze rozwiązanie wspiera transformację cyfrową i umożliwia firmom wykorzystanie potencjału danych.\n\nTekst nie mówi, co to rozwiązanie robi ani dla kogo jest, więc nie dopisywałem funkcji, korzyści ani liczb. Jeśli podasz, co robi i jaki efekt dają dane, zdanie da się zamienić na konkretną ofertę.",
           "usage": {
-            "input": 19653,
-            "output": 516
+            "input": 19368,
+            "output": 586
           },
-          "cost_usd": 0.08120179999999999,
+          "cost_usd": 0.0807618,
           "verdict": "PASS",
           "reasons": []
         },
         {
-          "response": "Nasze rozwiązanie wspiera transformację cyfrową i pozwala firmom wykorzystać dane.\n\nTekst nie mówi, co rozwiązanie robi, dla kogo jest ani jaki daje wynik, więc niczego nie dopisywałem. Jeśli podasz funkcję i grupę docelową, zamienię to na konkretny komunikat.",
+          "response": "Nasze rozwiązanie pomaga firmom wykorzystać dane w transformacji cyfrowej.\n\nŹródło nie mówi, co rozwiązanie robi, na jakich danych działa ani jaki efekt daje, więc zostawiłem tylko to, co z niego wynika. Jeśli podasz funkcję i odbiorcę, napiszę wersję z konkretem.",
           "usage": {
-            "input": 19648,
-            "output": 446
+            "input": 19366,
+            "output": 135
           },
-          "cost_usd": 0.0804818,
+          "cost_usd": 0.0762438,
           "verdict": "PASS",
           "reasons": []
         }
@@ -697,20 +953,45 @@
         {
           "response": "Każdy dział używa innej definicji klienta premium.",
           "usage": {
-            "input": 19606,
+            "input": 19327,
             "output": 21
           },
-          "cost_usd": 0.0760638,
+          "cost_usd": 0.0749478,
           "verdict": "PASS",
           "reasons": []
         },
         {
           "response": "Każdy dział używa innej definicji klienta premium.",
           "usage": {
-            "input": 19611,
+            "input": 19323,
             "output": 21
           },
-          "cost_usd": 0.0760838,
+          "cost_usd": 0.07493179999999999,
+          "verdict": "PASS",
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "id": "x-synonym-cycling",
+      "runs": [
+        {
+          "response": "Agent przyjmuje zgłoszenie, nadaje mu priorytet i przekazuje sprawę konsultantowi.",
+          "usage": {
+            "input": 19347,
+            "output": 46
+          },
+          "cost_usd": 0.07527779999999999,
+          "verdict": "PASS",
+          "reasons": []
+        },
+        {
+          "response": "Agent przyjmuje zgłoszenie, nadaje mu priorytet i przekazuje sprawę konsultantowi.",
+          "usage": {
+            "input": 19348,
+            "output": 46
+          },
+          "cost_usd": 0.0752818,
           "verdict": "PASS",
           "reasons": []
         }
@@ -720,22 +1001,22 @@
       "id": "a-audit-clean",
       "runs": [
         {
-          "response": "**Audyt**\n\nNie znalazłem istotnych problemów. Tekst jest konkretny i krótki.\n\n- 🟢 **„Użytkownicy zgłosili 14 błędów w procesie logowania.\"** Zdanie ma aktora, czasownik w stronie czynnej, liczbę i miejsce problemu. `Użytkownicy` to ogólne słowo, ale tu wystarczy, bo źródło nie podaje nic bliższego. Bez zmian.\n- 🟢 **„Zespół naprawi je przed wydaniem wersji 2.3.\"** Jest aktor, czynność i termin wyrażony wersją. `Przed wydaniem` to zwykła konstrukcja, a nie rzeczownikowa mgła. Bez zmian.\n\nJedna uwaga warunkowa, nie defekt: tekst nie mówi, czy zespół naprawi wszystkie 14 błędów, czy tylko część. `je` odnosi się do wszystkich, więc zdanie obiecuje komplet. Jeśli tak jest naprawdę, nic nie trzeba zmieniać.",
+          "response": "**Audyt: nie wykryłem istotnego problemu.** Tekst jest konkretny i nie ma w nim wzorców, które trzeba by poprawiać.\n\n- 🟢 **„Użytkownicy zgłosili 14 błędów w procesie logowania\"**: samo słowo „użytkownicy\" jest ogólne, ale zdanie ma liczbę (14), nazwany obszar (proces logowania) i czynnego wykonawcę. Nie ma tu mgły, więc nic nie trzeba zmieniać.\n- 🟢 **„Zespół naprawi je przed wydaniem wersji 2.3\"**: ma wykonawcę, czynność, termin i numer wersji. „Przed wydaniem\" to naturalne rzeczownikowe wyrażenie, a nie urzędowa nominalizacja. Czas przyszły i forma czynna są jasne i nie przesadzają z pewnością.\n- 🟢 **Rytm i struktura**: dwa krótkie zdania, bez wzmacniaczy, rozbudowanych łączników, sloganów i efektownego zakończenia.\n\nJeśli ten fragment jest częścią dłuższego tekstu, mogę ocenić także resztę. Samo to, co wkleiłeś, nie wymaga poprawek.",
           "usage": {
-            "input": 19604,
-            "output": 382
+            "input": 19321,
+            "output": 628
           },
-          "cost_usd": 0.0796658,
+          "cost_usd": 0.0809938,
           "verdict": "MANUAL",
           "reasons": []
         },
         {
-          "response": "**Audyt: brak istotnych problemów**\n\n- **Zielony:** „Użytkownicy zgłosili 14 błędów w procesie logowania.” Zdanie jest konkretne: podaje liczbę, obszar i aktora. „Użytkownicy” to słowo ogólne, ale w tym kontekście nie ukrywa niczego istotnego, bo źródło nie daje więcej szczegółów. Zostawić bez zmian.\n- **Zielony:** „Zespół naprawi je przed wydaniem wersji 2.3.” Zdanie ma czasownik w formie osobowej i jasne zobowiązanie z terminem. „Przed wydaniem” to nominalizacja, ale zwyczajna i naturalna. Numer wersji jest chroniony. Zostawić bez zmian.\n\nNie widzę tu wzorców typowych dla sztucznego ani urzędowego stylu: nie ma wypełniaczy, zawyżonej wagi, ogólnikowych zakończeń ani kalk. Jedyna niewiadoma to, o jaki „zespół” chodzi i czy zobowiązanie jest potwierdzone, ale to kwestia kontekstu spoza tekstu, a nie wady samego zdania.",
+          "response": "**Audyt: nie stwierdzam istotnych problemów.** Tekst jest konkretny, krótki i w naturalnym rejestrze notatki o statusie.\n\n- **Zielony:** „Użytkownicy zgłosili 14 błędów w procesie logowania\". Czasownik w stronie czynnej, podany jest wykonawca i liczba. Samo słowo „użytkownicy\" jest ogólne, ale w krótkiej informacji o stanie prac to wystarcza. Nie ma tu mgły ani nominalizacji.\n- **Zielony:** „Zespół naprawi je przed wydaniem wersji 2.3\". Wykonawca, czynność i termin są nazwane wprost. Konstrukcja „przed wydaniem\" jest zwykłą polszczyzną, a numer wersji pozostaje bez zmian.\n\nNie widzę śladów oficjalizmu, patosu, pustych otwarć ani generycznych zakończeń. Jeśli tekst ma być częścią dłuższego komunikatu, jego ocena zależy od kontekstu, którego tu nie ma, ale w samych dwóch zdaniach nic tego nie wymaga.",
           "usage": {
-            "input": 19597,
-            "output": 429
+            "input": 19322,
+            "output": 582
           },
-          "cost_usd": 0.08010779999999999,
+          "cost_usd": 0.0805378,
           "verdict": "MANUAL",
           "reasons": []
         }
@@ -745,22 +1026,22 @@
       "id": "a-audit-mixed",
       "runs": [
         {
-          "response": "## Audyt\n\n**1. Żółty: zapowiedź wagi zdania**\nFragment: „Warto podkreślić, że projekt ma…\"\nWzorzec: throat-clearing. Opener mówi czytelnikowi, że coś jest ważne, ale nic do zdania nie dodaje. Kierunek: usunąć go i zacząć od samej tezy.\n\n**2. Żółty: ocena bez oparcia**\nFragment: „ma ogromny potencjał\"\nWzorzec: nadęta ocena, która jednocześnie działa jak generyczne zakończenie. Pasowałaby do dowolnego projektu. Tekst nie mówi, w czym ten potencjał polega ani po czym go poznać. Znaczenie da się odczytać, więc to nie czerwone. Kierunek: jeśli to opinia autora, zmniejszyć ją do tego, co tekst już podaje (zakres: trzy moduły, termin wdrożenia), albo wyciąć. Nie dopisywać korzyści, liczb ani przykładów, bo źródło ich nie zawiera. Jeśli konkret jest potrzebny, trzeba dopytać autora, co dokładnie ma na myśli.\n\n**3. Zielony: „W zakresie umowy mieszczą się trzy moduły\"**\n„W zakresie\" to zwykle urzędowy wypełniacz, ale tu po wyrażeniu stoi jeden rzeczownik, który nazywa realny zakres (umowa). Zastępniki w rodzaju „umowa obejmuje\" byłyby tylko zamianą synonimów. Do zostawienia.\n\n**4. Zielony: „Dostawca wdroży je do 30 czerwca.\"**\nJest wykonawca, czasownik, konkretny termin. Zdanie jest zwarte i nie wymaga zmian. Tekst nie podaje roku, więc nie należy go dopisywać.\n\n**Podsumowanie:** problem skupia się w pierwszym zdaniu (opener plus ogólnikowa ocena). Drugie i trzecie są konkretne i poprawne.",
+          "response": "## Audyt\n\n**1. Wtrącenie ważące zdanie: żółty**\n> „Warto podkreślić, że…\"\n\nZapowiada wagę zdania zamiast ją uzasadnić. Zdanie znaczy to samo bez tego początku. Kierunek: usunąć otwarcie i zacząć od samego twierdzenia.\n\n**2. Ogólnik bez poparcia: żółty**\n> „projekt ma ogromny potencjał\"\n\nPrzymiotnik „ogromny\" nie ma oparcia w tekście: nie wiadomo, jaki to potencjał, dla kogo ani wobec czego. To zdanie pasowałoby do dowolnego projektu. Kierunek: oprzeć je na fakcie ze źródła, np. na tym, co dzięki trzem modułom ma się zmienić, albo osłabić twierdzenie, albo je usunąć. Tekst nie podaje takiego faktu, więc trzeba go dostarczyć od autora. Nie należy go wymyślać.\n\n**3. „W zakresie umowy\": zielony**\n> „W zakresie umowy mieszczą się trzy moduły: sprzedaż, magazyn i księgowość.\"\n\nPo wyrażeniu stoi jeden rzeczownik i nazywa ono realny zakres. Zdanie jest konkretne, a dwukropek wprowadza wyliczenie. Zostawić bez zmian.\n\n**4. Termin i wykonawca: zielony**\n> „Dostawca wdroży je do 30 czerwca.\"\n\nJest wskazany wykonawca, czasownik w formie osobowej i termin. Brak roku wynika z kontekstu, którego tu nie ma, więc nie traktuję tego jako wady.\n\n**Podsumowanie:** problem dotyczy tylko pierwszego zdania. Dwa następne są konkretne i nie wymagają poprawek.",
           "usage": {
-            "input": 19633,
-            "output": 1212
+            "input": 19349,
+            "output": 1037
           },
-          "cost_usd": 0.0880818,
+          "cost_usd": 0.0851958,
           "verdict": "MANUAL",
           "reasons": []
         },
         {
-          "response": "## Audyt\n\n**1. Żółty: zapowiedź wagi zdania**\nFragment: „Warto podkreślić, że projekt ma ogromny potencjał.\"\nFraza „warto podkreślić, że\" nie wnosi treści. Zdanie znaczy to samo bez niej. Kierunek: zacząć od samej tezy.\n\n**2. Żółty: ogólnik bez oparcia**\nFragment: „projekt ma ogromny potencjał\"\nW tekście nie ma niczego, co ten potencjał uzasadnia: ani wyniku, ani liczby, ani porównania. To zdanie pasowałoby do dowolnego projektu. Kierunek: jeśli autor ma konkret (co projekt ma dać i komu), wstawić go zamiast przymiotnika. Jeśli nie, zmniejszyć twierdzenie albo je usunąć. Sam tekst nie daje podstaw, żeby uzupełnić je za autora.\n\n**3. Zielony: „W zakresie umowy mieszczą się…\"**\n„W zakresie\" jest urzędowe, ale po nim stoi jeden rzeczownik, który nazywa rzeczywisty zakres (umowa). Całość jest zrozumiała i dokładna. Kierunek: zostawić, bo zamiana na „umowa obejmuje\" byłaby tylko kwestią gustu, nie naprawą wady.\n\n**4. Zielony: „Dostawca wdroży je do 30 czerwca.\"**\nZdanie ma nazwanego wykonawcę, czasownik w stronie czynnej i konkretny termin. Kierunek: zostawić bez zmian. Ewentualny brak roku przy dacie zależy od kontekstu dokumentu, którego nie widać, więc nie jest to usterka tego fragmentu.\n\n**Podsumowanie:** problem skupia się w pierwszym zdaniu (zapowiedź wagi i niepoparte twierdzenie). Zdania drugie i trzecie są konkretne i nie wymagają poprawek.",
+          "response": "## Audyt\n\n**1. Zapowiadacz wagi. Żółty**\nFragment: „Warto podkreślić, że projekt…\"\nWzorzec: throat-clearing. Zdanie znaczy to samo bez tego otwarcia, więc zapowiedź niczego nie wnosi. Kierunek poprawki: zacząć od samego twierdzenia.\n\n**2. Pusty superlatyw. Żółty**\nFragment: „projekt ma ogromny potencjał\"\nWzorce: nadęta ocena i generyczne zakończenie. Zdanie pasowałoby do dowolnego projektu (test przenośności), nie mówi, w czym ten potencjał polega, i nie ma poparcia w pozostałych zdaniach. Kierunek poprawki:\n- usunąć zdanie,\n- zmniejszyć twierdzenie,\n- jeśli autor ma konkretną podstawę tej oceny (wynik, koszt, ryzyko, porównanie), dopisać ją. Z tekstu jej nie da się wywieść.\n\n**3. „W zakresie umowy mieszczą się…\". Zielony**\nWzorzec: „w zakresie\" z oficjalnego rejestru. Po wyrażeniu stoi jeden rzeczownik i wskazuje ono rzeczywisty zakres umowy, a nie otwiera łańcucha rzeczowników. Zdanie podaje też konkretną listę (sprzedaż, magazyn, księgowość). Zostawić bez zmian.\n\n**4. „Dostawca wdroży je do 30 czerwca.\" Zielony**\nZdanie ma nazwanego wykonawcę, stronę czynną i konkretny termin. Zostawić bez zmian.\n\n**Podsumowanie:** Realny problem dotyczy tylko pierwszego zdania i ma dwie warstwy, formułę otwierającą i niepopartą ocenę. Dwa pozostałe zdania są konkretne i poprawne.",
           "usage": {
-            "input": 19632,
-            "output": 1207
+            "input": 19345,
+            "output": 1041
           },
-          "cost_usd": 0.08802779999999999,
+          "cost_usd": 0.0852198,
           "verdict": "MANUAL",
           "reasons": []
         }

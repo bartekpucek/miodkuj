@@ -52,6 +52,36 @@
       }
     },
     {
+      "id": "clean-business-wording",
+      "kind": "clean",
+      "source": "probe",
+      "mode": "edit",
+      "prompt": "Popraw styl:\nRozwiązanie dedykowane dla firm z sektora MŚP adresuje problem ręcznego raportowania. Zespół robi deploy w każdy piątek, po code review.",
+      "checks": {
+        "equals": "Rozwiązanie dedykowane dla firm z sektora MŚP adresuje problem ręcznego raportowania. Zespół robi deploy w każdy piątek, po code review."
+      }
+    },
+    {
+      "id": "clean-business-calques",
+      "kind": "clean",
+      "source": "probe",
+      "mode": "edit",
+      "prompt": "Napisz to po ludzku:\nDedykowany zespół adresuje każde zgłoszenie w ciągu godziny, bo na koniec dnia klient ocenia nas po czasie reakcji.",
+      "checks": {
+        "equals": "Dedykowany zespół adresuje każde zgłoszenie w ciągu godziny, bo na koniec dnia klient ocenia nas po czasie reakcji."
+      }
+    },
+    {
+      "id": "clean-business-unnamed",
+      "kind": "clean",
+      "source": "probe",
+      "mode": "edit",
+      "prompt": "Usuń slop:\nFinalnie zaaplikowało 40 osób, a 12 przeszło do drugiego etapu. Benefity opisaliśmy w ogłoszeniu, a opóźnienia eskalujemy do managera.",
+      "checks": {
+        "equals": "Finalnie zaaplikowało 40 osób, a 12 przeszło do drugiego etapu. Benefity opisaliśmy w ogłoszeniu, a opóźnienia eskalujemy do managera."
+      }
+    },
+    {
       "id": "s08-clean-human-prose",
       "kind": "clean",
       "source": "scenario 8",
@@ -187,6 +217,45 @@
         ],
         "excludes_ci": [
           "rewolucj"
+        ]
+      }
+    },
+    {
+      "id": "mixed-business-wording",
+      "kind": "mixed",
+      "source": "probe",
+      "mode": "edit",
+      "prompt": "Usuń slop:\nWarto zauważyć, że w dzisiejszych czasach onboarding jest kluczowy. Nasz onboarding trwa 5 dni i ma dedykowanego opiekuna. Feedback zbieramy po pierwszym sprincie.",
+      "checks": {
+        "contains": [
+          "Nasz onboarding trwa 5 dni i ma dedykowanego opiekuna.",
+          "Feedback zbieramy po pierwszym sprincie."
+        ],
+        "excludes": [
+          "Warto zauważyć",
+          "w dzisiejszych czasach"
+        ]
+      }
+    },
+    {
+      "id": "mixed-long-form",
+      "kind": "mixed",
+      "source": "probe",
+      "mode": "edit",
+      "prompt": "Popraw styl:\nW dzisiejszych czasach obsługa klienta odgrywa kluczową rolę. W 2025 r. nasz zespół odpowiedział na 18 400 zgłoszeń, a średni czas odpowiedzi wyniósł 3 godziny 40 minut.\n\nUstalono, że 62% zgłoszeń dotyczyło faktur. W przypadku reklamacji klient dostaje odpowiedź w ciągu 14 dni. Z jednej strony skróciliśmy kolejkę o połowę, z drugiej strony liczba ponownych kontaktów wzrosła z 9% do 12%.\n\nWarto podkreślić, że to krok w dobrym kierunku. W ramach budżetu na 2026 r. zatrudnimy dwie osoby do działu faktur.",
+      "scope": "full",
+      "checks": {
+        "contains": [
+          "W 2025 r. nasz zespół odpowiedział na 18 400 zgłoszeń, a średni czas odpowiedzi wyniósł 3 godziny 40 minut.",
+          "Ustalono, że 62% zgłoszeń dotyczyło faktur.",
+          "W przypadku reklamacji klient dostaje odpowiedź w ciągu 14 dni.",
+          "Z jednej strony skróciliśmy kolejkę o połowę, z drugiej strony liczba ponownych kontaktów wzrosła z 9% do 12%.",
+          "W ramach budżetu na 2026 r. zatrudnimy dwie osoby do działu faktur."
+        ],
+        "excludes": [
+          "W dzisiejszych czasach",
+          "Warto podkreślić",
+          "krok w dobrym kierunku"
         ]
       }
     },
@@ -361,6 +430,78 @@
       }
     },
     {
+      "id": "s20-travel-metaphor",
+      "kind": "protected",
+      "source": "scenario 20",
+      "mode": "edit",
+      "prompt": "Popraw fragment praktycznego planu podróży:\nŚrodek ciężkości to Edynburg. Poza miastem plan obejmuje tylko miejsca dostępne bez auta.",
+      "checks": {
+        "contains": [
+          "Edynburg",
+          "Poza miastem plan obejmuje tylko miejsca dostępne bez auta."
+        ],
+        "excludes": [
+          "Środek ciężkości"
+        ],
+        "excludes_ci": [
+          "bazą",
+          "bazę",
+          "nocleg"
+        ]
+      }
+    },
+    {
+      "id": "s22-literal-term",
+      "kind": "protected",
+      "source": "scenario 22",
+      "mode": "edit",
+      "prompt": "Popraw tylko rzeczywisty problem w opisie technicznym:\nObniżenie środka ciężkości poprawia stabilność pojazdu.",
+      "checks": {
+        "equals": "Obniżenie środka ciężkości poprawia stabilność pojazdu."
+      }
+    },
+    {
+      "id": "s22-figurative-use",
+      "kind": "protected",
+      "source": "scenario 22",
+      "mode": "edit",
+      "prompt": "Popraw tylko rzeczywisty problem w omówieniu artykułu naukowego:\nW drugiej części artykułu środek ciężkości analizy przesuwa się z kosztów na jakość usług.",
+      "checks": {
+        "equals": "W drugiej części artykułu środek ciężkości analizy przesuwa się z kosztów na jakość usług."
+      }
+    },
+    {
+      "id": "s24-temporary-stay",
+      "kind": "protected",
+      "source": "scenario 24",
+      "mode": "edit",
+      "prompt": "Popraw polską poradę dotyczącą noclegu podczas weekendowej wycieczki. Angielski oryginał jest źródłem znaczenia.\n\nOryginał:\nStay near the station for the weekend.\n\nPolska wersja:\nZamieszkaj blisko dworca na weekend.",
+      "scope": "full",
+      "checks": {
+        "contains": [
+          "dworca",
+          "weekend"
+        ],
+        "contains_ci": [
+          "zatrzymaj się"
+        ]
+      }
+    },
+    {
+      "id": "s26-remain-in-place",
+      "kind": "protected",
+      "source": "scenario 26",
+      "mode": "edit",
+      "prompt": "Popraw polską wersję instrukcji. Angielski oryginał jest źródłem znaczenia.\n\nOryginał:\nStay at the station until Anna arrives.\n\nPolska wersja:\nZatrzymaj się na dworcu do przyjazdu Anny.",
+      "scope": "full",
+      "checks": {
+        "contains_ci": [
+          "zostań",
+          "ann"
+        ]
+      }
+    },
+    {
       "id": "x-readme-form",
       "kind": "must_change",
       "source": "README",
@@ -455,11 +596,29 @@
       "mode": "edit",
       "prompt": "Skróć i uczyń wiarygodnym bez wymyślania konkretów:\nKażdy dział używa innej definicji klienta premium. To właśnie dane zmieniają zasady gry.",
       "checks": {
-        "contains": [
-          "Każdy dział używa innej definicji klienta premium."
+        "contains_ci": [
+          "klienta premium",
+          "dział"
         ],
         "excludes": [
           "zmieniają zasady gry"
+        ]
+      }
+    },
+    {
+      "id": "x-synonym-cycling",
+      "kind": "must_change",
+      "source": "probe",
+      "mode": "edit",
+      "prompt": "Usuń slop. Agent, asystent i narzędzie to ten sam produkt:\nAgent przyjmuje zgłoszenie. Następnie asystent nadaje mu priorytet. Na końcu narzędzie przekazuje sprawę konsultantowi.",
+      "checks": {
+        "contains": [
+          "Agent",
+          "konsultantowi"
+        ],
+        "excludes_ci": [
+          "asystent",
+          "narzędzie"
         ]
       }
     },

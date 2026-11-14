@@ -43,16 +43,18 @@ class ValidateRepoTests(unittest.TestCase):
 
             self.assertTrue(any("internal path" in error for error in errors), errors)
 
-    def test_reference_drift_is_reported(self):
+    def test_second_reference_copy_is_reported(self):
         with tempfile.TemporaryDirectory() as tmp:
             copy = self.copy_repository(Path(tmp))
-            target = copy / SKILL / "references" / "examples.md"
-            target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_text("drift\n", encoding="utf-8")
+            duplicate = copy / "shared" / "references" / "examples.md"
+            duplicate.parent.mkdir(parents=True, exist_ok=True)
+            duplicate.write_text("copy\n", encoding="utf-8")
 
             errors = MODULE.validate_repo(copy)
 
-            self.assertTrue(any("reference drift" in error for error in errors), errors)
+            self.assertTrue(
+                any("duplicate reference copy" in error for error in errors), errors
+            )
 
     def test_missing_runtime_file_is_reported(self):
         with tempfile.TemporaryDirectory() as tmp:

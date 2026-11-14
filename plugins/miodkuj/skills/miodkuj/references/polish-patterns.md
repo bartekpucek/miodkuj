@@ -3,16 +3,7 @@
 A listed word or construction marks a place to look, not a defect.
 
 - **Cut on sight** sections (chatbot residue, throat-clearing, redundant officialese, generic endings): the wording goes and nothing is lost.
-- **Every other section** lists ordinary Polish that is slop only when empty or piled up. A sentence where the listed wording carries real content stays verbatim, even if its neighbours are edited. If a cut sentence held the subject that a kept sentence relies on, put that subject into the kept sentence and change nothing else. `Keep when` and `False-positive guard` lines name the common cases.
-
-## Contents
-
-- Chatbot residue, throat-clearing, and inflated importance
-- Officialese, nominalizations, passive fog, genitive chains, and participial heaviness
-- Translated word choices, metaphors, and register
-- Formulaic structures, faux insight, metadiscourse, colon reveals, and negative listing
-- Synonym cycling, fake-profound endings, formatting slop, and second-hand text
-- Dashes, generic endings, and generic specificity
+- **Every other section** lists ordinary Polish that is slop only when empty or piled up. A sentence where the listed wording carries real content stays verbatim, even if its neighbours are edited. If a cut leaves the next sentence with no grammatical subject, add that one word to it and change nothing else. `Keep when` and `False-positive guard` lines name the common cases.
 
 ## Chatbot Residue
 
@@ -76,7 +67,7 @@ Fix: use the shorter form without inventing an actor.
 Keep when:
 
 - the verb is already a plain impersonal form (`opracowano`, `wymieniono`): that is the fix, not the fog,
-- an impersonal verb reports a finding or decision (`stwierdzono, że`, `przyjęto, że`): deleting it turns the finding into a bare fact,
+- an impersonal verb reports a finding or decision (`stwierdzono, że`, `przyjęto, że`): deleting it turns the finding into a bare fact, and giving it a subject (`stwierdziliśmy`, `zespół przyjął`) names an actor the source does not,
 - the sentence names no actor: one named in a neighbouring sentence is not evidence,
 - the text is legal, an official notice, or an academic method section.
 
@@ -112,6 +103,8 @@ Fix:
 - If only the Polish draft is supplied, or the original is truncated, do not reconstruct missing context or add itinerary details. See `examples.md` for the Edinburgh and accommodation cases.
 
 False-positive guard: Preserve literal technical meanings, established figurative uses that fit the register, deliberate metaphors supported by the writer's voice, and protected quotations. `Środek ciężkości` is legitimate in both physics and figurative Polish. `Zamieszkać` can describe residence or temporary accommodation; it does not always imply permanence. For `stay` meaning remain in place, use the corresponding sense, such as `zostań`, rather than accommodation wording.
+
+Keep business and IT working vocabulary as written, even where a style guide would call it an anglicism or a calque: borrowed words (`deploy`, `onboarding`, `feedback`), Polish words in a business sense taken from English (`dedykowany`, `adresować problem`), and set phrases (`na koniec dnia`). The writer and their readers use these daily. A purer Polish replacement is a style preference, and it can shift the meaning.
 
 ## Formulaic AI Structures
 
@@ -244,14 +237,6 @@ Fix:
 
 - Repeat the clearest established term. Use a different term only for a different concept.
 
-Before:
-
-> Agent porządkuje zgłoszenia. Asystent przypisuje priorytety. Następnie narzędzie przekazuje sprawy zespołowi.
-
-After:
-
-> Agent porządkuje zgłoszenia, przypisuje im priorytety i przekazuje sprawy zespołowi.
-
 False-positive guard: Keep distinct terms when the source defines distinct components, legal roles, system layers, or actors. Precision outranks stylistic repetition.
 
 ## Fake-Profound Kickers And Aphorisms
@@ -271,14 +256,6 @@ Problem:
 Fix:
 
 - Delete the kicker and end on the last concrete fact, unresolved tension, decision, or next action already supported by the source.
-
-Before:
-
-> Zespół nadal używa trzech definicji aktywnego klienta. Dane są walutą przyszłości.
-
-After:
-
-> Zespół nadal używa trzech definicji aktywnego klienta.
 
 False-positive guard: Keep a metaphor when it is original, developed by the author, and carries reasoning that plain paraphrase would lose. A familiar phrase alone is not enough.
 
@@ -337,14 +314,6 @@ Problem:
 Fix:
 
 - Leave second-hand text exact. Edit only the surrounding prose unless the user explicitly asks to alter the quotation or example.
-
-Before:
-
-> Autor zaczyna od zdania „Warto podkreślić, że transformacja ma kluczowe znaczenie”, a potem nie podaje żadnego przykładu.
-
-After:
-
-> Autor zaczyna od zdania „Warto podkreślić, że transformacja ma kluczowe znaczenie”, ale nie podaje żadnego przykładu.
 
 False-positive guard: This is a preservation rule. It does not protect unattributed prose merely because it uses quotation marks decoratively; determine whether the words are genuinely cited, named, or discussed.
 

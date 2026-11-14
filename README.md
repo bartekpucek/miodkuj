@@ -2,13 +2,14 @@
 
 > **Polszczyzna bez sztucznego tonu.**
 
-Miodkuj poprawia polskie teksty bez zmieniania ich sensu. Usuwa slop AI, czyli schematyczne, napompowane brzmienie, a także urzędniczy język, kalki z angielskiego i gładkie ogólniki. Zachowuje fakty, styl i głos autora.
+Miodkuj poprawia polskie teksty bez zmieniania ich sensu. Usuwa slop AI, czyli schematyczne, napompowane brzmienie, a także urzędniczy język, niezręczne tłumaczenia z angielskiego i gładkie ogólniki. Zachowuje fakty, styl i głos autora.
 
 ## Co robi
 
 - Poprawia tylko fragmenty, które tego potrzebują. Zostawia mocne zdania, cel tekstu i rozpoznawalny sposób pisania autora.
 - Nie zmienia faktów, liczb, nazw, dat, linków, cytatów, kodu, podstaw prawnych ani zastrzeżeń.
-- Usuwa puste wstępy, bezosobowe zdania, ciężkie konstrukcje rzeczownikowe, wymuszone kontrasty, kalki z angielskiego i ogólnikowe zakończenia.
+- Usuwa puste wstępy, urzędowe zwroty, ciężkie konstrukcje rzeczownikowe, wymuszone kontrasty, niezręczne tłumaczenia z angielskiego i ogólnikowe zakończenia.
+- Zostawia słownictwo biznesowe i informatyczne, także zapożyczone: `deploy`, `onboarding`, `dedykowany zespół`. Tak mówią autor i jego czytelnicy, więc Miodkuj tego nie poprawia.
 - Dopasowuje redakcję do rodzaju tekstu: instrukcji, marketingu, dokumentacji technicznej, tekstu naukowego, pisma urzędowego lub prawnego czy wypowiedzi osobistej.
 - Może też zrobić sam audyt: wskazać problematyczne fragmenty i kierunek zmian, bez przepisywania tekstu i zgadywania, czy napisało go AI.
 
@@ -105,25 +106,24 @@ Miodkuj najpierw zwraca tekst po minimalnej redakcji. Uwagi dodaje tylko na pro�
 ## Układ repozytorium
 
 ```text
-shared/references/      # główny zestaw polskich reguł
 plugins/
   miodkuj/
-    skills/miodkuj/     # jeden skill używany na wszystkich platformach
-scripts/                # budowanie, synchronizacja i sprawdzanie
+    skills/miodkuj/     # jeden skill używany na wszystkich platformach, razem z regułami
+scripts/                # budowanie i sprawdzanie
 tests/                  # testy repozytorium i paczki
 docs/                   # źródła, opis badań i scenariusze zachowania
 ```
 
 ## Rozwój
 
-Reguły źródłowe znajdziesz w `shared/references/`, a gotowy skill w `plugins/miodkuj/skills/miodkuj/`. Po zmianie uruchom dwa polecenia:
+Skill i jego reguły są w `plugins/miodkuj/skills/miodkuj/`; reguły edytujesz bezpośrednio w podfolderze `references/`. Po zmianie uruchom dwa polecenia:
 
 ```bash
-./scripts/build.sh      # synchronizuje reguły i buduje dist/miodkuj.skill
-./scripts/validate.sh   # sprawdza skill, metadane, synchronizację i paczkę
+./scripts/build.sh      # buduje dist/miodkuj.skill
+./scripts/validate.sh   # sprawdza skill, metadane i paczkę
 ```
 
-Przed wydaniem sprawdź też, jak skill zachowuje się na stałym zestawie 30 tekstów:
+Przed wydaniem sprawdź też, jak skill zachowuje się na stałym zestawie 41 tekstów:
 
 ```bash
 python3 scripts/behavior_eval.py --samples 2
