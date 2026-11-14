@@ -77,4 +77,4 @@ Do not apply this test mechanically to definitions, legal formulas, standard war
 - Do not regularize intentional fragments, repetition, punctuation, or digressions merely for consistency.
 - Do not add examples, data, dates, sources, opinions, or claims the user did not provide.
 - Do not treat one use of `kluczowy`, a triad, a contrast, or an em dash as proof of slop. Judge function and clusters.
-- Do not use the em dash as a default connector. Preserve or use it only when the source or supplied voice supports it and it clearly works better than a comma, colon, full stop, or parentheses.
+- Add a dash as a connector only when a supplied voice sample uses dashes that way. Keep a dash that the source already uses for a standard Polish job; see the dash section of `references/polish-patterns.md`.

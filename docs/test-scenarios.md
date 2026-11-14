@@ -557,3 +557,82 @@ Expected behavior:
 
 - Oddaj znaczenie pozostania na miejscu, np. przez `zostań`.
 - Nie traktuj `stay` jako stałego odpowiednika `zatrzymaj się`.
+
+## 27. Czyste zdania obok slopu
+
+Prompt:
+
+```text
+Use $miodkuj. Popraw styl:
+Warto zauważyć, że w dzisiejszych czasach bezpieczeństwo danych jest kluczowe. W przypadku wycieku należy zgłosić incydent do UODO w ciągu 72 godzin. Ustalono, że w 2025 r. firma zgłosiła dwa takie incydenty.
+```
+
+Protected invariants:
+
+- Zachowaj dosłownie drugie i trzecie zdanie, w tym `W przypadku wycieku`, `należy zgłosić` i `Ustalono, że`.
+- Nie dopisuj, kto ustalił liczbę incydentów ani kto ma zgłosić wyciek.
+
+Expected behavior:
+
+- Usuń pusty wstęp pierwszego zdania; samo zdanie możesz zmniejszyć albo pominąć.
+- Nie przerabiaj czystych zdań tylko dlatego, że sąsiednie wymaga redakcji.
+- `Ustalono, że` oznacza ustalenie, a nie mgłę. Jego usunięcie zmienia status twierdzenia.
+
+## 28. Myślnik w polskiej funkcji
+
+Prompt:
+
+```text
+Use $miodkuj. Napisz to po ludzku:
+W dynamicznie zmieniającym się świecie praca zdalna odgrywa coraz większą rolę. U nas wygląda to prosto: jedni pracują z domu, drudzy — z biura. Decyzja — to sprawa zespołu, nie zarządu.
+```
+
+Protected invariants:
+
+- Zachowaj oba myślniki: pierwszy zastępuje pominięty czasownik, drugi stoi przed `to` zamiast `jest`.
+- Zachowaj podział na dom i biuro oraz to, że decyduje zespół, nie zarząd.
+
+Expected behavior:
+
+- Usuń albo zmniejsz ogólnikowe pierwsze zdanie.
+- Nie zamieniaj poprawnych myślników na przecinki ani nie przebudowuj tych zdań.
+
+## 29. Przegląd instalacji bez dopisanego wykonawcy
+
+Prompt:
+
+```text
+Use $miodkuj. Popraw styl:
+W związku z powyższym informujemy, iż w dniu 3 marca dokonano przeglądu instalacji. Przegląd został wykonany przez firmę Elektro-Serwis. W ramach przeglądu wymieniono dwa bezpieczniki.
+```
+
+Protected invariants:
+
+- Zachowaj 3 marca, firmę Elektro-Serwis jako wykonawcę przeglądu i wymianę dwóch bezpieczników.
+- Tekst nie mówi, kto wymienił bezpieczniki. Nie przypisuj tej czynności firmie Elektro-Serwis.
+- Zachowaj dosłownie `W ramach przeglądu wymieniono dwa bezpieczniki.`
+
+Expected behavior:
+
+- Uprość `w dniu 3 marca` i `dokonano przeglądu`; możesz połączyć dwa pierwsze zdania, bo wykonawca przeglądu jest podany.
+- Nie zamieniaj `w ramach przeglądu` na `podczas przeglądu`: to zamiana synonimu, nie poprawka.
+
+## 30. Rzeczywisty kontrast po usuniętym zdaniu
+
+Prompt:
+
+```text
+Use $miodkuj. Usuń slop:
+To nie tylko narzędzie, ale także nowy sposób myślenia o pracy. Z jednej strony skraca raportowanie z 3 dni do 4 godzin, z drugiej strony wymaga ręcznego importu danych co tydzień. Użytkownicy z działu finansów zgłosili to jako główną wadę.
+```
+
+Protected invariants:
+
+- Zachowaj skrócenie raportowania z 3 dni do 4 godzin, cotygodniowy ręczny import i zgłoszenie z działu finansów.
+- Zachowaj konstrukcję `z jednej strony… z drugiej strony`, bo obie strony to podane fakty.
+
+Expected behavior:
+
+- Usuń pierwsze zdanie albo zostaw z niego samo `narzędzie`.
+- Jeśli pierwsze zdanie znika, przenieś podmiot `narzędzie` do drugiego zdania i niczego więcej w nim nie zmieniaj.
+- Zostaw trzecie zdanie bez zmian.

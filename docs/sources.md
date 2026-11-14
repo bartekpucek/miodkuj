@@ -30,6 +30,10 @@ Ten plik dokumentuje materiały wykorzystane przy projektowaniu Miodkuj. Nie jes
 - Gov.pl, Prosty język, Ministerstwo Cyfryzacji: https://www.gov.pl/web/cyfryzacja/prosty-jezyk
 - Podręcznik Jasnopisu: https://jasnopis.pl/manual/
 
+## Interpunkcja
+
+- [Zasady pisowni i interpunkcji PWN, 93. Myślnik](https://sjp.pwn.pl/zasady/93-Myslnik;629819.html): myślnik oznaczający domyślny człon zdania (93.1), zastępujący `jest` lub `są` przed `to` (93.2) oraz wydzielający wtrącenia (93.7). To podstawa zachowywania takich myślników zamiast usuwania każdego.
+
 ## Dobór słów i rejestr w przekładzie
 
 - [Zgłoszenie #2: centre -> Środek ciężkości](https://github.com/bartekpucek/miodkuj/issues/2) zainspirowało przykład z Edynburgiem i scenariusze 20–23. Scenariusze rozwijają przypadek redakcyjny; nie dokumentują odtworzonego błędu konkretnego modelu lub wersji skilla.
