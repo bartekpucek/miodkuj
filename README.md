@@ -123,6 +123,14 @@ Reguły źródłowe znajdziesz w `shared/references/`, a gotowy skill w `plugins
 ./scripts/validate.sh   # sprawdza skill, metadane, synchronizację i paczkę
 ```
 
+Przed wydaniem sprawdź też, jak skill zachowuje się na stałym zestawie 30 tekstów:
+
+```bash
+python3 scripts/behavior_eval.py --samples 2
+```
+
+Polecenie wysyła każdy tekst do Claude Code z wczytanym skillem i samo sprawdza odpowiedzi: czy czyste zdania wróciły bez zmian, czy liczby, cytaty i terminy ocalały, czy slop zniknął. Dwa przypadki audytu wypisuje do przeczytania. Wymaga zalogowanego polecenia `claude` i zużywa Twoje tokeny, około 20 tys. na jedno uruchomienie przypadku. Zestaw i testy nie trafiają do paczki skilla. Opcja `--ref v2.1.1` sprawdza wydaną wersję, a `--grade plik.json` ocenia zapisane odpowiedzi bez wywoływania modelu. Przypadki są w `tests/behavior/cases.json`.
+
 Końcowa kontrola jest opisana w `references/eval.md` w folderze skilla. Przed publikacją sprawdź, czy tekst zachowuje sens i głos autora, pasuje do sytuacji oraz działa w wybranym trybie. Ręczne scenariusze, w tym teksty, których nie należy poprawiać, znajdziesz w [docs/test-scenarios.md](docs/test-scenarios.md).
 
 ## Pochodzenie nazwy

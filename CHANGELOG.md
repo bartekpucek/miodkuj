@@ -4,6 +4,25 @@ All notable changes to this project are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+
+- `scripts/behavior_eval.py` and `tests/behavior/cases.json`: 30 fixed inputs sent to the Claude Code CLI with the skill loaded, with automatic checks for verbatim text, protected strings, and removed slop. The suite stays in the repository and is not part of the skill bundle.
+- Four manual behavioral scenarios (27–30) for clean sentences next to slop, Polish dash usage, an impersonal sentence with no named actor, and a factual contrast after a cut sentence.
+
+### Changed
+
+- Older pattern sections now separate wording that can always go from ordinary Polish that is slop only when empty or piled up, with keep conditions for meaningful `w ramach`, `w zakresie` and `w przypadku`, plain impersonal forms, reporting verbs such as `stwierdzono, że`, and contrasts whose two sides are stated facts.
+- Dash guidance follows Polish usage: a source dash that marks an omitted element, stands for `jest` or `są` before `to`, or sets off an insertion or dialogue stays; clusters and connector dashes are still replaced.
+- The second-person rewrite of `należy` + infinitive no longer appears in the general pattern list, where it pulled statements of legal duty towards direct address; direct address remains in the plain-Polish guide.
+
+### Fixed
+
+- Guidance that a clean sentence containing a watched phrase stays verbatim when neighbouring sentences are edited.
+- Guidance that an actor named in one sentence is not evidence for a neighbouring impersonal sentence.
+- Legal register: a request to simplify or explain a duty for the obligated party no longer reads as a request to address that party as `ty`. Scenario 15 passed 14 of 16 runs before this change and 16 of 16 after.
+
 ## [2.1.1] - 2026-09-14
 
 ### Added
