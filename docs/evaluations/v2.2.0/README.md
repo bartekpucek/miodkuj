@@ -1,8 +1,8 @@
-# Unreleased changes: behavioural check
+# Miodkuj 2.2.0: behavioural check
 
 Date: 2026-11-14.
 
-Compared the released skill at tag `v2.1.1` with the working tree, which holds the pattern rework, the legal-register sentence, the rule that leaves business and IT vocabulary alone, the trimmed pattern file, and a per-sentence rule in `SKILL.md`. Both were run with `scripts/behavior_eval.py`: 41 cases sent to the Claude Code CLI (`claude -p`) with the whole skill inlined, no user settings, no MCP servers and no tools.
+Compared the released skill at tag `v2.1.1` with the 2.2.0 candidate ("working tree" in the result files), which holds the pattern rework, the legal-register sentence, the rule that leaves business and IT vocabulary alone, the trimmed pattern file, and a per-sentence rule in `SKILL.md`. Both were run with `scripts/behavior_eval.py`: 41 cases sent to the Claude Code CLI (`claude -p`) with the whole skill inlined, no user settings, no MCP servers and no tools.
 
 ## Evidence
 
