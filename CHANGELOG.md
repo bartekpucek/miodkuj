@@ -18,8 +18,9 @@ All notable changes to this project are documented here. The format is based on
 - The second-person rewrite of `należy` + infinitive no longer appears in the general pattern list, where it pulled statements of legal duty towards direct address; direct address remains in the plain-Polish guide.
 
 - Business and IT working vocabulary stays as written, including borrowed words (`deploy`, `onboarding`), Polish words in a business sense taken from English (`dedykowany`, `adresować problem`) and set phrases (`na koniec dnia`). The 2.1.1 release replaced such wording in every measured run. The README no longer promises to remove calques in general, nor impersonal sentences as such.
-- The pattern file no longer carries a contents list or the three before/after pairs that `examples.md` repeats. The skill is 2.0% larger than 2.1.1 overall, and the files read on nearly every use are 2.7% larger.
+- The pattern file no longer carries a contents list or the three before/after pairs that `examples.md` repeats. The skill is 2.7% larger than 2.1.1 overall, and the files read on nearly every use are 3.8% larger.
 - The references live only in the skill folder. `shared/references` and the sync step in `scripts/build.sh` are gone; validation now rejects a second copy. The bundle's contents are unchanged by this.
+- `SKILL.md` now asks for a silent per-sentence decision in edit mode: rewrite a sentence with cut-on-sight wording or another named defect, copy every other sentence exactly. On Sonnet this took the two weakest mixed cases from 3 and 6 of 8 runs to 8 of 8. On Haiku, clean text came back intact in 15 of 30 runs instead of 9, and slop that must change was fixed in 20 of 21 instead of 13.
 
 ### Fixed
 

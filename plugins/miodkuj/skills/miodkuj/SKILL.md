@@ -11,6 +11,13 @@ Make the minimum effective edit. Preserve the writer's point, recognizable voice
 
 Preserve meaning, facts, qualifications, names, numbers, dates, links, citations, quotations, code, legal references, product names, and user constraints. Never invent specificity or promise detector evasion, "undetectable" writing, academic laundering, or impersonation.
 
+## Sentence By Sentence
+
+In edit mode, sort each sentence silently before writing:
+
+- **Rewrite** a sentence that contains cut-on-sight wording from `references/polish-patterns.md`, or another defect you can name from that file.
+- **Copy** every other sentence character for character, punctuation included.
+
 ## Modes
 
 - **Edit mode:** Default for pasted text. Return the revised Polish text first. Add a short change note only when requested or when a material constraint or evidence gap needs explanation. If the source already passes the quality gate, return it verbatim without a "no changes needed" note; do not replace correct wording merely to show an edit.
