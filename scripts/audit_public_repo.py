@@ -13,6 +13,12 @@ from pathlib import Path
 
 
 PUBLIC_GIT_EMAIL = "65296954+bartekpucek@users.noreply.github.com"
+# GitHub commits the synthetic merge commit for each pull-request run as
+# `GitHub <noreply@github.com>`. That address is public and names no person.
+GITHUB_MERGE_EMAIL = "noreply@github.com"
+PUBLIC_EMAILS = frozenset(
+    email.casefold() for email in (PUBLIC_GIT_EMAIL, GITHUB_MERGE_EMAIL)
+)
 EXPECTED_SKILL_ARCHIVE = Path("dist/miodkuj.skill")
 INTERNAL_IDENTIFIERS = (
     "".join(("T", "T", "C")),
@@ -93,7 +99,7 @@ def _sensitive_matches(text: str) -> list[tuple[str, str]]:
 
     for match in _EMAIL_RE.finditer(text):
         literal = match.group(0)
-        if literal.casefold() != PUBLIC_GIT_EMAIL.casefold():
+        if literal.casefold() not in PUBLIC_EMAILS:
             matches.append(("private email metadata", literal))
 
     return list(dict.fromkeys(matches))

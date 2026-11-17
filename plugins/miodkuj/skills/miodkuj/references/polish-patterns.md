@@ -1,200 +1,87 @@
 # Polish Slop Patterns
 
-Use these as cluster-sensitive signals. Most items are not absolute bans.
+A listed word or construction marks a place to look, not a defect.
 
-## Contents
-
-- Chatbot residue, throat-clearing, and inflated importance
-- Officialese, nominalizations, passive fog, genitive chains, and participial heaviness
-- Translated word choices, metaphors, and register
-- Formulaic structures, faux insight, metadiscourse, colon reveals, and negative listing
-- Synonym cycling, fake-profound endings, formatting slop, and second-hand text
-- Em dashes, generic endings, and generic specificity
+- **Cut on sight** sections (chatbot residue, throat-clearing, redundant officialese, generic endings): the wording goes and nothing is lost.
+- **Every other section** lists ordinary Polish that is slop only when empty or piled up. A sentence where the listed wording carries real content stays verbatim, even if its neighbours are edited. If a cut leaves the next sentence with no grammatical subject, add that one word to it and change nothing else. `Keep when` and `False-positive guard` lines name the common cases.
 
 ## Chatbot Residue
 
-Red flags:
+Cut on sight: `jako model językowy`, `nie mam dostępu do`, `moja wiedza kończy się`, `mogę pomóc w`, `oto poprawiona wersja`, `mam nadzieję, że to pomoże`, and any explanation of the task in place of the task.
 
-- `jako model językowy`
-- `nie mam dostępu do`
-- `moja wiedza kończy się`
-- `mogę pomóc w`
-- `oto poprawiona wersja`
-- `mam nadzieję, że to pomoże`
-- explaining the task instead of doing it
-
-Fix:
-
-- Remove interface chatter.
-- Return the finished text.
-- Keep notes separate from the rewrite.
+Fix: remove the interface chatter and return the finished text. Keep notes separate from the rewrite.
 
 ## Throat-Clearing
 
-Watchlist:
+Cut on sight:
 
-- `warto zauważyć`
-- `należy podkreślić`
-- `trzeba zaznaczyć`
-- `nie sposób nie wspomnieć`
-- `co istotne`
-- `ważne jest, aby`
-- `w dzisiejszych czasach`
-- `w obecnych realiach`
-- `w dynamicznie zmieniającym się świecie`
-- `w erze sztucznej inteligencji`
-- `w dobie cyfryzacji`
+- weight announcers: `warto zauważyć`, `należy podkreślić`, `trzeba zaznaczyć`, `nie sposób nie wspomnieć`, `co istotne`, `ważne jest, aby`,
+- stock settings: `w dzisiejszych czasach`, `w obecnych realiach`, `w dynamicznie zmieniającym się świecie`, `w erze sztucznej inteligencji`, `w dobie cyfryzacji`.
 
-Fix:
-
-- Start with the claim, action, fact, or consequence.
-- Delete any opener that can disappear without changing meaning.
+Fix: start with the claim, action, fact, or consequence. Delete the opener when the sentence means the same without it.
 
 ## Inflated Importance
 
-Watchlist:
+Watchlist: `kluczowy`, `istotny`, `znaczący`, `fundamentalny`, `strategiczny`, `kompleksowy`, `przełomowy`, `unikalny`, `niezwykle ważny`, `wielowymiarowy`, `holistyczny`, `innowacyjny`, `nowoczesny`, `skuteczny`.
 
-- `kluczowy`
-- `istotny`
-- `znaczący`
-- `fundamentalny`
-- `strategiczny`
-- `kompleksowy`
-- `przełomowy`
-- `unikalny`
-- `niezwykle ważny`
-- `wielowymiarowy`
-- `holistyczny`
-- `innowacyjny`
-- `nowoczesny`
-- `skuteczny`
-
-Fix:
-
-- Replace adjective with evidence: number, user, deadline, risk, cost, result, comparison.
-- If evidence is missing, make the claim smaller.
+Edit when the adjective stands in for missing evidence: replace it with a number, user, deadline, risk, cost, result, or comparison from the source, or make the claim smaller.
 
 ## Officialese
 
-Watchlist:
-
-- `niniejszy`
-- `celem`
-- `w celu`
-- `w ramach`
-- `w zakresie`
-- `w przypadku`
-- `z uwagi na`
-- `na skutek`
-- `w związku z powyższym`
-- `dokonać`
-- `dokonywać`
-- `realizować działania`
-- `podejmować działania`
-- `ulec poprawie`
-- `ulec pogorszeniu`
-- `posiadać możliwość`
-- `w miesiącu maju`
-- `w dniu dzisiejszym`
-
-Common replacements:
+Cut on sight:
 
 - `niniejszy` -> `ten`
-- `celem` -> `aby` or `żeby`
-- `w dniu dzisiejszym` -> `dzisiaj`
-- `w miesiącu maju` -> `w maju`
-- `dokonać zakupu` -> `kupić`
-- `ulec pogorszeniu` -> `pogorszyć się`
-- `posiadać możliwość` -> `może`
+- `celem`, `w celu` + verbal noun -> `aby`, `żeby` + verb
+- `w dniu dzisiejszym` -> `dzisiaj`; `w dniu 3 marca` -> `3 marca`; `w miesiącu maju` -> `w maju`
+- `dokonać zakupu` -> `kupić`; `realizować działania`, `podejmować działania` -> the action's verb
+- `ulec pogorszeniu` -> `pogorszyć się`; `posiadać możliwość` -> `może`
+- `w związku z powyższym` -> `dlatego`, or cut
+
+Judge in context: `w ramach`, `w zakresie`, `w przypadku`, `z uwagi na`, `na skutek`.
+
+Edit when the phrase heads a noun chain (see Genitive Chains) or can go with nothing lost: `w ramach realizacji projektu` -> `w projekcie`.
+
+Keep when one noun follows and names a real scope, condition, or cause: `w ramach umowy serwisowej`, `w przypadku awarii`. It stays as written; `podczas`, `jeśli`, or `w razie` in its place is a synonym swap, not a fix.
 
 ## Nominalizations
 
-Signals:
+Signals: verbal nouns in `-anie`, `-enie`, `-cie` carrying the action: `wdrożenie rozwiązania`, `realizacja działań`, `przeprowadzenie analizy`, `podjęcie decyzji`, `zapewnienie możliwości`.
 
-- endings: `-anie`, `-enie`, `-cie`
-- `wdrożenie rozwiązania`
-- `realizacja działań`
-- `dokonanie zmiany`
-- `przeprowadzenie analizy`
-- `podjęcie decyzji`
-- `zwiększenie efektywności`
-- `zapewnienie możliwości`
+Fix: prefer a finite verb. Name the actor only if the source names one; otherwise use an impersonal form:
 
-Fix:
+- `przeprowadzenie analizy danych` -> `przeanalizowano dane`
+- `podjęcie decyzji nastąpiło` -> `podjęto decyzję`
 
-- Prefer a finite verb. Name the actor only if supplied; otherwise keep an impersonal form:
-  - `przeprowadzenie analizy danych` -> `przeanalizowano dane`
-  - `podjęcie decyzji nastąpiło` -> `podjęto decyzję`
-
-Keep:
-
-- terms of art,
-- legal labels,
-- official procedure names,
-- scientific terms,
-- headings where the noun form is natural.
+Keep when the noun is a term of art, legal label, official procedure name, scientific term, or a heading where the noun form is natural.
 
 ## Passive And Impersonal Fog
 
-Watchlist:
+Watchlist: `zostało wykonane`, `jest realizowane`, `został opracowany`, `dokonano` + noun, `można zauważyć`, `powinno się`.
 
-- `zostało wykonane`
-- `jest realizowane`
-- `został opracowany`
-- `dokonano`
-- `ustalono`
-- `przyjęto`
-- `wskazano`
-- `należy`
-- `powinno się`
-- `można zauważyć`
+Fix: use the shorter form without inventing an actor.
 
-Fix:
+- `zostało opracowane narzędzie` -> `opracowano narzędzie`
+- `dokonano zmiany` -> `zmieniono`
+- actor named in the same sentence: `raport został przygotowany przez dział finansów` -> `raport przygotował dział finansów`
 
-- Name the actor when supplied and useful; otherwise simplify without inventing one:
-  - `zostało opracowane narzędzie` -> `opracowano narzędzie`
-  - `dokonano zmiany` -> `zmieniono`
-  - `należy złożyć wniosek` -> `złóż wniosek`
+Keep when:
 
-Keep:
-
-- legal text,
-- official notices,
-- academic methods,
-- cases where actor is irrelevant or unknown.
+- the verb is already a plain impersonal form (`opracowano`, `wymieniono`): that is the fix, not the fog,
+- an impersonal verb reports a finding or decision (`stwierdzono, że`, `przyjęto, że`): deleting it turns the finding into a bare fact, and giving it a subject (`stwierdziliśmy`, `zespół przyjął`) names an actor the source does not,
+- the sentence names no actor: one named in a neighbouring sentence is not evidence,
+- the text is legal, an official notice, or an academic method section.
 
 ## Genitive Chains
 
-Signals:
+Signals: three or more stacked nouns in the genitive, with unclear ownership or relation.
 
-- stacked nouns in dopełniacz,
-- unclear ownership or relation,
-- phrases like `w przypadku braku możliwości uruchomienia pojazdu`.
-
-Fix:
-
-- Convert the chain into a clause:
-  - `w przypadku braku możliwości uruchomienia pojazdu` -> `jeśli nie możesz uruchomić pojazdu`
+Fix: convert the chain into a clause: `w przypadku braku możliwości uruchomienia pojazdu` -> `jeśli nie możesz uruchomić pojazdu`.
 
 ## Participial Heaviness
 
-Watchlist:
+Watchlist: `mając na uwadze`, `biorąc pod uwagę`, `uwzględniając`, `dotyczący`, `obejmujący`, `stanowiący`, `wskazujący`, `umożliwiający`, `pozwalający`, `korzystając z`.
 
-- `mając na uwadze`
-- `biorąc pod uwagę`
-- `uwzględniając`
-- `dotyczący`
-- `obejmujący`
-- `stanowiący`
-- `wskazujący`
-- `umożliwiający`
-- `pozwalający`
-- `korzystając z`
-
-Fix:
-
-- Convert to shorter clauses.
-- Put the action in a finite verb.
+Edit when participles stack in one sentence or delay its verb: convert them to clauses with a finite verb.
 
 ## Translated Word Choices And Register
 
@@ -217,26 +104,15 @@ Fix:
 
 False-positive guard: Preserve literal technical meanings, established figurative uses that fit the register, deliberate metaphors supported by the writer's voice, and protected quotations. `Środek ciężkości` is legitimate in both physics and figurative Polish. `Zamieszkać` can describe residence or temporary accommodation; it does not always imply permanence. For `stay` meaning remain in place, use the corresponding sense, such as `zostań`, rather than accommodation wording.
 
+Keep business and IT working vocabulary as written, even where a style guide would call it an anglicism or a calque: borrowed words (`deploy`, `onboarding`, `feedback`), Polish words in a business sense taken from English (`dedykowany`, `adresować problem`), and set phrases (`na koniec dnia`). The writer and their readers use these daily. A purer Polish replacement is a style preference, and it can shift the meaning.
+
 ## Formulaic AI Structures
 
-Watchlist:
+Watchlist: `nie tylko X, ale także Y`; `to nie X, lecz Y`; `z jednej strony... z drugiej strony...`; `zarówno X, jak i Y`; `od X po Y`; `X stanowi Y`; `X wpisuje się w szerszy trend`; `X pokazuje, jak ważne jest Y`; `X odzwierciedla potrzebę Y`; `X jest przykładem tego, jak Y`.
 
-- `nie tylko X, ale także Y`
-- `to nie X, lecz Y`
-- `z jednej strony... z drugiej strony...`
-- `zarówno X, jak i Y`
-- `od X po Y`
-- `X stanowi Y`
-- `X wpisuje się w szerszy trend`
-- `X pokazuje, jak ważne jest Y`
-- `X odzwierciedla potrzebę Y`
-- `X jest przykładem tego, jak Y`
+Edit when one side of the pair is filler or the synthesis is generic: state the real side directly, or give the consequence the source supplies.
 
-Fix:
-
-- Keep contrast only if it carries a real distinction.
-- Replace generic synthesis with actual consequence.
-- Avoid balanced pairs unless the text genuinely compares two sides.
+Keep when both sides are stated facts or named things: `z jednej strony tańszy o 200 zł, z drugiej wolniejszy o 20%`; `zarówno kierowca, jak i pasażerowie`. The connector stays as written; `ale` or `jednak` in its place is a synonym swap, not a fix.
 
 ## Faux Insight And Exclusivity
 
@@ -361,14 +237,6 @@ Fix:
 
 - Repeat the clearest established term. Use a different term only for a different concept.
 
-Before:
-
-> Agent porządkuje zgłoszenia. Asystent przypisuje priorytety. Następnie narzędzie przekazuje sprawy zespołowi.
-
-After:
-
-> Agent porządkuje zgłoszenia, przypisuje im priorytety i przekazuje sprawy zespołowi.
-
 False-positive guard: Keep distinct terms when the source defines distinct components, legal roles, system layers, or actors. Precision outranks stylistic repetition.
 
 ## Fake-Profound Kickers And Aphorisms
@@ -388,14 +256,6 @@ Problem:
 Fix:
 
 - Delete the kicker and end on the last concrete fact, unresolved tension, decision, or next action already supported by the source.
-
-Before:
-
-> Zespół nadal używa trzech definicji aktywnego klienta. Dane są walutą przyszłości.
-
-After:
-
-> Zespół nadal używa trzech definicji aktywnego klienta.
 
 False-positive guard: Keep a metaphor when it is original, developed by the author, and carries reasoning that plain paraphrase would lose. A familiar phrase alone is not enough.
 
@@ -455,57 +315,24 @@ Fix:
 
 - Leave second-hand text exact. Edit only the surrounding prose unless the user explicitly asks to alter the quotation or example.
 
-Before:
-
-> Autor zaczyna od zdania „Warto podkreślić, że transformacja ma kluczowe znaczenie”, a potem nie podaje żadnego przykładu.
-
-After:
-
-> Autor zaczyna od zdania „Warto podkreślić, że transformacja ma kluczowe znaczenie”, ale nie podaje żadnego przykładu.
-
 False-positive guard: This is a preservation rule. It does not protect unattributed prose merely because it uses quotation marks decoratively; determine whether the words are genuinely cited, named, or discussed.
 
-## Em Dashes
+## Dashes
 
-Signals:
+Signals: several dashes in one paragraph; a dash where a comma, colon, or full stop is the ordinary mark; a dash staging a reveal.
 
-- an em dash used as a default connector between clauses,
-- several em dashes in one paragraph,
-- an em dash standing in for a comma, colon, or full stop.
+Fix: use the ordinary mark or split the sentence. Add a connector dash only when a supplied voice sample uses one.
 
-Fix:
-
-- Replace the em dash with a comma, colon, or full stop, or split the sentence.
-- Prefer shorter finite Polish sentences over dash-joined clauses.
-- Keep a dash only where Polish genuinely needs it, such as dialogue or a clear apposition.
+Keep a source dash that does a standard Polish job: marking an omitted element (`Ojciec czytał gazetę, matka — książkę`), standing for `jest` or `są` before `to` (`Wiedza — to potęga`), or setting off one insertion or a line of dialogue.
 
 ## Generic Endings
 
-Watchlist:
+Cut on sight: `podsumowując`, `można stwierdzić`, `czas pokaże`, `przyszłość pokaże`, `to krok w dobrym kierunku`, `ma ogromny potencjał`, `będzie odgrywać coraz większą rolę`, `warto śledzić rozwój sytuacji`.
 
-- `podsumowując`
-- `można stwierdzić`
-- `czas pokaże`
-- `przyszłość pokaże`
-- `to krok w dobrym kierunku`
-- `ma ogromny potencjał`
-- `będzie odgrywać coraz większą rolę`
-- `warto śledzić rozwój sytuacji`
-
-Fix:
-
-- End with a concrete next step, implication, unresolved tension, or crisp final claim.
-- In public-service text, end with the action the reader should take.
+Fix: end on the last concrete fact, next step, implication, or unresolved tension the source gives. In public-service text, end with the action the reader should take.
 
 ## Generic Specificity
 
-Watch for:
+Watch for bare `interesariusze`, `użytkownicy`, `organizacje`, `rozwiązania`, `procesy`, `wyzwania`, `obszary`, `aspekty`, and claims without dates, names, examples, measurements, constraints, tradeoffs, or consequences.
 
-- `interesariusze`, `użytkownicy`, `organizacje`, `rozwiązania`, `procesy`, `wyzwania`, `obszary`, `aspekty`,
-- claims without dates, names, examples, measurements, constraints, tradeoffs, or consequences,
-- paragraphs that could apply to any company, ministry, project, or product.
-
-Fix:
-
-- Ask: who, when, where, how much, compared with what, what changed, who cares, what breaks if ignored?
-- Add only known facts. If facts are missing, make the sentence honest instead of invented.
+Fix: ask who, when, where, how much, compared with what, what changed, and what breaks if ignored. Add only known facts; if they are missing, make the sentence honest instead of invented.

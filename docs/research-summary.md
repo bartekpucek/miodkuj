@@ -18,7 +18,7 @@ Najlepsze skille anti-slop (m.in. `hardikpandya/stop-slop`, `blader/humanizer`, 
 
 Wersja 1.1 pozostaje lekkim edytorem opartym na instrukcji i referencjach. Najpierw rozpoznaje zadanie, rejestr i kilka cech głosu autora. Potem robi najmniejszą skuteczną zmianę, a na końcu przechodzi binarną kontrolę wierności, głosu i trybu odpowiedzi.
 
-Nie dodajemy deterministycznego lintera do rdzenia. Taki linter pomaga przy pracy wsadowej, lecz sama lista dopasowań nie rozstrzyga kontekstu i nie chroni głosu autora. Pełny audyt gramatyki, terminologii i anglicyzmów również pozostaje poza zakresem tego skilla.
+Nie dodajemy deterministycznego lintera do rdzenia. Taki linter pomaga przy pracy wsadowej, lecz sama lista dopasowań nie rozstrzyga kontekstu i nie chroni głosu autora. Pełny audyt gramatyki, terminologii i anglicyzmów również pozostaje poza zakresem tego skilla. Słownictwo biznesowe i informatyczne, także zapożyczone lub skalkowane z angielskiego, zostaje bez zmian.
 
 ## Adaptacja do polszczyzny
 

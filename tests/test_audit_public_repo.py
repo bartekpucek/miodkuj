@@ -581,6 +581,22 @@ class PublicRepoAuditTests(unittest.TestCase):
 
         self.assertEqual(MODULE.scan_bytes("LICENSE", text), [])
 
+    def test_github_pull_request_merge_committer_is_allowed(self):
+        """Catches a rule that fails every pull-request run on GitHub's merge commit."""
+        text = b"GitHub noreply@github.com"
+
+        self.assertEqual(MODULE.scan_bytes("<committer-email>", text), [])
+
+    def test_other_github_addresses_are_still_reported(self):
+        """Catches an allowlist widened to every github.com address."""
+        text = ("someone" + "@" + "github.com").encode()
+
+        findings = MODULE.scan_bytes("<committer-email>", text)
+
+        self.assertEqual(len(findings), 1, findings)
+        self.assertIn("private email metadata", findings[0])
+        self.assertNotIn("someone", findings[0])
+
     def test_generic_polish_business_words_are_allowed(self):
         """Catches an over-broad heuristic that suppresses ordinary Polish."""
         text = " ".join(("klient", "zespół", "firma")).encode()

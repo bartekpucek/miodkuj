@@ -4,6 +4,30 @@ All notable changes to this project are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/), and this project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [2.2.0] - 2026-11-17
+
+### Added
+
+- `scripts/behavior_eval.py` and `tests/behavior/cases.json`: 41 fixed inputs sent to the Claude Code CLI with the skill loaded, with automatic checks for verbatim text, protected strings, and removed slop. The suite stays in the repository and is not part of the skill bundle.
+- Five manual behavioral scenarios (27–31) for clean sentences next to slop, Polish dash usage, an impersonal sentence with no named actor, a factual contrast after a cut sentence, and business wording that stays.
+
+### Changed
+
+- Older pattern sections now separate wording that can always go from ordinary Polish that is slop only when empty or piled up, with keep conditions for meaningful `w ramach`, `w zakresie` and `w przypadku`, plain impersonal forms, reporting verbs such as `stwierdzono, że`, and contrasts whose two sides are stated facts.
+- Dash guidance follows Polish usage: a source dash that marks an omitted element, stands for `jest` or `są` before `to`, or sets off an insertion or dialogue stays; clusters and connector dashes are still replaced.
+- The second-person rewrite of `należy` + infinitive no longer appears in the general pattern list, where it pulled statements of legal duty towards direct address; direct address remains in the plain-Polish guide.
+
+- Business and IT working vocabulary stays as written, including borrowed words (`deploy`, `onboarding`), Polish words in a business sense taken from English (`dedykowany`, `adresować problem`) and set phrases (`na koniec dnia`). The 2.1.1 release replaced such wording in every measured run. The README no longer promises to remove calques in general, nor impersonal sentences as such.
+- The pattern file no longer carries a contents list or the three before/after pairs that `examples.md` repeats. The skill is 2.7% larger than 2.1.1 overall, and the files read on nearly every use are 3.8% larger.
+- The references live only in the skill folder. `shared/references` and the sync step in `scripts/build.sh` are gone; validation now rejects a second copy. The bundle's contents are unchanged by this.
+- `SKILL.md` now asks for a silent per-sentence decision in edit mode: rewrite a sentence with cut-on-sight wording or another named defect, copy every other sentence exactly. On Sonnet this took the two weakest mixed cases from 3 and 6 of 8 runs to 8 of 8. On Haiku, clean text came back intact in 15 of 30 runs instead of 9, and slop that must change was fixed in 20 of 21 instead of 13.
+
+### Fixed
+
+- Guidance that a clean sentence containing a watched phrase stays verbatim when neighbouring sentences are edited.
+- Guidance that an actor named in one sentence is not evidence for a neighbouring impersonal sentence, and that an impersonal reporting verb is not given a subject.
+- Legal register: a request to simplify or explain a duty for the obligated party no longer reads as a request to address that party as `ty`. Scenario 15 passed 14 of 16 runs before this change and 16 of 16 after.
+
 ## [2.1.1] - 2026-09-14
 
 ### Added
@@ -84,6 +108,7 @@ Initial public release.
   (`README.md`, `docs/research-summary.md`, `docs/test-scenarios.md`).
 - CI workflow that validates the pre-2.0 targets and guards against reference drift.
 
+[2.2.0]: https://github.com/bartekpucek/miodkuj/compare/v2.1.1...v2.2.0
 [2.1.1]: https://github.com/bartekpucek/miodkuj/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/bartekpucek/miodkuj/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/bartekpucek/miodkuj/compare/v1.1.0...v2.0.0

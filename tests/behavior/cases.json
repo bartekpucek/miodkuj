@@ -1,0 +1,650 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "id": "clean-neutral-words",
+      "kind": "clean",
+      "source": "probe",
+      "mode": "edit",
+      "prompt": "Popraw styl:\nSkuteczny lek to taki, który w badaniu działa lepiej niż placebo. W przypadku tego preparatu różnica wyniosła 12 punktów procentowych.",
+      "checks": {
+        "equals": "Skuteczny lek to taki, który w badaniu działa lepiej niż placebo. W przypadku tego preparatu różnica wyniosła 12 punktów procentowych."
+      }
+    },
+    {
+      "id": "clean-impersonal",
+      "kind": "clean",
+      "source": "probe",
+      "mode": "edit",
+      "prompt": "Usuń slop:\nUstalono, że awarię spowodował błąd w konfiguracji. Przyjęto nowy harmonogram wdrożeń.",
+      "checks": {
+        "equals": "Ustalono, że awarię spowodował błąd w konfiguracji. Przyjęto nowy harmonogram wdrożeń."
+      }
+    },
+    {
+      "id": "clean-dash-ellipsis",
+      "kind": "clean",
+      "source": "probe",
+      "mode": "edit",
+      "prompt": "Napisz to po ludzku:\nJedni wolą pracować z domu, drudzy — z biura. Nam jest wszystko jedno, byle praca była zrobiona.",
+      "checks": {
+        "equals": "Jedni wolą pracować z domu, drudzy — z biura. Nam jest wszystko jedno, byle praca była zrobiona."
+      }
+    },
+    {
+      "id": "clean-scope-phrase",
+      "kind": "clean",
+      "source": "probe",
+      "mode": "edit",
+      "prompt": "Popraw styl:\nW ramach umowy serwisowej producent wymienia baterię raz w roku. Gwarancja nie obejmuje uszkodzeń mechanicznych.",
+      "checks": {
+        "equals": "W ramach umowy serwisowej producent wymienia baterię raz w roku. Gwarancja nie obejmuje uszkodzeń mechanicznych."
+      }
+    },
+    {
+      "id": "clean-real-pair",
+      "kind": "clean",
+      "source": "probe",
+      "mode": "edit",
+      "prompt": "Usuń slop:\nZarówno kierowca, jak i pasażerowie muszą zapiąć pasy. Od tej zasady są dwa wyjątki opisane w regulaminie.",
+      "checks": {
+        "equals": "Zarówno kierowca, jak i pasażerowie muszą zapiąć pasy. Od tej zasady są dwa wyjątki opisane w regulaminie."
+      }
+    },
+    {
+      "id": "clean-business-wording",
+      "kind": "clean",
+      "source": "probe",
+      "mode": "edit",
+      "prompt": "Popraw styl:\nRozwiązanie dedykowane dla firm z sektora MŚP adresuje problem ręcznego raportowania. Zespół robi deploy w każdy piątek, po code review.",
+      "checks": {
+        "equals": "Rozwiązanie dedykowane dla firm z sektora MŚP adresuje problem ręcznego raportowania. Zespół robi deploy w każdy piątek, po code review."
+      }
+    },
+    {
+      "id": "clean-business-calques",
+      "kind": "clean",
+      "source": "probe",
+      "mode": "edit",
+      "prompt": "Napisz to po ludzku:\nDedykowany zespół adresuje każde zgłoszenie w ciągu godziny, bo na koniec dnia klient ocenia nas po czasie reakcji.",
+      "checks": {
+        "equals": "Dedykowany zespół adresuje każde zgłoszenie w ciągu godziny, bo na koniec dnia klient ocenia nas po czasie reakcji."
+      }
+    },
+    {
+      "id": "clean-business-unnamed",
+      "kind": "clean",
+      "source": "probe",
+      "mode": "edit",
+      "prompt": "Usuń slop:\nFinalnie zaaplikowało 40 osób, a 12 przeszło do drugiego etapu. Benefity opisaliśmy w ogłoszeniu, a opóźnienia eskalujemy do managera.",
+      "checks": {
+        "equals": "Finalnie zaaplikowało 40 osób, a 12 przeszło do drugiego etapu. Benefity opisaliśmy w ogłoszeniu, a opóźnienia eskalujemy do managera."
+      }
+    },
+    {
+      "id": "s08-clean-human-prose",
+      "kind": "clean",
+      "source": "scenario 8",
+      "mode": "edit",
+      "prompt": "Popraw tylko to, co naprawdę wymaga poprawy:\nW piątek znowu próbowałem skrócić ten raport. Nie wyszło. Za każdym razem usuwałem zdanie, a potem odkrywałem, że bez niego następne nie ma sensu. Może problemem nie jest długość, tylko to, że nadal nie wiem, komu ten raport ma pomóc.",
+      "checks": {
+        "contains": [
+          "W piątek",
+          "Nie wyszło.",
+          "nadal nie wiem, komu ten raport ma pomóc"
+        ]
+      }
+    },
+    {
+      "id": "s12-rough-voice",
+      "kind": "clean",
+      "source": "scenario 12",
+      "mode": "edit",
+      "prompt": "Nie wygładzaj mojego tonu:\nNo dobra, dowieźliśmy. Trochę późno, trochę bokiem, ale działa. I serio nie mam dziś ochoty udawać, że od początku taki był plan :)",
+      "checks": {
+        "contains": [
+          "No dobra",
+          "serio",
+          ":)",
+          "działa"
+        ]
+      }
+    },
+    {
+      "id": "s27-clean-next-to-slop",
+      "kind": "mixed",
+      "source": "scenario 27",
+      "mode": "edit",
+      "prompt": "Popraw styl:\nWarto zauważyć, że w dzisiejszych czasach bezpieczeństwo danych jest kluczowe. W przypadku wycieku należy zgłosić incydent do UODO w ciągu 72 godzin. Ustalono, że w 2025 r. firma zgłosiła dwa takie incydenty.",
+      "checks": {
+        "contains": [
+          "W przypadku wycieku należy zgłosić incydent do UODO w ciągu 72 godzin.",
+          "Ustalono, że w 2025 r. firma zgłosiła dwa takie incydenty."
+        ],
+        "excludes": [
+          "Warto zauważyć",
+          "w dzisiejszych czasach"
+        ]
+      }
+    },
+    {
+      "id": "s28-polish-dash",
+      "kind": "mixed",
+      "source": "scenario 28",
+      "mode": "edit",
+      "prompt": "Napisz to po ludzku:\nW dynamicznie zmieniającym się świecie praca zdalna odgrywa coraz większą rolę. U nas wygląda to prosto: jedni pracują z domu, drudzy — z biura. Decyzja — to sprawa zespołu, nie zarządu.",
+      "checks": {
+        "contains": [
+          "drudzy — z biura",
+          "Decyzja — to sprawa zespołu, nie zarządu."
+        ],
+        "excludes": [
+          "dynamicznie zmieniającym"
+        ]
+      }
+    },
+    {
+      "id": "s29-no-invented-actor",
+      "kind": "mixed",
+      "source": "scenario 29",
+      "mode": "edit",
+      "prompt": "Popraw styl:\nW związku z powyższym informujemy, iż w dniu 3 marca dokonano przeglądu instalacji. Przegląd został wykonany przez firmę Elektro-Serwis. W ramach przeglądu wymieniono dwa bezpieczniki.",
+      "checks": {
+        "contains": [
+          "W ramach przeglądu wymieniono dwa bezpieczniki.",
+          "3 marca",
+          "Elektro-Serwis"
+        ],
+        "excludes": [
+          "w dniu",
+          "dokonano",
+          " iż "
+        ]
+      }
+    },
+    {
+      "id": "s30-real-contrast",
+      "kind": "mixed",
+      "source": "scenario 30",
+      "mode": "edit",
+      "prompt": "Usuń slop:\nTo nie tylko narzędzie, ale także nowy sposób myślenia o pracy. Z jednej strony skraca raportowanie z 3 dni do 4 godzin, z drugiej strony wymaga ręcznego importu danych co tydzień. Użytkownicy z działu finansów zgłosili to jako główną wadę.",
+      "checks": {
+        "contains": [
+          "skraca raportowanie z 3 dni do 4 godzin",
+          "z drugiej strony wymaga ręcznego importu danych co tydzień",
+          "Użytkownicy z działu finansów zgłosili to jako główną wadę."
+        ],
+        "contains_ci": [
+          "z jednej strony",
+          "narzędzie"
+        ],
+        "excludes": [
+          "nie tylko"
+        ]
+      }
+    },
+    {
+      "id": "mixed-grounded-adjective",
+      "kind": "mixed",
+      "source": "probe",
+      "mode": "edit",
+      "prompt": "Usuń slop:\nNasze innowacyjne, kompleksowe rozwiązanie to klucz do sukcesu każdej firmy. Filtr jest skuteczny wobec 99,9% bakterii według testu PZH z 2024 r. Wymieniasz go raz na pół roku.",
+      "checks": {
+        "contains": [
+          "Filtr jest skuteczny wobec 99,9% bakterii według testu PZH z 2024 r.",
+          "Wymieniasz go raz na pół roku."
+        ],
+        "excludes_ci": [
+          "innowacyjn",
+          "kompleksow",
+          "klucz do sukcesu"
+        ]
+      }
+    },
+    {
+      "id": "mixed-reporting-verb",
+      "kind": "mixed",
+      "source": "probe",
+      "mode": "edit",
+      "prompt": "Napisz to po ludzku:\nNasza nowa platforma to prawdziwa rewolucja w obsłudze klienta. Odpowiada na zgłoszenia w 4 minuty zamiast 2 godzin. Założono, że do końca roku obsłuży 60% zgłoszeń.",
+      "checks": {
+        "contains": [
+          "na zgłoszenia w 4 minuty zamiast 2 godzin",
+          "Założono, że do końca roku obsłuży 60% zgłoszeń."
+        ],
+        "contains_ci": [
+          "platforma"
+        ],
+        "excludes_ci": [
+          "rewolucj"
+        ]
+      }
+    },
+    {
+      "id": "mixed-business-wording",
+      "kind": "mixed",
+      "source": "probe",
+      "mode": "edit",
+      "prompt": "Usuń slop:\nWarto zauważyć, że w dzisiejszych czasach onboarding jest kluczowy. Nasz onboarding trwa 5 dni i ma dedykowanego opiekuna. Feedback zbieramy po pierwszym sprincie.",
+      "checks": {
+        "contains": [
+          "Nasz onboarding trwa 5 dni i ma dedykowanego opiekuna.",
+          "Feedback zbieramy po pierwszym sprincie."
+        ],
+        "excludes": [
+          "Warto zauważyć",
+          "w dzisiejszych czasach"
+        ]
+      }
+    },
+    {
+      "id": "mixed-long-form",
+      "kind": "mixed",
+      "source": "probe",
+      "mode": "edit",
+      "prompt": "Popraw styl:\nW dzisiejszych czasach obsługa klienta odgrywa kluczową rolę. W 2025 r. nasz zespół odpowiedział na 18 400 zgłoszeń, a średni czas odpowiedzi wyniósł 3 godziny 40 minut.\n\nUstalono, że 62% zgłoszeń dotyczyło faktur. W przypadku reklamacji klient dostaje odpowiedź w ciągu 14 dni. Z jednej strony skróciliśmy kolejkę o połowę, z drugiej strony liczba ponownych kontaktów wzrosła z 9% do 12%.\n\nWarto podkreślić, że to krok w dobrym kierunku. W ramach budżetu na 2026 r. zatrudnimy dwie osoby do działu faktur.",
+      "scope": "full",
+      "checks": {
+        "contains": [
+          "W 2025 r. nasz zespół odpowiedział na 18 400 zgłoszeń, a średni czas odpowiedzi wyniósł 3 godziny 40 minut.",
+          "Ustalono, że 62% zgłoszeń dotyczyło faktur.",
+          "W przypadku reklamacji klient dostaje odpowiedź w ciągu 14 dni.",
+          "Z jednej strony skróciliśmy kolejkę o połowę, z drugiej strony liczba ponownych kontaktów wzrosła z 9% do 12%.",
+          "W ramach budżetu na 2026 r. zatrudnimy dwie osoby do działu faktur."
+        ],
+        "excludes": [
+          "W dzisiejszych czasach",
+          "Warto podkreślić",
+          "krok w dobrym kierunku"
+        ]
+      }
+    },
+    {
+      "id": "s04-legal-basis",
+      "kind": "protected",
+      "source": "scenario 4",
+      "mode": "edit",
+      "prompt": "Tryb: urzędowy/prawny. Uprość bez usuwania podstawy prawnej:\nNa podstawie art. 15 ust. 2 ustawy z dnia 6 marca 2018 r. przedsiębiorca zobowiązany jest do złożenia oświadczenia w terminie 14 dni od dnia doręczenia wezwania.",
+      "checks": {
+        "contains": [
+          "art. 15 ust. 2",
+          "6 marca 2018",
+          "14 dni"
+        ],
+        "contains_ci": [
+          "przedsiębiorca"
+        ],
+        "excludes_ci": [
+          "złóż ",
+          "musisz",
+          "masz "
+        ]
+      }
+    },
+    {
+      "id": "s15-legal-duty",
+      "kind": "protected",
+      "source": "scenario 15",
+      "mode": "edit",
+      "prompt": "Uprość wyjaśnienie dla przedsiębiorcy:\nPrzedsiębiorca składa oświadczenie w terminie 14 dni od doręczenia wezwania. Niezłożenie oświadczenia skutkuje pozostawieniem wniosku bez rozpoznania.",
+      "checks": {
+        "contains": [
+          "Przedsiębiorca",
+          "14 dni",
+          "bez rozpoznania"
+        ],
+        "excludes_ci": [
+          "złóż ",
+          "złożysz",
+          "zrobisz",
+          "musisz",
+          "masz "
+        ]
+      }
+    },
+    {
+      "id": "s03-academic-claim",
+      "kind": "protected",
+      "source": "scenario 3",
+      "mode": "edit",
+      "prompt": "Tryb: akademicki. Zachowaj ostrożność:\nW badaniu zaobserwowano istotny statystycznie wzrost dokładności klasyfikacji z 81,2% do 84,7% (p = 0,03), co może sugerować, że zastosowana metoda poprawia stabilność modelu.",
+      "checks": {
+        "contains": [
+          "81,2%",
+          "84,7%",
+          "p = 0,03",
+          "może sugerować"
+        ],
+        "contains_ci": [
+          "istotny statystycznie"
+        ]
+      }
+    },
+    {
+      "id": "s16-academic-hedging",
+      "kind": "protected",
+      "source": "scenario 16",
+      "mode": "edit",
+      "prompt": "Popraw tylko styl:\nZaobserwowana korelacja (r = 0,42; 95% CI: 0,18–0,61) może wynikać ze sposobu doboru próby. Wynik nie pozwala stwierdzić, że interwencja spowodowała zmianę zachowania.",
+      "checks": {
+        "contains": [
+          "r = 0,42; 95% CI: 0,18–0,61",
+          "może wynikać",
+          "nie pozwala stwierdzić"
+        ]
+      }
+    },
+    {
+      "id": "s06-protected-spans",
+      "kind": "protected",
+      "source": "scenario 6",
+      "mode": "edit",
+      "prompt": "Zachowaj linki, kod, cytat i liczby:\nWarto zauważyć, że endpoint `POST /v1/search` stanowi kluczowy element procesu. Dokumentacja: https://example.com/docs. Cytat: \"Model zwrócił 42 wyniki\". Wynik wzrósł z 12,4% do 15,1%.",
+      "checks": {
+        "contains": [
+          "`POST /v1/search`",
+          "https://example.com/docs",
+          "\"Model zwrócił 42 wyniki\"",
+          "12,4%",
+          "15,1%"
+        ],
+        "excludes": [
+          "Warto zauważyć"
+        ]
+      }
+    },
+    {
+      "id": "s10-quoted-phrase",
+      "kind": "protected",
+      "source": "scenario 10",
+      "mode": "edit",
+      "prompt": "Popraw analizę, ale zachowaj cytat:\nAutor zaczyna od zdania „Warto podkreślić, że transformacja ma kluczowe znaczenie”, a następnie nie przedstawia żadnego przykładu.",
+      "checks": {
+        "contains": [
+          "Warto podkreślić, że transformacja ma kluczowe znaczenie"
+        ]
+      }
+    },
+    {
+      "id": "s14-technical-terms",
+      "kind": "protected",
+      "source": "scenario 14",
+      "mode": "edit",
+      "prompt": "Popraw dokumentację bez zmiany terminów:\nEndpoint `POST /v1/search` wykonuje walidację pola `query`, po czym Search Worker publikuje zdarzenie `search.requested` do kolejki `search-jobs`. Warto zauważyć, że retry policy pozostaje bez zmian w wersji 2.4.1.",
+      "checks": {
+        "contains": [
+          "`POST /v1/search`",
+          "`query`",
+          "Search Worker",
+          "`search.requested`",
+          "`search-jobs`",
+          "2.4.1"
+        ],
+        "excludes": [
+          "Warto zauważyć"
+        ],
+        "contains_ci": [
+          "retry policy"
+        ]
+      }
+    },
+    {
+      "id": "s11-voice-sample-dash",
+      "kind": "protected",
+      "source": "scenario 11",
+      "mode": "edit",
+      "prompt": "Dopasuj tekst do próbki, również interpunkcję.\n\nPróbka:\nNie lubię wielkich deklaracji — zwykle przykrywają brak decyzji. Wolę jedno „nie wiem” niż trzy slajdy pewności.\n\nTekst:\nWarto zauważyć, że nowy plan może przynieść istotne korzyści, jednak na obecnym etapie nie dysponujemy danymi potwierdzającymi jego skuteczność.",
+      "scope": "full",
+      "checks": {
+        "contains": [
+          "—",
+          "może przynieść"
+        ],
+        "excludes": [
+          "Warto zauważyć, że nowy plan"
+        ]
+      }
+    },
+    {
+      "id": "s19-long-form",
+      "kind": "protected",
+      "source": "scenario 19",
+      "mode": "edit",
+      "prompt": "Zredaguj całość bez utraty faktów:\nProjekt rozpoczął się 3 marca 2026 r. Zespół miał sześć tygodni i budżet 180 000 zł. W obecnych realiach kluczowym wyzwaniem okazała się integracja danych.\n\nPierwszy test objął 42 konsultantów. Średni czas odpowiedzi spadł z 18 do 11 minut, ale liczba ponownych kontaktów nie zmieniła się. Wynik może zależeć od tego, że test trwał tylko 14 dni.\n\nPodsumowując, rozwiązanie ma ogromny potencjał i będzie odgrywać coraz większą rolę. Zarząd zdecyduje o drugim teście 30 kwietnia 2026 r.",
+      "scope": "full",
+      "checks": {
+        "contains": [
+          "3 marca 2026",
+          "sześć tygodni",
+          "180 000 zł",
+          "42 konsultantów",
+          "z 18 do 11 minut",
+          "14 dni",
+          "30 kwietnia 2026"
+        ],
+        "excludes": [
+          "Podsumowując",
+          "ogromny potencjał",
+          "W obecnych realiach"
+        ]
+      }
+    },
+    {
+      "id": "s20-travel-metaphor",
+      "kind": "protected",
+      "source": "scenario 20",
+      "mode": "edit",
+      "prompt": "Popraw fragment praktycznego planu podróży:\nŚrodek ciężkości to Edynburg. Poza miastem plan obejmuje tylko miejsca dostępne bez auta.",
+      "checks": {
+        "contains": [
+          "Edynburg",
+          "Poza miastem plan obejmuje tylko miejsca dostępne bez auta."
+        ],
+        "excludes": [
+          "Środek ciężkości"
+        ],
+        "excludes_ci": [
+          "bazą",
+          "bazę",
+          "nocleg"
+        ]
+      }
+    },
+    {
+      "id": "s22-literal-term",
+      "kind": "protected",
+      "source": "scenario 22",
+      "mode": "edit",
+      "prompt": "Popraw tylko rzeczywisty problem w opisie technicznym:\nObniżenie środka ciężkości poprawia stabilność pojazdu.",
+      "checks": {
+        "equals": "Obniżenie środka ciężkości poprawia stabilność pojazdu."
+      }
+    },
+    {
+      "id": "s22-figurative-use",
+      "kind": "protected",
+      "source": "scenario 22",
+      "mode": "edit",
+      "prompt": "Popraw tylko rzeczywisty problem w omówieniu artykułu naukowego:\nW drugiej części artykułu środek ciężkości analizy przesuwa się z kosztów na jakość usług.",
+      "checks": {
+        "equals": "W drugiej części artykułu środek ciężkości analizy przesuwa się z kosztów na jakość usług."
+      }
+    },
+    {
+      "id": "s24-temporary-stay",
+      "kind": "protected",
+      "source": "scenario 24",
+      "mode": "edit",
+      "prompt": "Popraw polską poradę dotyczącą noclegu podczas weekendowej wycieczki. Angielski oryginał jest źródłem znaczenia.\n\nOryginał:\nStay near the station for the weekend.\n\nPolska wersja:\nZamieszkaj blisko dworca na weekend.",
+      "scope": "full",
+      "checks": {
+        "contains": [
+          "dworca",
+          "weekend"
+        ],
+        "contains_ci": [
+          "zatrzymaj się"
+        ]
+      }
+    },
+    {
+      "id": "s26-remain-in-place",
+      "kind": "protected",
+      "source": "scenario 26",
+      "mode": "edit",
+      "prompt": "Popraw polską wersję instrukcji. Angielski oryginał jest źródłem znaczenia.\n\nOryginał:\nStay at the station until Anna arrives.\n\nPolska wersja:\nZatrzymaj się na dworcu do przyjazdu Anny.",
+      "scope": "full",
+      "checks": {
+        "contains_ci": [
+          "zostań",
+          "ann"
+        ]
+      }
+    },
+    {
+      "id": "x-readme-form",
+      "kind": "must_change",
+      "source": "README",
+      "mode": "edit",
+      "prompt": "Popraw styl:\nW celu dokonania zgłoszenia należy wypełnić niniejszy formularz.",
+      "checks": {
+        "contains_ci": [
+          "formularz"
+        ],
+        "excludes_ci": [
+          "w celu",
+          "dokonania",
+          "niniejszy"
+        ]
+      }
+    },
+    {
+      "id": "s01-officialese",
+      "kind": "must_change",
+      "source": "scenario 1",
+      "mode": "edit",
+      "prompt": "Popraw styl i usuń slop po polsku:\nW celu dokonania zgłoszenia należy wypełnić niniejszy formularz oraz przekazać go do właściwej komórki organizacyjnej w terminie 7 dni od daty zaistnienia zdarzenia.",
+      "checks": {
+        "contains": [
+          "7 dni"
+        ],
+        "contains_ci": [
+          "formularz"
+        ],
+        "excludes_ci": [
+          "w celu",
+          "dokonania",
+          "niniejszy"
+        ]
+      }
+    },
+    {
+      "id": "x-servers",
+      "kind": "must_change",
+      "source": "probe",
+      "mode": "edit",
+      "prompt": "Popraw styl:\nWarto zauważyć, że w dniu dzisiejszym dokonano zakupu trzech serwerów. W dzisiejszych czasach stanowi to kluczowy element kompleksowej strategii.",
+      "checks": {
+        "contains_ci": [
+          "serwer"
+        ],
+        "excludes_ci": [
+          "warto zauważyć",
+          "w dniu dzisiejszym",
+          "dokonano",
+          "w dzisiejszych czasach",
+          "kompleksow"
+        ]
+      }
+    },
+    {
+      "id": "x-dash-cluster",
+      "kind": "must_change",
+      "source": "probe",
+      "mode": "edit",
+      "prompt": "Usuń slop:\nNasz zespół — mały, ale doświadczony — wdrożył system w sześć tygodni — bez przestojów — i zmieścił się w budżecie.",
+      "checks": {
+        "contains": [
+          "sześć tygodni",
+          "bez przestojów",
+          "budżecie"
+        ],
+        "max_count": {
+          "—": 2
+        }
+      }
+    },
+    {
+      "id": "s02-marketing-slop",
+      "kind": "must_change",
+      "source": "scenario 2",
+      "mode": "edit",
+      "prompt": "Tryb: marketing. Usuń slop:\nNasze innowacyjne i kompleksowe rozwiązanie stanowi kluczowy element transformacji cyfrowej, umożliwiając firmom skuteczne wykorzystanie potencjału danych w dynamicznie zmieniającym się świecie.",
+      "checks": {
+        "excludes_ci": [
+          "innowacyjn",
+          "kompleksow",
+          "kluczowy element",
+          "dynamicznie zmieniającym"
+        ]
+      }
+    },
+    {
+      "id": "s13-kicker",
+      "kind": "must_change",
+      "source": "scenario 13",
+      "mode": "edit",
+      "prompt": "Skróć i uczyń wiarygodnym bez wymyślania konkretów:\nKażdy dział używa innej definicji klienta premium. To właśnie dane zmieniają zasady gry.",
+      "checks": {
+        "contains_ci": [
+          "klienta premium",
+          "dział"
+        ],
+        "excludes": [
+          "zmieniają zasady gry"
+        ]
+      }
+    },
+    {
+      "id": "x-synonym-cycling",
+      "kind": "must_change",
+      "source": "probe",
+      "mode": "edit",
+      "prompt": "Usuń slop. Agent, asystent i narzędzie to ten sam produkt:\nAgent przyjmuje zgłoszenie. Następnie asystent nadaje mu priorytet. Na końcu narzędzie przekazuje sprawę konsultantowi.",
+      "checks": {
+        "contains": [
+          "Agent",
+          "konsultantowi"
+        ],
+        "excludes_ci": [
+          "asystent",
+          "narzędzie"
+        ]
+      }
+    },
+    {
+      "id": "a-audit-clean",
+      "kind": "audit",
+      "source": "probe",
+      "mode": "audit",
+      "prompt": "Tylko audyt:\nUżytkownicy zgłosili 14 błędów w procesie logowania. Zespół naprawi je przed wydaniem wersji 2.3.",
+      "scope": "full",
+      "manual": true,
+      "checks": {}
+    },
+    {
+      "id": "a-audit-mixed",
+      "kind": "audit",
+      "source": "probe",
+      "mode": "audit",
+      "prompt": "Tylko audyt:\nWarto podkreślić, że projekt ma ogromny potencjał. W zakresie umowy mieszczą się trzy moduły: sprzedaż, magazyn i księgowość. Dostawca wdroży je do 30 czerwca.",
+      "scope": "full",
+      "manual": true,
+      "checks": {
+        "contains": [
+          "Warto podkreślić"
+        ]
+      }
+    }
+  ]
+}
